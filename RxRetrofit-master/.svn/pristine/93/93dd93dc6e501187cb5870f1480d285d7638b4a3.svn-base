@@ -1,0 +1,52 @@
+package com.xmjj.rxretrofit_master.http.api;
+
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.xmjj.jujianglibrary.api.BaseApi;
+import com.xmjj.jujianglibrary.http.HttpManager;
+import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
+import com.xmjj.rxretrofit_master.http.HttpApiService;
+
+import retrofit2.Retrofit;
+import rx.Observable;
+
+/**
+ * 功能描述：
+ * Created by wzw
+ * 2017/8/18
+ */
+public class BaseInfoApi extends BaseApi {
+    public static final String BASE_INFO_METHOD = "brand/brandBaseInfo";
+    public static final String CIVILIZATION_METHOD = "brand/getMoralRateData";
+    private HttpApiService httpApiService;
+    private HttpManager httpManager;
+    private Retrofit mRetrofit;
+    private String dialogContent;
+
+    public BaseInfoApi(HttpOnNextListener onNextListener, RxAppCompatActivity appCompatActivity, Class clazz, String dialogContent) {
+        this.dialogContent = dialogContent;
+        if (httpManager == null) {
+            httpManager = new HttpManager(onNextListener, appCompatActivity, clazz);
+            mRetrofit = httpManager.getRetrofit();
+            httpApiService = mRetrofit.create(HttpApiService.class);
+        } else {
+            mRetrofit = httpManager.getRetrofit();
+            httpApiService = mRetrofit.create(HttpApiService.class);
+        }
+    }
+
+
+    /*请求1*/
+    public void getBaseInfo(String seqNum) {
+        setMethod(BASE_INFO_METHOD);
+        Observable observable = httpApiService.getBaseInfo(seqNum);
+        httpManager.initHttp(observable, BaseInfoApi.this, dialogContent);
+    }
+
+    /*请求2*/
+    public void getCivilization(String classId) {
+        setMethod(CIVILIZATION_METHOD);
+        Observable observable = httpApiService.getCivilization(classId);
+        httpManager.initHttp(observable, BaseInfoApi.this, dialogContent);
+    }
+
+}

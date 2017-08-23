@@ -1,0 +1,27 @@
+package com.xmjj.rxretrofit_master.base;
+
+import android.app.Application;
+import android.content.Context;
+
+import com.raizlabs.android.dbflow.config.FlowManager;
+
+/**
+ * Created by Somewereb on 2017/8/18.
+ */
+
+public class BaseApplication extends Application {
+
+    public static Context mAppContext;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mAppContext = this;
+        FlowManager.init(this);
+       // FlowManager.init(new FlowConfig.Builder(this).build());//这句也可以初始化
+    }
+
+    public static Context getContext() {
+        return mAppContext;
+    }
+}

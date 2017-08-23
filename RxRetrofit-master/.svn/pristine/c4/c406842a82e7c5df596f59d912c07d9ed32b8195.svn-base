@@ -1,0 +1,41 @@
+package com.xmjj.rxretrofit_master.http.api;
+
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.xmjj.jujianglibrary.api.HttpManagerApi;
+import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
+import com.xmjj.rxretrofit_master.http.HttpApiService;
+
+import rx.Observable;
+
+/**
+ * 功能描述：
+ * Created by wzw
+ * 2017/8/18
+ */
+
+public class BaseInfoApi extends HttpManagerApi {
+	public static final String BASE_INFO_METHOD="brand/brandBaseInfo";
+	public static final String CIVILIZATION_METHOD="brand/getMoralRateData";
+
+	public BaseInfoApi(HttpOnNextListener onNextListener, RxAppCompatActivity appCompatActivity, Class clazz) {
+		super(onNextListener, appCompatActivity, clazz);
+	}
+
+
+	/*请求1*/
+	public void getBaseInfo(String seqNum){
+		setMethod(BASE_INFO_METHOD);
+		HttpApiService httpApiService = getRetrofit().create(HttpApiService.class);
+		Observable observable = httpApiService.getBaseInfo(seqNum);
+		httpRequest(observable);
+
+	}
+	/*请求2*/
+	public void getCivilization(String classId){
+		setMethod(CIVILIZATION_METHOD);
+		HttpApiService httpApiService = getRetrofit().create(HttpApiService.class);
+		Observable observable = httpApiService.getCivilization(classId);
+		httpRequest(observable);
+	}
+
+}

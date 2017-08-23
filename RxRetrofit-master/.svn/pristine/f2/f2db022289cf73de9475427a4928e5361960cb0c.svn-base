@@ -1,0 +1,158 @@
+package com.xmjj.rxretrofit_master;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Select;
+import com.raizlabs.android.dbflow.structure.ModelAdapter;
+import com.xmjj.jujianglibrary.base.BaseActivity;
+import com.xmjj.jujianglibrary.exception.ApiException;
+import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
+import com.xmjj.rxretrofit_master.db.DBFlowModel;
+import com.xmjj.rxretrofit_master.db.DBFlowModel_Table;
+import com.xmjj.rxretrofit_master.entity.BrandInfoDetailBean;
+import com.xmjj.rxretrofit_master.entity.RatingBean;
+import com.xmjj.rxretrofit_master.http.api.BaseInfoApi;
+
+import java.util.List;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener, HttpOnNextListener {
+    private Button btnObject;
+    private Button btnArray;
+	private Button btnIn;
+    private TextView tvShow;
+    private BaseInfoApi baseInfoApi;
+    private Button addBtn;
+
+    @Override
+    public int getLayoutResId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initViews() {
+        btnObject = (Button) findViewById(R.id.btn_object);
+        btnArray = (Button) findViewById(R.id.btn_array);
+        tvShow = (TextView) findViewById(R.id.tv_show);
+		btnIn = (Button)findViewById(R.id.btn_in);
+		addBtn = (Button) findViewById(R.id.add_btn);
+		btnObject.setOnClickListener(this);
+		btnArray.setOnClickListener(this);
+        addBtn.setOnClickListener(this);
+		btnIn.setOnClickListener(this);
+    }
+
+    @Override
+    public void initData() {
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_object:
+                baseInfoApi = new BaseInfoApi(this, this, BrandInfoDetailBean.class);
+                baseInfoApi.getBaseInfo("d6aa48251b85b045","数据加载中......");
+                break;
+
+            case R.id.btn_array:
+                baseInfoApi = new BaseInfoApi(this, this, RatingBean.class);
+                baseInfoApi.getCivilization("14871");
+                break;
+			case R.id.btn_in:
+				baseInfoApi = new BaseInfoApi(this, this, BrandInfoDetailBean.class);
+				baseInfoApi.doOther("d6aa48251b85b045","嵌套接口加载......");
+				break;
+            case R.id.add_btn://add DBFlow
+//				DatabaseDefinition db = FlowManager.getDatabase(AppDataBase.class);
+
+                DBFlowModel dbFlowModel = new DBFlowModel();
+                dbFlowModel.id = 1;//这一行必须加，必须指定id，后面才能根据id修改某一条的数据
+                dbFlowModel.name = "张三";
+                dbFlowModel.age = 99;
+                dbFlowModel.sex = true;
+                dbFlowModel.content = "增加的字段";
+                dbFlowModel.grade = 22222;
+                ModelAdapter<DBFlowModel> adapter = FlowManager.getModelAdapter(DBFlowModel.class);
+                /**
+                 * 增
+                 */
+//                adapter.insert(dbFlowModel);//插入数据
+                /**
+                 * 删除数据，需要新建一个实例
+                 */
+                DBFlowModel dbFlowModel2 = new DBFlowModel();
+                dbFlowModel2.id = 11;
+                adapter.delete(dbFlowModel2);
+                /**
+                 * 全部删除
+                 */
+//                 adapter.deleteAll(list);
+
+//                //查询第一条数据
+//                DBFlowModel model = new Select().from(DBFlowModel.class).querySingle();
+//                Log.i("zzz", new Gson().toJson(model));
+                /**
+                 * 查询全部数据
+                 */
+                List<DBFlowModel> list = new Select().from(DBFlowModel.class).queryList();
+                for (int i = 0; i < list.size(); i++) {
+                    Log.i("zzz222", new Gson().toJson(list.get(i)));
+                }
+
+                /**
+                 * 改数据
+                 */
+//                dbFlowModel.id=6;
+//                dbFlowModel.name = "照理";
+//                dbFlowModel.update();
+
+                /**
+                 *  按条件查询
+                 */
+                List<DBFlowModel> list2 = new Select().from(DBFlowModel.class).where(DBFlowModel_Table.id.eq((long) 1)).queryList();
+                for (int i = 0; i < list2.size(); i++) {
+                    Log.i("zzzlist2", new Gson().toJson(list2.get(i)));
+                }
+
+//                SQLite.update(DBFlowModel.class).set(DBFlowModel_Table.name.eq("丽丽")).where(DBFlowModel_Table.name.eq("汪汪")).execute();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
+	@Override
+	public void onNext(Object result, String method) {
+		if (BaseInfoApi.BASE_INFO_METHOD.equals(method)) {
+			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
+
+			tvShow.setText("info respond \n" + bean.getBrand().getSchoolName());
+
+		} else if (BaseInfoApi.CIVILIZATION_METHOD.equals(method)) {
+			List<RatingBean> lists = (List<RatingBean>) result;
+
+			tvShow.setText("civilization respond \n" + lists.get(0).getWeek());
+		}else if(BaseInfoApi.IN.equals(method)){
+
+			List<RatingBean> lists = (List<RatingBean>) result;
+
+			tvShow.setText("嵌套 respond \n" + lists.get(0).getWeek());
+		}
+	}
+
+    @Override
+    public void onError(ApiException e, String method) {
+        Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+
+}
