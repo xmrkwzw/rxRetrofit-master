@@ -1,4 +1,4 @@
-package com.xmjj.jujianglibrary.base;
+package com.xmjj.rxretrofit_master.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -14,7 +14,7 @@ public class AppDataBase {
     //数据库名称
     public static final String NAME = "AppDatabase";
     //数据库版本号
-    public static final int VERSION = 3;
+    public static final int VERSION = 1;
 
 
     /**
@@ -29,14 +29,13 @@ public class AppDataBase {
             super(table);
         }
 
-        /**
-         * 每次增加字段需要版本加一并且只能加一个字段
-         */
         @Override
         public void onPreMigrate() {
             addColumn(SQLiteType.INTEGER, "grade");
+
         }
     }
+
 
 
 

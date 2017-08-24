@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
-def dbflow_version = "4.0.2"
+
 
 android {
     compileSdkVersion 25
@@ -22,7 +21,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -39,13 +38,6 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
     /*gson*/
     compile 'com.google.code.gson:gson:2.8.1'
-
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
-    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
-    // sql-cipher database encyrption (optional)
-    compile "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:${dbflow_version}"
-
 
 
 }
