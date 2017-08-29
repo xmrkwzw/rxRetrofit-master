@@ -29,7 +29,8 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 	private Button btnDbDelete;
 	private Button btnDbUpdate;
 	private Button btnDbQuery;
-
+	private Button btnMsgCode;
+	private Button btnDeleteTable;
 	private BaseInfoApi baseInfoApi;
 
 	@Override
@@ -37,29 +38,28 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 		return R.layout.activity_main;
 	}
 
-	
-
-
-	
-
 	@Override
 	public void initViews() {
-		btnObject = (Button)findViewById( R.id.btn_object );
-		btnArray = (Button)findViewById( R.id.btn_array );
-		btnIn = (Button)findViewById( R.id.btn_in );
-		tvShow = (TextView)findViewById( R.id.tv_show );
-		btnDbAdd = (Button)findViewById( R.id.btn_db_add );
-		btnDbDelete = (Button)findViewById( R.id.btn_db_delete );
-		btnDbUpdate = (Button)findViewById( R.id.btn_db_update );
-		btnDbQuery = (Button)findViewById( R.id.btn_db_query );
+		btnObject = (Button) findViewById(R.id.btn_object);
+		btnArray = (Button) findViewById(R.id.btn_array);
+		btnIn = (Button) findViewById(R.id.btn_in);
+		tvShow = (TextView) findViewById(R.id.tv_show);
+		btnDbAdd = (Button) findViewById(R.id.btn_db_add);
+		btnDbDelete = (Button) findViewById(R.id.btn_db_delete);
+		btnDbUpdate = (Button) findViewById(R.id.btn_db_update);
+		btnDbQuery = (Button) findViewById(R.id.btn_db_query);
+		btnMsgCode = (Button) findViewById(R.id.btn_msg_code);
+		btnDeleteTable = (Button) findViewById(R.id.btn_db_delete_table);
 
-		btnObject.setOnClickListener( this );
-		btnArray.setOnClickListener( this );
-		btnIn.setOnClickListener( this );
-		btnDbAdd.setOnClickListener( this );
-		btnDbDelete.setOnClickListener( this );
-		btnDbUpdate.setOnClickListener( this );
-		btnDbQuery.setOnClickListener( this );
+		btnObject.setOnClickListener(this);
+		btnArray.setOnClickListener(this);
+		btnIn.setOnClickListener(this);
+		btnDbAdd.setOnClickListener(this);
+		btnDbDelete.setOnClickListener(this);
+		btnDbUpdate.setOnClickListener(this);
+		btnDbQuery.setOnClickListener(this);
+		btnMsgCode.setOnClickListener(this);
+		btnDeleteTable.setOnClickListener(this);
 
 	}
 
@@ -86,6 +86,9 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 			List<RatingBean> lists = (List<RatingBean>) result;
 
 			tvShow.setText("嵌套 respond \n" + lists.get(0).getWeek());
+		} else if (BaseInfoApi.MSG_CODE_METHOD.equals(method)) {
+
+			tvShow.setText((String) result);
 		}
 	}
 
@@ -112,6 +115,14 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 	}
 
 	/**
+	 * get verify code
+	 */
+	public void getMsgCode() {
+		baseInfoApi = new BaseInfoApi(this, this, String.class);
+		baseInfoApi.getMscCode("18750931912");
+	}
+
+	/**
 	 * Nested request interface :a result doing after the other result
 	 */
 	public void nestedRequest() {
@@ -126,29 +137,54 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 		ArrayList<DBFlowModel> array = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			DBFlowModel dbFlowModel = new DBFlowModel();
-			dbFlowModel.setAge((i + 1));
-			dbFlowModel.setContent("content" + (i + 1));
+			dbFlowModel.setName("name:" + i);
+			dbFlowModel.setAge((i));
+			dbFlowModel.setContent("content" + i);
+			dbFlowModel.setGrade(i);
 			array.add(dbFlowModel);
 		}
 		FlowManagerUtil.getInstance().saveAll(array);
+		query();
 
 	}
 
+	/**
+	 * dbflow operate delete a array by flowManager
+	 */
 	public void delete() {
-
+		SQLite.delete().from(DBFlowModel.class)
+				.where(DBFlowModel_Table.age.eq(5))
+				.execute();
+		query();
 	}
 
-	public void update() {
+	/**
+	 * remove all data from table
+	 * */
+	public void deleteTable() {
+		FlowManagerUtil.getInstance().deleteTable(DBFlowModel.class);
+	}
 
+	/**
+	 * dbflow operate update a array by flowManager
+	 */
+	public void update() {
+		SQLite.update(DBFlowModel.class).set(DBFlowModel_Table.grade.eq(2))
+				.where(DBFlowModel_Table.grade.eq(1))
+				.execute();
+		query();
 	}
 
 	public void query() {
+		tvShow.setText("");
 		List<DBFlowModel> lists =
-				SQLite.select().from(DBFlowModel.class)
-				.where(DBFlowModel_Table.age.greaterThan(5))
-				.queryList();
-
-		tvShow.setText(lists.get(0).getName());
+				SQLite.select().from(DBFlowModel.class).queryList();
+		for (int i = 0; i < lists.size(); i++) {
+			DBFlowModel dbFlowModel = lists.get(i);
+			tvShow.setText(tvShow.getText().toString() + dbFlowModel.getContent() + "--" + dbFlowModel.getName()
+					+ "--" + dbFlowModel.getGrade()
+					+ "--" + dbFlowModel.getAge() + "\n");
+		}
 	}
 
 	@Override
@@ -163,6 +199,9 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 			case R.id.btn_in:
 				nestedRequest();
 				break;
+			case R.id.btn_msg_code:
+				getMsgCode();
+				break;
 			case R.id.tv_show:
 				break;
 			case R.id.btn_db_add:
@@ -176,6 +215,9 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 				break;
 			case R.id.btn_db_query:
 				query();
+				break;
+			case R.id.btn_db_delete_table:
+				deleteTable();
 				break;
 		}
 	}

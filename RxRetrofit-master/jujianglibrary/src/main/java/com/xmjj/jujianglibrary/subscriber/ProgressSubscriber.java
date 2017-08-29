@@ -11,9 +11,12 @@ import com.xmjj.jujianglibrary.api.BaseApi;
 import com.xmjj.jujianglibrary.exception.ApiException;
 import com.xmjj.jujianglibrary.http.entity.BaseRespond;
 import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
+import com.xmjj.jujianglibrary.util.StringUtil;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.SoftReference;
 import java.lang.reflect.Type;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +61,13 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
 	@Override
 	public void onNext(T t) {
 		if (mHttpOnNextListener.get() != null) {
-			BaseRespond respond = new Gson().fromJson((String) t, BaseRespond.class);
+			String json = null;
+			try {
+				json = URLDecoder.decode(StringUtil.reBuildJson((String)t),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			BaseRespond respond = new Gson().fromJson(json, BaseRespond.class);
 			String status = respond.getStatus();
 			String msg = respond.getMsg();
 			if (TextUtils.isEmpty(status)) {
@@ -133,8 +142,9 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
 			dialog.dismiss();
 		}
 	}
+
 	/*设置提示内容*/
-	public void setDialogMsg(String msg){
+	public void setDialogMsg(String msg) {
 		if (dialog != null || dialog.isShowing()) {
 			dialog.setMessage(msg);
 		}

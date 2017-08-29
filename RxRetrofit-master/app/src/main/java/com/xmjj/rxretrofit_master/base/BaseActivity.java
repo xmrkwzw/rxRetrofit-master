@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.xmjj.jujianglibrary.util.ActivityManagerUtils;
 
 /**
  * 功能描述：
@@ -16,6 +17,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(getLayoutResId());
+		ActivityManagerUtils.getInstance().addActivity(this);
 		initViews();
 		initData();
 	}

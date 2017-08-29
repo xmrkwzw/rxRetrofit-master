@@ -11,11 +11,17 @@ import com.xmjj.jujianglibrary.http.func.ExceptionFunc;
 import com.xmjj.jujianglibrary.http.func.ResulteFunc;
 import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
 import com.xmjj.jujianglibrary.subscriber.ProgressSubscriber;
+import com.xmjj.jujianglibrary.util.SharedPreferencesUtil;
 
+import java.io.IOException;
 import java.lang.ref.SoftReference;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -37,12 +43,16 @@ public class HttpManager {
 	private static final int READ_TIME_OUT = 10;
 	private String dialogMsg;
 	public static final String BASE_URL = "http://www.ijinbu.com/ijinbu/";
+	//public static final String BASE_URL = "http://192.168.1.29/ijinbu/";
+	private SharedPreferencesUtil sharedPreferencesUtil;
 
 
 	public HttpManager(HttpOnNextListener onNextListener, RxAppCompatActivity appCompatActivity, Class clazz) {
 		this.onNextListener = new SoftReference(onNextListener);
 		this.appCompatActivity = new SoftReference(appCompatActivity);
 		this.clazz = clazz;
+		SharedPreferencesUtil.init(appCompatActivity.getApplicationContext());
+		sharedPreferencesUtil = SharedPreferencesUtil.getInstance();
 
 
 	}
@@ -60,6 +70,7 @@ public class HttpManager {
 		builder.writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS);
 		builder.readTimeout(READ_TIME_OUT, TimeUnit.SECONDS);
 		builder.addInterceptor(getHttpLoggingInterceptor());
+		builder.addInterceptor(new HeaderInterceptor());
 
 
         /*创建retrofit对象*/
@@ -82,7 +93,7 @@ public class HttpManager {
 		  /*失败后的retry配置*/
 		observable = observable.retryWhen(new RetryWhenNetworkException(basePar.getRetryCount(),
 				basePar.getRetryDelay(), basePar.getRetryIncreaseDelay()))
-                /*异常处理*/
+				/*异常处理*/
 				.onErrorResumeNext(new ExceptionFunc())
                 /*生命周期管理*/
 				//.compose(appCompatActivity.get().bindToLifecycle())
@@ -123,6 +134,26 @@ public class HttpManager {
 		});
 		loggingInterceptor.setLevel(level);
 		return loggingInterceptor;
+	}
+
+	/**
+	 * 添加头部 其中 token需要登陆接口添加 使用sp 保存
+	 */
+	private class HeaderInterceptor implements Interceptor {
+
+		@Override
+		public Response intercept(Chain chain) throws IOException {
+			Request request = chain.request().newBuilder()
+					.addHeader("clientType", "1")
+					.addHeader("appType", "1")
+					.addHeader("imei", UUID.randomUUID().toString())
+					.addHeader("sign", "typeuserRegisteruserAccount13290787756")
+					.addHeader("ver", "2.5.1231")
+					.addHeader("token", "df284208246f4f4aacba453394e37a63")
+					.build();
+			return chain.proceed(request);
+
+		}
 	}
 
 	public String getDialogMsg() {

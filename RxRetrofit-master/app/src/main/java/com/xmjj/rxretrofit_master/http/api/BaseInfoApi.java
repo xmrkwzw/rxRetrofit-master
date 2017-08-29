@@ -25,6 +25,7 @@ import rx.schedulers.Schedulers;
 public class BaseInfoApi extends BaseApi {
 	public static final String BASE_INFO_METHOD = "brand/brandBaseInfo";
 	public static final String CIVILIZATION_METHOD = "brand/getMoralRateData";
+	public static final String MSG_CODE_METHOD="getVerifyCode";
 	public static final String IN = "in";
 	private HttpApiService httpApiService;
 	private HttpManager httpManager;
@@ -56,6 +57,14 @@ public class BaseInfoApi extends BaseApi {
 		httpManager.initHttp(observable, BaseInfoApi.this);
 	}
 
+	/*请求3*/
+	public void getMscCode (String mobilePhone){
+		setMethod(MSG_CODE_METHOD);
+		Observable observable = httpApiService.getMscCode(mobilePhone);
+		httpManager.initHttp(observable,BaseInfoApi.this);
+	}
+
+	/*嵌套接口*/
 	public void doOther(String num, String dialogContent) {
 		Observable observable = httpApiService.getBaseInfo(num).flatMap(new Func1<String, Observable<String>>() {
 
@@ -80,6 +89,8 @@ public class BaseInfoApi extends BaseApi {
 
 
 	}
+
+
 
 
 }

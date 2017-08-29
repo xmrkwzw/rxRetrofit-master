@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:http="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.xmjj.rxretrofit_master">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-sdk tools:overrideLibrary="com.xmjj.jujianglibrary" />-->
+
 
     <application
         android:name=".base.BaseApplication"

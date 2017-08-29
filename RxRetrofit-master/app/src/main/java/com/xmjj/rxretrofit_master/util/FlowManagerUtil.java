@@ -1,6 +1,7 @@
 package com.xmjj.rxretrofit_master.util;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.structure.Model;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
@@ -26,7 +27,7 @@ public class FlowManagerUtil {
 	}
 
 
-	public  void saveAll(final Collection<? extends Model> models) {
+	public void saveAll(final Collection<? extends Model> models) {
 		FlowManager.getDatabase(AppDataBase.class)
 				.beginTransactionAsync(new ProcessModelTransaction.Builder<>(
 						new ProcessModelTransaction.ProcessModel<Model>() {
@@ -38,15 +39,19 @@ public class FlowManagerUtil {
 				.error(new Transaction.Error() {
 					@Override
 					public void onError(Transaction transaction, Throwable error) {
-						System.out.println("error"+error.toString());
+
 					}
 				})
 				.success(new Transaction.Success() {
 					@Override
 					public void onSuccess(Transaction transaction) {
-						System.out.println("success");
+
 					}
 				}).build().execute();
+	}
+
+	public void deleteTable(Class table) {
+		Delete.table(table);
 	}
 
 }
