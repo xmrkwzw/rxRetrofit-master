@@ -136,6 +136,8 @@ public class HttpManager {
 		return loggingInterceptor;
 	}
 
+
+
 	/**
 	 * 添加头部 其中 token需要登陆接口添加 使用sp 保存
 	 */

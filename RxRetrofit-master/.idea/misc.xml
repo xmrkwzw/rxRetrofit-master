@@ -44,28 +44,6 @@
     <option name="id" value="Android" />
   </component>
   <component name="SvnBranchConfigurationManager">
-    <option name="myConfigurationMap">
-      <map>
-        <entry key="$PROJECT_DIR$">
-          <value>
-            <SvnBranchConfiguration>
-              <option name="branchUrls">
-                <list>
-                  <option value="http://192.168.1.22/svn/newandapp/%E7%94%B5%E5%AD%90%E7%8F%AD%E7%89%8C" />
-                  <option value="http://192.168.1.22/svn/newandapp/JujiangLibs" />
-                  <option value="http://192.168.1.22/svn/newandapp/apk_and_doc" />
-                  <option value="http://192.168.1.22/svn/newandapp/banpai" />
-                  <option value="http://192.168.1.22/svn/newandapp/bp_branches" />
-                  <option value="http://192.168.1.22/svn/newandapp/branches" />
-                  <option value="http://192.168.1.22/svn/newandapp/tags" />
-                </list>
-              </option>
-              <option name="trunkUrl" value="http://192.168.1.22/svn/newandapp/trunk" />
-            </SvnBranchConfiguration>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="masterDetails">

@@ -5,110 +5,162 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.xmjj.rxretrofit_master.MainActivity">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+              tools:context="com.xmjj.rxretrofit_master.activity.MainActivity">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent">
 
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_object"
+            android:orientation="vertical">
+            <!--网络模块-->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="object结构"/>
+                android:text="网络模块"/>
 
-            <Button
-                android:id="@+id/btn_array"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_object"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="object结构"/>
+
+                    <Button
+                        android:id="@+id/btn_array"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="array结构"/>
+
+                    <Button
+                        android:id="@+id/btn_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="嵌套请求"/>
+
+                    <Button
+                        android:id="@+id/btn_msg_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="获取验证码"/>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="array结构"/>
+                android:layout_marginTop="20dp"
+                android:text="数据库模块"/>
+            <!--数据库模块-->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btn_in"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/btn_db_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+
+                        android:text=" add"/>
+
+                    <Button
+                        android:id="@+id/btn_db_delete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+
+                        android:text="delete"/>
+
+                    <Button
+                        android:id="@+id/btn_db_update"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="update"/>
+
+                    <Button
+                        android:id="@+id/btn_db_query"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text=" query"/>
+
+                    <Button
+                        android:id="@+id/btn_db_delete_table"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+
+                        android:text="delete table"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="嵌套请求"/>
+                android:layout_marginTop="20dp"
+                android:text="rxbus"/>
 
-            <Button
-                android:id="@+id/btn_msg_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="获取验证码"/>
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_rx_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发送事件"/>
+
+                    <Button
+                        android:id="@+id/btn_rx_sticky_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发送sticky事件"/>
+
+                    <Button
+                        android:id="@+id/btn_go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="接收页面"/>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tv_show"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
 
         </LinearLayout>
-    </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/tv_show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
 
-            <Button
-                android:id="@+id/btn_db_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+    </ScrollView>
 
-                android:text=" add"/>
-
-            <Button
-                android:id="@+id/btn_db_delete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-
-                android:text="delete"/>
-
-            <Button
-                android:id="@+id/btn_db_update"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-
-                android:text="update"/>
-
-            <Button
-                android:id="@+id/btn_db_query"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-
-                android:text=" query"/>
-
-            <Button
-                android:id="@+id/btn_db_delete_table"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-
-                android:text="delete table"/>
-        </LinearLayout>
-    </HorizontalScrollView>
-    </LinearLayout>
-
-</ScrollView>
 </LinearLayout>
