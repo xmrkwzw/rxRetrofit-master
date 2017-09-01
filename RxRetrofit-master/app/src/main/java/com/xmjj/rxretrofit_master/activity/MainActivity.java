@@ -3,6 +3,7 @@ package com.xmjj.rxretrofit_master.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.wzgiceman.rxbuslibrary.rxbus.Subscribe;
 import com.wzgiceman.rxbuslibrary.rxbus.ThreadMode;
 import com.xmjj.jujianglibrary.exception.ApiException;
 import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
+import com.xmjj.jujianglibrary.util.GlideImageLoader;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
 import com.xmjj.rxretrofit_master.db.DBFlowModel;
@@ -42,6 +44,8 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 	private Button btnGo;
 	private Button btnPost;
 	private Button btnStickyPost;
+	private Button btnLoadImg, btnLoadGif, btnLoadRound, btnLoadRoundCorner;
+	private ImageView ivBg;
 
 	@Override
 	public int getLayoutResId() {
@@ -63,7 +67,11 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 		btnGo = (Button) findViewById(R.id.btn_go);
 		btnPost = (Button) findViewById(R.id.btn_rx_post);
 		btnStickyPost = (Button) findViewById(R.id.btn_rx_sticky_post);
-
+		btnLoadGif = (Button) findViewById(R.id.btn_load_gif);
+		btnLoadImg = (Button) findViewById(R.id.btn_load_img);
+		ivBg = (ImageView) findViewById(R.id.iv_bg);
+		btnLoadRound = (Button) findViewById(R.id.btn_load_round);
+		btnLoadRoundCorner = (Button) findViewById(R.id.btn_load_round_corner);
 
 		btnObject.setOnClickListener(this);
 		btnArray.setOnClickListener(this);
@@ -77,6 +85,10 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 		btnStickyPost.setOnClickListener(this);
 		btnPost.setOnClickListener(this);
 		btnGo.setOnClickListener(this);
+		btnLoadImg.setOnClickListener(this);
+		btnLoadGif.setOnClickListener(this);
+		btnLoadRound.setOnClickListener(this);
+		btnLoadRoundCorner.setOnClickListener(this);
 	}
 
 	@Override
@@ -198,10 +210,15 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 	 * dbflow operate update a array by flowManager
 	 */
 	public void update() {
-		SQLite.update(DBFlowModel.class).set(DBFlowModel_Table.grade.eq(2))
-				.where(DBFlowModel_Table.grade.eq(1))
-				.execute();
-		query();
+//		SQLite.update(DBFlowModel.class).set(DBFlowModel_Table.grade.eq(2))
+//				.where(DBFlowModel_Table.grade.eq(1))
+//				.execute();
+//		query();
+		DBFlowModel dbFlowModel = new DBFlowModel();
+		dbFlowModel.id = 51;
+		dbFlowModel.content = "content51";
+		dbFlowModel.update();
+
 	}
 
 	public void query() {
@@ -232,6 +249,22 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 		if (event != null) {
 			tvShow.setText("一般事件结果：" + event.msg);
 		}
+	}
+
+	/*load img*/
+	public void loadImg(String url) {
+		GlideImageLoader.getInstance().setImage(this, url, ivBg, null);
+	}
+	public void loadGifImg(String url){
+		GlideImageLoader.getInstance().setGifImage(this, url, ivBg);
+	}
+
+	public void loadRoundImg(String url) {
+		GlideImageLoader.getInstance().setRoundImage(this, url, ivBg);
+	}
+
+	public void loadRoundCornerImg(String url) {
+		GlideImageLoader.getInstance().setRoundCornerImage(this, url, ivBg, 10);
 	}
 
 	@Override
@@ -274,6 +307,23 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 				break;
 			case R.id.btn_rx_sticky_post:
 				stickyPost();
+				break;
+			case R.id.btn_load_img:
+				String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504082848617&di=4ce37a189839d25d47e4250beb54a8eb&imgtype=0&src=http%3A%2F%2Fwww.cncrk.com%2Fup%2F1705%2F201705181542228456.jpg";
+				loadImg(url);
+				break;
+			case R.id.btn_load_gif:
+				String url2 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504082949678&di=0d35537ce12121fee2bff6f7d3e5fb64&imgtype=0&src=http%3A%2F%2Fdl.bbs.9game.cn%2Fattachments%2Fforum%2F201408%2F21%2F223649hz585v2sh0353gv6.gif";
+				loadGifImg(url2);
+				break;
+			case R.id.btn_load_round:
+				String url3 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504082848617&di=4ce37a189839d25d47e4250beb54a8eb&imgtype=0&src=http%3A%2F%2Fwww.cncrk.com%2Fup%2F1705%2F201705181542228456.jpg";
+				loadRoundImg(url3);
+				break;
+
+			case R.id.btn_load_round_corner:
+				String url4 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504082848617&di=4ce37a189839d25d47e4250beb54a8eb&imgtype=0&src=http%3A%2F%2Fwww.cncrk.com%2Fup%2F1705%2F201705181542228456.jpg";
+				loadRoundCornerImg(url4);
 				break;
 		}
 	}
