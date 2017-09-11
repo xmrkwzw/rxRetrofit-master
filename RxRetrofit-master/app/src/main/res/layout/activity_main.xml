@@ -165,33 +165,37 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/btn_load_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="一般图片加载"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/btn_load_gif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="加载gif图"/>
-                <Button
-                    android:id="@+id/btn_load_round"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="加载圆形头像"/>
-                <Button
-                    android:id="@+id/btn_load_round_corner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="加载圆角图"/>
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/btn_load_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="一般图片加载"/>
+
+                    <Button
+                        android:id="@+id/btn_load_gif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="加载gif图"/>
+
+                    <Button
+                        android:id="@+id/btn_load_round"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="加载圆形头像"/>
+
+                    <Button
+                        android:id="@+id/btn_load_round_corner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="加载圆角图"/>
+                </LinearLayout>
             </HorizontalScrollView>
+
             <ImageView
 
                 android:id="@+id/iv_bg"

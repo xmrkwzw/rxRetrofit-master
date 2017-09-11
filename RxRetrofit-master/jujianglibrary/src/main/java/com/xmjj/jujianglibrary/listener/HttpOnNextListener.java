@@ -10,11 +10,11 @@ import com.xmjj.jujianglibrary.exception.ApiException;
 public interface HttpOnNextListener {
     /**
      * 成功后回调方法
-     *
+     * @param json 原数据转为json字符串
      * @param result
      * @param method
      */
-    void onNext(Object result, String method);
+    void onNext(String json,Object result, String method);
 
     /**
      * 失败

@@ -5,11 +5,8 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.internal.$Gson$Types;
-import com.xmjj.jujianglibrary.api.BaseApi;
 import com.xmjj.jujianglibrary.http.entity.BaseRespond;
-import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
 
-import java.lang.ref.SoftReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,29 +31,6 @@ public class GsonUtils {
 	}
 
 
-	public void format(String respondStr, BaseApi mApi, Class clazz, SoftReference<HttpOnNextListener> mHttpOnNextListener) {
-		BaseRespond baseRespond = new Gson().fromJson(respondStr, BaseRespond.class);
-		String status = baseRespond.getStatus();
-		String msg = baseRespond.getMsg();
-		if (TextUtils.isEmpty(status)) {
-			return;
-		}
-		if (SUCCESS.equals(status)) {
-			JsonElement result = baseRespond.getResult();
-			if (result != null) {
-				if (result.isJsonArray()) {
-					ArrayList _list = new Gson().fromJson(result.getAsJsonArray().toString(), getListTypeFromType(clazz));
-					mHttpOnNextListener.get().onNext(_list, mApi.getMethod());
-				} else if (result.isJsonObject()) {
-					mHttpOnNextListener.get().onNext(new Gson().fromJson(result.getAsJsonObject(), clazz), mApi.getMethod());
-				}
-			} else {
-				mHttpOnNextListener.get().onNext(status, mApi.getMethod());
-			}
-		} else if (FAIL.equals(status)) {
-			mHttpOnNextListener.get().onNext(msg, mApi.getMethod());
-		}
-	}
 
 	public Object format(String respondStr, Class clazz) {
 		BaseRespond baseRespond = new Gson().fromJson(respondStr, BaseRespond.class);

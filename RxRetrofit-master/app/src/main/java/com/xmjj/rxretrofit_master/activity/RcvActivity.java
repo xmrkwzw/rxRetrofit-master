@@ -1,6 +1,5 @@
 package com.xmjj.rxretrofit_master.activity;
 
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -49,15 +48,8 @@ public class RcvActivity extends BaseActivity {
 
 	@Override
 	public void initViews() {
-		btnRgSticky = (Button)findViewById(R.id.btn_rg_sticky);
 		tvShow = (TextView)findViewById(R.id.tv_shows);
 
-		btnRgSticky.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
 	}
 
 	@Override

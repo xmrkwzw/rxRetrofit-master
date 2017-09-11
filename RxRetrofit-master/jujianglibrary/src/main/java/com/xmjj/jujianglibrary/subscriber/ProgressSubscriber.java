@@ -78,15 +78,15 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
 				if (result != null) {
 					if (result.isJsonArray()) {
 						ArrayList _list = new Gson().fromJson(result.getAsJsonArray().toString(), getListTypeFromType(clazz));
-						mHttpOnNextListener.get().onNext(_list, mApi.getMethod());
+						mHttpOnNextListener.get().onNext(json,_list, mApi.getMethod());
 					} else if (result.isJsonObject()) {
-						mHttpOnNextListener.get().onNext(new Gson().fromJson(result.getAsJsonObject(), clazz), mApi.getMethod());
+						mHttpOnNextListener.get().onNext(json,new Gson().fromJson(result.getAsJsonObject(), clazz), mApi.getMethod());
 					}
 				} else {
-					mHttpOnNextListener.get().onNext(status, mApi.getMethod());
+					mHttpOnNextListener.get().onNext(json,status, mApi.getMethod());
 				}
 			} else if (FAIL.equals(status)) {
-				mHttpOnNextListener.get().onNext(msg, mApi.getMethod());
+				mHttpOnNextListener.get().onNext(json,msg, mApi.getMethod());
 			}
 		}
 

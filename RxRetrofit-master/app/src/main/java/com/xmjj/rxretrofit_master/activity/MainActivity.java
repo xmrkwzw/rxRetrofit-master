@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 
 	/*retrofit*/
 	@Override
-	public void onNext(Object result, String method) {
+	public void onNext(String json,Object result, String method) {
 		if (BaseInfoApi.BASE_INFO_METHOD.equals(method)) {
 			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
 
@@ -210,14 +210,10 @@ public class MainActivity extends BaseActivity implements HttpOnNextListener, Vi
 	 * dbflow operate update a array by flowManager
 	 */
 	public void update() {
-//		SQLite.update(DBFlowModel.class).set(DBFlowModel_Table.grade.eq(2))
-//				.where(DBFlowModel_Table.grade.eq(1))
-//				.execute();
-//		query();
-		DBFlowModel dbFlowModel = new DBFlowModel();
-		dbFlowModel.id = 51;
-		dbFlowModel.content = "content51";
-		dbFlowModel.update();
+		SQLite.update(DBFlowModel.class).set(DBFlowModel_Table.grade.eq(2))
+				.where(DBFlowModel_Table.grade.eq(1))
+				.execute();
+		query();
 
 	}
 

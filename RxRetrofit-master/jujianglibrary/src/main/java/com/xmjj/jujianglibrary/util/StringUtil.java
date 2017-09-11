@@ -625,6 +625,7 @@ public final class StringUtil {
 
 	}
 
+	/*去除前后对于的引号*/
 	public static String reBuildJson(String json) {
 		if (json.startsWith("\"") && json.endsWith("\"")) {
 			return json.substring(1, json.length() - 1);

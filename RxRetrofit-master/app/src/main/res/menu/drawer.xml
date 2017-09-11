@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MainActivity">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/model_net"
+            android:checked="true"
+            android:icon="@mipmap/iconfont_blog"
+            android:title="网络模块"/>
+        <item
+            android:id="@+id/model_sql"
+
+            android:icon="@mipmap/iconfont_source"
+            android:title="数据库模块"
+            />
+        <item
+            android:id="@+id/model_rxbus"
+            android:icon="@mipmap/event"
+            android:title="rxbus模块"/>
+        <item
+            android:id="@+id/model_view"
+            android:icon="@mipmap/view"
+            android:title="自定义View"/>
+        <item
+            android:id="@+id/model_glide"
+            android:icon="@mipmap/iconfont_custom_view"
+            android:title="glide"/>
+
+        <item android:title="其他">
+            <menu>
+                <item
+                    android:id="@+id/model_about"
+                    android:checkable="true"
+                    android:icon="@mipmap/iconfont_about"
+                    android:title="关于"/>
+                <item
+                    android:id="@+id/model_other"
+                    android:checkable="true"
+                    android:icon="@mipmap/blog"
+                    android:title="我的博客"/>
+
+
+            </menu>
+        </item>
+    </group>
+
+</menu>

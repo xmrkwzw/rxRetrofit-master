@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RxRetrofit-master</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="about_msg">该应用主要是对retrofit+rxjava做的二次封装。近期对界面做了修改，基于android MD风格重新设计
+    主要针对后台返回的不同类型数据导致程序异常的处理。并且使用了dbflow数据库模块、glide图片模块、rxbus事件分发模块等一些工具类。\n\n作者：若无初见\n\n简书：http://www.jianshu.com/p/431f12648da0\n\nGitHub主页 https://github.com/xmrkwzw/rxRetrofit-master
+    </string>
 </resources>
