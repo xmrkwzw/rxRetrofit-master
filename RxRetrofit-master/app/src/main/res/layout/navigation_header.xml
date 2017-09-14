@@ -18,7 +18,7 @@
         android:layout_marginTop="20dp"
         android:src="@mipmap/avatar"
         app:border_color="#fff"
-        app:border_width="2dp" />
+        app:border_width="2dp"/>
 
 
     <TextView
@@ -27,8 +27,8 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="若无初见"
-        android:textColor="#ffffff"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="18sp" />
+        android:textColor="#ffffff"
+        android:textSize="18sp"/>
 
 </LinearLayout>

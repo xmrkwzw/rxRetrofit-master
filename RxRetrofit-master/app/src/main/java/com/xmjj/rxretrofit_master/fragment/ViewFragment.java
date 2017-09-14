@@ -9,7 +9,11 @@ import com.xmjj.rxretrofit_master.base.BaseFragment;
  * 2017/9/11
  */
 
-public class ViewFragment extends BaseFragment {
+public class ViewFragment extends BaseFragment{
+
+
+
+
 	@Override
 	public int getLayoutResId() {
 		return R.layout.fragment_view;

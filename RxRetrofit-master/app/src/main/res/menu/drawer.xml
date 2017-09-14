@@ -28,9 +28,18 @@
             android:id="@+id/model_glide"
             android:icon="@mipmap/iconfont_custom_view"
             android:title="glide"/>
+        <item
+            android:id="@+id/model_camera2"
+            android:icon="@mipmap/camera_icon"
+            android:title="camera2"/>
 
         <item android:title="其他">
             <menu>
+                <item
+                    android:id="@+id/model_skin"
+                    android:checkable="true"
+                    android:icon="@mipmap/skin"
+                    android:title="换肤"/>
                 <item
                     android:id="@+id/model_about"
                     android:checkable="true"

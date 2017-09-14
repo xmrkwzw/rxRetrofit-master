@@ -5,9 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="windowBackground">#fafafa</color>
     <color name="transparent">#00000000</color>
-    <color name="color_white">#ffffff</color>
-    <color name="text_black">#000000</color>
+
     <color name="translucent">#66000000</color>
     <color name="light_gray">#FDFDFD</color>
     <color name="gray">#DDDDDD</color>
+    <color name="text_normal">#3c3f41</color>
 </resources>

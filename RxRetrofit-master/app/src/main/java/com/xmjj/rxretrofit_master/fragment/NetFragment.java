@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+import com.xmjj.jujianglibrary.util.skinloader.attr.AttrFactory;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 import com.xmjj.rxretrofit_master.base.BaseViewPagerAdapter;
@@ -34,6 +35,9 @@ public class NetFragment extends BaseFragment {
 	public void initViews() {
 		tabLayout = findView(R.id.tablayout_net);
 		viewPager = findView(R.id.viewpager_net);
+		//dynamicAddSkinView(tabLayout, AttrFactory.BACKGROUND, R.color.color_white);//设置tablayout的背景
+		//dynamicAddSkinView(tabLayout, AttrFactory.TAB_SELECT_TEXT_COLOR,R.color.colorAccent);//设置选中的颜色
+		dynamicAddSkinView(tabLayout, AttrFactory.TAB_INDICATOR_COLOR,R.color.colorPrimary);
 	}
 
 	@Override

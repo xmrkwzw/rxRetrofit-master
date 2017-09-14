@@ -8,18 +8,33 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.wzgiceman.rxbuslibrary.rxbus.RxBus;
+import com.wzgiceman.rxbuslibrary.rxbus.Subscribe;
+import com.wzgiceman.rxbuslibrary.rxbus.ThreadMode;
+import com.xmjj.jujianglibrary.util.ActivityManagerUtils;
+import com.xmjj.jujianglibrary.util.DialogUtils;
+import com.xmjj.jujianglibrary.util.FileUtils;
 import com.xmjj.jujianglibrary.util.ToastUtils;
+import com.xmjj.jujianglibrary.util.logger.Logger;
+import com.xmjj.jujianglibrary.util.skinloader.listener.ILoaderListener;
+import com.xmjj.jujianglibrary.util.skinloader.load.SkinManager;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
+import com.xmjj.rxretrofit_master.entity.event.SkinEvent;
 import com.xmjj.rxretrofit_master.fragment.AboutFragment;
+import com.xmjj.rxretrofit_master.fragment.CameraFragment;
 import com.xmjj.rxretrofit_master.fragment.DbFlowFragment;
 import com.xmjj.rxretrofit_master.fragment.GlideFragment;
 import com.xmjj.rxretrofit_master.fragment.NetFragment;
 import com.xmjj.rxretrofit_master.fragment.OtherFragment;
 import com.xmjj.rxretrofit_master.fragment.RxbusFragment;
+import com.xmjj.rxretrofit_master.fragment.SkinFragment;
 import com.xmjj.rxretrofit_master.fragment.ViewFragment;
+
+import java.io.File;
 
 /**
  * 功能描述：
@@ -40,6 +55,16 @@ public class MdActivity extends BaseActivity {
 	private OtherFragment otherFragment;
 	private AboutFragment aboutFragment;
 	private ViewFragment viewFragment;
+	private CameraFragment cameraFragment;
+	private SkinFragment skinFragment;
+
+	private static String SKIN_DIR;
+	/*皮肤名*/
+	private static final String SKIN_GREEN = "skin_green.skin";
+	private static final String SKIN_BLACK = "skin_black.skin";
+	public static final int GREEN = 0;
+	public static final int BLUE = 1;
+	public static final int BLACK = 2;
 
 
 	@Override
@@ -49,6 +74,7 @@ public class MdActivity extends BaseActivity {
 
 	@Override
 	public void initViews() {
+		RxBus.getDefault().register(this);
 		toolbar = findView(R.id.toolbar);
 		navigationView = findView(R.id.navigation_view);
 		drawerLayout = findView(R.id.drawer_layout);
@@ -59,7 +85,9 @@ public class MdActivity extends BaseActivity {
 		mDrawerToggle.syncState();
 		drawerLayout.setDrawerListener(mDrawerToggle);
 		toolbar.setNavigationIcon(R.mipmap.ic_drawer_home);
-
+		dynamicAddSkinEnableView(toolbar, "background", R.color.colorPrimary);
+		dynamicAddSkinEnableView(navigationView.getHeaderView(0), "background", R.color.colorPrimary);
+		dynamicAddSkinEnableView(navigationView, "navigationViewMenu", R.color.colorPrimary);
 
 	}
 
@@ -72,14 +100,20 @@ public class MdActivity extends BaseActivity {
 		otherFragment = new OtherFragment();
 		rxbusFragment = new RxbusFragment();
 		viewFragment = new ViewFragment();
-
+		cameraFragment = new CameraFragment();
+		skinFragment = new SkinFragment();
 		switchFragment(netFragment);
+		SKIN_DIR = FileUtils.getSkinDirPath(this);
 	}
-	private long lastBackKeyDownTick = 0;
-	public static final long MAX_DOUBLE_BACK_DURATION = 1500;
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		RxBus.getDefault().unRegister(this);
+	}
+
 	@Override
 	public void onBackPressed() {
-
 		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {//当前抽屉是打开的，则关闭
 			drawerLayout.closeDrawer(Gravity.LEFT);
 			return;
@@ -90,16 +124,47 @@ public class MdActivity extends BaseActivity {
 			if (otherFragment.canGoBack()) {
 				otherFragment.goBack();
 				return;
+			} else {
+				exit();
 			}
+		} else {
+			exit();
 		}
 
-		long currentTick = System.currentTimeMillis();
-		if (currentTick - lastBackKeyDownTick > MAX_DOUBLE_BACK_DURATION) {
-			ToastUtils.showShortMes(this,"再按一次退出");
-			lastBackKeyDownTick = currentTick;
-		} else {
-			finish();
-			System.exit(0);
+	}
+
+	public void exit() {
+		DialogUtils.getInstance()
+				.showDialog(this, new Listener())
+				.setMessage("确认要退出程序吗?");
+
+
+	}
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void changeSkin(SkinEvent event) {
+		if (event != null) {
+			int skin = event.skin;
+			switch (skin) {
+				case GREEN:
+					changeSkin(SKIN_GREEN);
+					break;
+				case BLUE:
+					SkinManager.getInstance().restoreDefaultTheme();
+					break;
+
+				case BLACK:
+					changeSkin(SKIN_BLACK);
+					break;
+			}
+		}
+	}
+
+	public class Listener extends DialogUtils.positiveListener {
+		@Override
+		public void onClick(View v) {
+			super.onClick(v);
+			ActivityManagerUtils.getInstance().AppExit(MdActivity.this);
 		}
 	}
 
@@ -133,6 +198,12 @@ public class MdActivity extends BaseActivity {
 							case R.id.model_other:
 								f = otherFragment;
 								break;
+							case R.id.model_camera2:
+								f = cameraFragment;
+								break;
+							case R.id.model_skin:
+								f = skinFragment;
+								break;
 
 						}
 						switchFragment(f);
@@ -143,6 +214,34 @@ public class MdActivity extends BaseActivity {
 				});
 	}
 
+	public void changeSkin(String skinFile) {
+		String skinFullName = SKIN_DIR + File.separator + skinFile;
+		FileUtils.moveRawToDir(this, skinFile, skinFullName);
+		File skin = new File(skinFullName);
+		if (!skin.exists()) {
+			ToastUtils.showShortMes(this, "请检查" + skinFullName + "是否存在");
+			return;
+		}
+		SkinManager.getInstance().load(skin.getAbsolutePath(),
+				new ILoaderListener() {
+					@Override
+					public void onStart() {
+						Logger.d("onStart");
+					}
+
+					@Override
+					public void onSuccess() {
+						Logger.d("onSuccess");
+
+					}
+
+					@Override
+					public void onFailed() {
+
+						Logger.d("onFailed");
+					}
+				});
+	}
 
 
 }

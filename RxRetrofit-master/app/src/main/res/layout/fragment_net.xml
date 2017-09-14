@@ -9,11 +9,9 @@
         android:id="@+id/tablayout_net"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/colorAccent"
-        app:tabTextColor="@color/card_background"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/text_black"
+        app:tabTextColor="@color/text_normal"
         />
 
 

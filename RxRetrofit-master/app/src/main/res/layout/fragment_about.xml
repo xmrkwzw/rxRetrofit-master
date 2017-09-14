@@ -39,7 +39,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="应用介绍"
-        android:textColor="@color/colorPrimaryDark"
+        skin:enable="true"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         />
 
@@ -49,7 +50,7 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:layout_weight="1"
-        android:background="@color/windowBackground"
+        android:background="@color/color_white"
         android:foreground="?android:attr/selectableItemBackground"
         android:padding="10dp"
         app:cardCornerRadius="10dp"
