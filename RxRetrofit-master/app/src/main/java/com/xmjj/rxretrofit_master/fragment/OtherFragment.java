@@ -6,6 +6,8 @@ import com.xmjj.jujianglibrary.util.WebViewUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 
+import butterknife.BindView;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -13,7 +15,8 @@ import com.xmjj.rxretrofit_master.base.BaseFragment;
  */
 
 public class OtherFragment extends BaseFragment {
-	private WebView webView;
+	@BindView(R.id.webview)
+	WebView webView;
 	private static final String URL = "http://www.jianshu.com/p/431f12648da0";
 
 	@Override
@@ -30,6 +33,7 @@ public class OtherFragment extends BaseFragment {
 	public void initData() {
 		WebViewUtils.getInstance().initWebView(webView, URL);
 	}
+
 	public boolean canGoBack() {
 		return webView != null && webView.canGoBack();
 	}

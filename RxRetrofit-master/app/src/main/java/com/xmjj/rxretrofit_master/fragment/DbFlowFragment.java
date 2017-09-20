@@ -14,6 +14,9 @@ import com.xmjj.rxretrofit_master.util.FlowManagerUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -21,12 +24,20 @@ import java.util.List;
  */
 
 public class DbFlowFragment extends BaseFragment implements View.OnClickListener {
-	private TextView tvShow;
-	private Button btnDbAdd;
-	private Button btnDbDelete;
-	private Button btnDbUpdate;
-	private Button btnDbQuery;
-	private Button btnDeleteTable;
+	@BindView(R.id.btn_db_add)
+	Button btnDbAdd;
+	@BindView(R.id.btn_db_delete)
+	Button btnDbDelete;
+	@BindView(R.id.btn_db_update)
+	Button btnDbUpdate;
+	@BindView(R.id.btn_db_query)
+	Button btnDbQuery;
+	@BindView(R.id.btn_db_delete_table)
+	Button btnDeleteTable;
+	@BindView(R.id.tv_show)
+	TextView tvShow;
+
+
 	@Override
 	public int getLayoutResId() {
 		return R.layout.fragment_db;
@@ -34,12 +45,7 @@ public class DbFlowFragment extends BaseFragment implements View.OnClickListener
 
 	@Override
 	public void initViews() {
-		btnDbAdd = findView(R.id.btn_db_add);
-		btnDbDelete = findView(R.id.btn_db_delete);
-		btnDbUpdate = findView(R.id.btn_db_update);
-		btnDbQuery = findView(R.id.btn_db_query);
-		btnDeleteTable = findView(R.id.btn_db_delete_table);
-		tvShow = findView(R.id.tv_show);
+
 	}
 
 	@Override
@@ -110,9 +116,10 @@ public class DbFlowFragment extends BaseFragment implements View.OnClickListener
 		}
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
+
+	@OnClick({R.id.btn_db_add, R.id.btn_db_delete, R.id.btn_db_update, R.id.btn_db_query, R.id.btn_db_delete_table})
+	public void onClick(View view) {
+		switch (view.getId()) {
 			case R.id.btn_db_add:
 				insert();
 				break;

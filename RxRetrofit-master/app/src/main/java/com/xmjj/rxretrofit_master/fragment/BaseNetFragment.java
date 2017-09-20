@@ -16,6 +16,8 @@ import com.xmjj.rxretrofit_master.http.api.BaseInfoApi;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -23,8 +25,9 @@ import java.util.List;
  */
 @SuppressLint("ValidFragment")
 public class BaseNetFragment extends BaseFragment implements HttpOnNextListener {
+	@BindView(R.id.tv_content)
+	TextView tvShow;
 	private BaseInfoApi baseInfoApi;
-	private TextView tvShow;
 	private static final int TYPE_OBJECT = 0;
 	private static final int TYPE_ARRAY = 1;
 	private static final int TYPE_INNER = 2;
@@ -41,7 +44,7 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 
 	@Override
 	public void initViews() {
-		tvShow = findView(R.id.tv_content);
+
 	}
 
 	@Override
@@ -68,17 +71,17 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
 
 
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName()+"\n");
+			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName() + "\n");
 
 		} else if (BaseInfoApi.CIVILIZATION_METHOD.equals(method)) {
 			List<RatingBean> lists = (List<RatingBean>) result;
 
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek()+"\n");
+			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
 		} else if (BaseInfoApi.IN.equals(method)) {
 
 			List<RatingBean> lists = (List<RatingBean>) result;
 
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek()+"\n");
+			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
 		} else if (BaseInfoApi.MSG_CODE_METHOD.equals(method)) {
 
 			tvShow.setText((String) result);

@@ -8,6 +8,9 @@ import com.xmjj.jujianglibrary.util.GlideImageLoader;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -15,8 +18,17 @@ import com.xmjj.rxretrofit_master.base.BaseFragment;
  */
 
 public class GlideFragment extends BaseFragment implements View.OnClickListener {
-	private Button btnLoadImg, btnLoadGif, btnLoadRound, btnLoadRoundCorner;
-	private ImageView ivBg;
+	@BindView(R.id.btn_load_img)
+	Button btnLoadImg;
+	@BindView(R.id.btn_load_gif)
+	Button btnLoadGif;
+	@BindView(R.id.btn_load_round)
+	Button btnLoadRound;
+	@BindView(R.id.btn_load_round_corner)
+	Button btnLoadRoundCorner;
+	@BindView(R.id.iv_show)
+	ImageView ivBg;
+
 
 	@Override
 	public int getLayoutResId() {
@@ -25,11 +37,7 @@ public class GlideFragment extends BaseFragment implements View.OnClickListener 
 
 	@Override
 	public void initViews() {
-		btnLoadGif = findView(R.id.btn_load_gif);
-		btnLoadImg = findView(R.id.btn_load_img);
-		ivBg = findView(R.id.iv_show);
-		btnLoadRound = findView(R.id.btn_load_round);
-		btnLoadRoundCorner = findView(R.id.btn_load_round_corner);
+
 	}
 
 	@Override
@@ -40,7 +48,7 @@ public class GlideFragment extends BaseFragment implements View.OnClickListener 
 		btnLoadRoundCorner.setOnClickListener(this);
 	}
 
-	@Override
+	@OnClick({R.id.btn_load_img, R.id.btn_load_gif, R.id.btn_load_round, R.id.btn_load_round_corner})
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_load_img:
@@ -62,11 +70,13 @@ public class GlideFragment extends BaseFragment implements View.OnClickListener 
 				break;
 		}
 	}
+
 	/*load img*/
 	public void loadImg(String url) {
 		GlideImageLoader.getInstance().setImage(getActivity(), url, ivBg, null);
 	}
-	public void loadGifImg(String url){
+
+	public void loadGifImg(String url) {
 		GlideImageLoader.getInstance().setGifImage(getActivity(), url, ivBg);
 	}
 
@@ -77,4 +87,7 @@ public class GlideFragment extends BaseFragment implements View.OnClickListener 
 	public void loadRoundCornerImg(String url) {
 		GlideImageLoader.getInstance().setRoundCornerImage(getActivity(), url, ivBg, 10);
 	}
+
+
+
 }

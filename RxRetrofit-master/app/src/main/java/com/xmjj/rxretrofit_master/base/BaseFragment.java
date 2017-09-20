@@ -14,6 +14,9 @@ import com.xmjj.jujianglibrary.util.skinloader.listener.IDynamicNewView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 
 /**
  * 功能描述：
@@ -24,12 +27,15 @@ import java.util.List;
 public abstract class BaseFragment extends RxFragment implements IDynamicNewView {
 	public View containerView;
 	public BaseActivity activity;
+	private Unbinder unbinder;
+	private IDynamicNewView mIDynamicNewView;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		if (containerView == null) {
 			containerView = inflater.inflate(getLayoutResId(), null);
+			unbinder = ButterKnife.bind(this, containerView);
 			activity = (BaseActivity) getActivity();
 			activity.getActionBarHeight();
 			activity.getScreenSize();
@@ -40,10 +46,19 @@ public abstract class BaseFragment extends RxFragment implements IDynamicNewView
 		if (parent != null) {
 			parent.removeView(containerView);
 		}
+
 		return containerView;
 	}
-	private IDynamicNewView mIDynamicNewView;
-	private LayoutInflater mLayoutInflater;
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (unbinder != null) {
+
+			unbinder.unbind();
+			unbinder = null;
+		}
+	}
 
 	@Override
 	public void onAttach(Context context) {

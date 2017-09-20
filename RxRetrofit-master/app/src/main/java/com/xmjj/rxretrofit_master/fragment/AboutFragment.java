@@ -7,6 +7,10 @@ import android.widget.TextView;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 
+import butterknife.BindView;
+
+import static com.xmjj.rxretrofit_master.R.id.tv_content;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -14,15 +18,19 @@ import com.xmjj.rxretrofit_master.base.BaseFragment;
  */
 
 public class AboutFragment extends BaseFragment {
+	@BindView(tv_content)
+	TextView tvContent;
+
 	@Override
 	public int getLayoutResId() {
 		return R.layout.fragment_about;
 	}
+
 	@Override
 	public void initViews() {
-		TextView tv_content = findView(R.id.tv_content);
-		tv_content.setAutoLinkMask(Linkify.ALL);
-		tv_content.setMovementMethod(LinkMovementMethod
+		tvContent = findView(tv_content);
+		tvContent.setAutoLinkMask(Linkify.ALL);
+		tvContent.setMovementMethod(LinkMovementMethod
 				.getInstance());
 	}
 

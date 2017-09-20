@@ -12,6 +12,8 @@ import com.xmjj.rxretrofit_master.base.BaseViewPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -19,8 +21,11 @@ import java.util.List;
  */
 
 public class NetFragment extends BaseFragment {
-	private TabLayout tabLayout;
-	private ViewPager viewPager;
+	@BindView(R.id.tablayout_net)
+	TabLayout tabLayout;
+	@BindView(R.id.viewpager_net)
+	ViewPager viewPager;
+
 	private BaseViewPagerAdapter adapter;
 	private List<Fragment> lists = new ArrayList<>();
 	private List<String> titles = new ArrayList<>();
@@ -37,7 +42,7 @@ public class NetFragment extends BaseFragment {
 		viewPager = findView(R.id.viewpager_net);
 		//dynamicAddSkinView(tabLayout, AttrFactory.BACKGROUND, R.color.color_white);//设置tablayout的背景
 		//dynamicAddSkinView(tabLayout, AttrFactory.TAB_SELECT_TEXT_COLOR,R.color.colorAccent);//设置选中的颜色
-		dynamicAddSkinView(tabLayout, AttrFactory.TAB_INDICATOR_COLOR,R.color.colorPrimary);
+		dynamicAddSkinView(tabLayout, AttrFactory.TAB_INDICATOR_COLOR, R.color.colorPrimary);
 	}
 
 	@Override
@@ -54,4 +59,5 @@ public class NetFragment extends BaseFragment {
 		tabLayout.setupWithViewPager(viewPager);
 
 	}
+
 }

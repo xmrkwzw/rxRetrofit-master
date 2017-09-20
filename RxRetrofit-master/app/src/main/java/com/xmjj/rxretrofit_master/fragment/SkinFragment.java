@@ -9,6 +9,9 @@ import com.xmjj.rxretrofit_master.activity.MdActivity;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 import com.xmjj.rxretrofit_master.entity.event.SkinEvent;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -16,9 +19,13 @@ import com.xmjj.rxretrofit_master.entity.event.SkinEvent;
  */
 
 public class SkinFragment extends BaseFragment implements View.OnClickListener {
-	private LinearLayout llBlue;
-	private LinearLayout llGreen;
-	private LinearLayout llBlack;
+	@BindView(R.id.ll_blue)
+	LinearLayout llBlue;
+	@BindView(R.id.ll_green)
+	LinearLayout llGreen;
+	@BindView(R.id.ll_black)
+	LinearLayout llBlack;
+
 
 	@Override
 	public int getLayoutResId() {
@@ -27,9 +34,7 @@ public class SkinFragment extends BaseFragment implements View.OnClickListener {
 
 	@Override
 	public void initViews() {
-		llBlue = findView(R.id.ll_blue);
-		llGreen = findView(R.id.ll_green);
-		llBlack = findView(R.id.ll_black);
+
 		llGreen.setOnClickListener(this);
 		llBlack.setOnClickListener(this);
 		llBlue.setOnClickListener(this);
@@ -40,7 +45,7 @@ public class SkinFragment extends BaseFragment implements View.OnClickListener {
 
 	}
 
-	@Override
+	@OnClick({R.id.ll_blue, R.id.ll_green, R.id.ll_black})
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.ll_blue:
@@ -55,4 +60,6 @@ public class SkinFragment extends BaseFragment implements View.OnClickListener {
 
 		}
 	}
+
+
 }

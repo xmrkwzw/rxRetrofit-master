@@ -23,6 +23,8 @@ import com.xmjj.rxretrofit_master.R;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -40,12 +42,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements ISkinU
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		mSkinInflaterFactory = new SkinInflaterFactory();
 		LayoutInflaterCompat.setFactory(getLayoutInflater(), mSkinInflaterFactory);
-
 		super.onCreate(savedInstanceState);
 		setContentView(getLayoutResId());
 		ActivityManagerUtils.getInstance().addActivity(this);
 		getScreenSize();
 		getActionBarHeight();
+		ButterKnife.bind(this);
 		initViews();
 		initData();
 	}

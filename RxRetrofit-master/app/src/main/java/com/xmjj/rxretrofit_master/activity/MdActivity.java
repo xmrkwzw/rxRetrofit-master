@@ -36,6 +36,8 @@ import com.xmjj.rxretrofit_master.fragment.ViewFragment;
 
 import java.io.File;
 
+import butterknife.BindView;
+
 /**
  * 功能描述：
  * Created by wzw
@@ -43,9 +45,12 @@ import java.io.File;
  */
 
 public class MdActivity extends BaseActivity {
-	private Toolbar toolbar;
-	private NavigationView navigationView;
-	private DrawerLayout drawerLayout;
+	@BindView(R.id.toolbar)
+	Toolbar toolbar;
+	@BindView(R.id.navigation_view)
+	NavigationView navigationView;
+	@BindView(R.id.drawer_layout)
+	DrawerLayout drawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;  //菜单开关
 	private BaseFragment f = null;
 	private NetFragment netFragment;
@@ -75,9 +80,6 @@ public class MdActivity extends BaseActivity {
 	@Override
 	public void initViews() {
 		RxBus.getDefault().register(this);
-		toolbar = findView(R.id.toolbar);
-		navigationView = findView(R.id.navigation_view);
-		drawerLayout = findView(R.id.drawer_layout);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		setupDrawerContent(navigationView);
@@ -159,6 +161,7 @@ public class MdActivity extends BaseActivity {
 			}
 		}
 	}
+
 
 	public class Listener extends DialogUtils.positiveListener {
 		@Override

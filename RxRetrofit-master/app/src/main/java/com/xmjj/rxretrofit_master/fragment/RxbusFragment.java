@@ -16,16 +16,23 @@ import com.xmjj.rxretrofit_master.base.BaseFragment;
 import com.xmjj.rxretrofit_master.entity.event.CommonEvent;
 import com.xmjj.rxretrofit_master.entity.event.StickyEvent;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /**
  * 功能描述：
  * Created by wzw
  * 2017/9/11
  */
 
-public class RxbusFragment extends BaseFragment implements View.OnClickListener{
-	private Button btnPost;
-	private Button btnStickyPost;
-	private TextView tvShow;
+public class RxbusFragment extends BaseFragment implements View.OnClickListener {
+	@BindView(R.id.btn_rx_post)
+	Button btnPost;
+	@BindView(R.id.btn_rx_sticky_post)
+	Button btnStickyPost;
+	@BindView(R.id.tv_show)
+	TextView tvShow;
+
 	@Override
 	public int getLayoutResId() {
 		return R.layout.fragment_rxbus;
@@ -41,7 +48,7 @@ public class RxbusFragment extends BaseFragment implements View.OnClickListener{
 	@Override
 	public void initViews() {
 		btnPost = findView(R.id.btn_rx_post);
-		btnStickyPost =findView(R.id.btn_rx_sticky_post);
+		btnStickyPost = findView(R.id.btn_rx_sticky_post);
 		tvShow = findView(R.id.tv_show);
 	}
 
@@ -51,6 +58,7 @@ public class RxbusFragment extends BaseFragment implements View.OnClickListener{
 		btnStickyPost.setOnClickListener(this);
 		btnPost.setOnClickListener(this);
 	}
+
 	/*post a common event by rxbus*/
 	public void post() {
 		RxBus.getDefault().post(new CommonEvent("common event"));
@@ -59,12 +67,12 @@ public class RxbusFragment extends BaseFragment implements View.OnClickListener{
 	/*post a sticky event by rxbus*/
 	public void stickyPost() {
 		RxBus.getDefault().post(new StickyEvent("sticky event"));
-		new CountDownTimer(3050,1000){
+		new CountDownTimer(3050, 1000) {
 
 			@Override
 			public void onTick(long millisUntilFinished) {
-				Log.d("tag",millisUntilFinished+"");
-				tvShow.setText(millisUntilFinished/1000+"秒后调整接收页面");
+				Log.d("tag", millisUntilFinished + "");
+				tvShow.setText(millisUntilFinished / 1000 + "秒后调整接收页面");
 			}
 
 			@Override
@@ -82,9 +90,9 @@ public class RxbusFragment extends BaseFragment implements View.OnClickListener{
 		}
 	}
 
-	@Override
+	@OnClick({R.id.btn_rx_post, R.id.btn_rx_sticky_post})
 	public void onClick(View v) {
-		switch (v.getId()){
+		switch (v.getId()) {
 			case R.id.btn_rx_post:
 				post();
 				break;
@@ -94,4 +102,5 @@ public class RxbusFragment extends BaseFragment implements View.OnClickListener{
 				break;
 		}
 	}
+
 }

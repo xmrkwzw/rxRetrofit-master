@@ -35,6 +35,8 @@ import com.xmjj.rxretrofit_master.base.BaseFragment;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
+import butterknife.BindView;
+
 import static android.os.Looper.getMainLooper;
 
 /**
@@ -54,10 +56,15 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 		ORIENTATIONS.append(Surface.ROTATION_270, 180);
 	}
 
-	private SurfaceView mSurfaceView;
+	@BindView(R.id.surfaceview)
+	SurfaceView mSurfaceView;
+	@BindView(R.id.iv_show)
+	ImageView iv_show;
+	@BindView(R.id.iv_take_photo)
+	ImageView ivTakePicture;
+
 	private SurfaceHolder mSurfaceHolder;
-	private ImageView iv_show;
-	private ImageView ivTakePicture;
+
 	private CameraManager mCameraManager;//摄像头管理器
 	private Handler childHandler, mainHandler;
 	private String mCameraID;//摄像头Id 0 为后  1 为前
@@ -324,5 +331,8 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 			mCameraDevice.close();
 			mCameraDevice = null;
 		}
+
 	}
+
+
 }
