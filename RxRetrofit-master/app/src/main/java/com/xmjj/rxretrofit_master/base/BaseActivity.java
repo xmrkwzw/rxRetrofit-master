@@ -67,6 +67,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements ISkinU
 	public void switchFragment(Fragment fragment) {
 		getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, fragment).commit();
 	}
+	//切换Fragment
+	public void switchFragment(android.app.Fragment fragment) {
+		getFragmentManager().beginTransaction()
+				.replace(R.id.frame_content, fragment)
+				.commit();
+	}
 
 	// 获取当前fragment
 	public Fragment getCurrentFragment() {

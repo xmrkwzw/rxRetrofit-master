@@ -1,12 +1,14 @@
 package com.xmjj.rxretrofit_master.activity;
 
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -246,5 +248,29 @@ public class MdActivity extends BaseActivity {
 				});
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_settings) {
+			startActivity(new Intent(this, SettingActivity.class));
+		} else if (id == R.id.action_about) {
+			switchFragment(aboutFragment);
+			drawerLayout.closeDrawers();
+		} else if (id == R.id.action_scan) {
+			startActivity(new Intent(this, ZxingActivity.class));
+		}
+
+
+		return super.onOptionsItemSelected(item);
+	}
 
 }

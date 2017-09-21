@@ -8,6 +8,7 @@
         <!--<item name="android:textColorPrimary">@color/white</item>-->
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.App</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="ActionButton.Overflow.App" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">

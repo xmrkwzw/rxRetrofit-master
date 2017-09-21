@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="users"
+        android:title="账号设置"
+        >
+        <Preference
+            android:key="user"
+            android:title="账号设置" />
+        <Preference
+            android:key="safe"
+            android:title="账号安全" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="msg"
+        android:title="消息设置"
+        >
+        <Preference
+            android:key="privacy"
+            android:title="隐私设置" />
+        <Preference
+            android:key="pingbi"
+            android:title="屏蔽设置" />
+        <Preference
+            android:key="common"
+            android:title="通用设置" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="other"
+        android:title="其他设置"
+        >
+        <Preference
+            android:key="clean"
+            android:title="清除缓存"
+            android:summary="清除数据库、缓存数据、自定义文件、图片缓存"/>
+        <SwitchPreference
+            android:summaryOff="正常模式"
+            android:summaryOn="夜间模式"
+            android:key="night"
+            android:title="夜间模式" />
+
+    </PreferenceCategory>
+
+
+
+
+
+
+
+</PreferenceScreen>

@@ -32,7 +32,9 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:titleTextColor="#ffffff"
                     skin:enable="true"/>
+
             </android.support.design.widget.AppBarLayout>
+
 
             <FrameLayout
                 android:id="@+id/frame_content"

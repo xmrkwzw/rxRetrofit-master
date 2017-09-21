@@ -4,7 +4,9 @@
           package="com.xmjj.rxretrofit_master">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
@@ -18,7 +20,7 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MdActivity">
+        <activity android:name=".activity.MdActivity" android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -26,6 +28,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.RcvActivity"/>
+        <activity android:name="com.xmjj.jujianglibrary.zxing.CaptureActivity"/>
+        <activity android:name=".activity.ZxingActivity"/>
+        <activity android:name=".activity.SettingActivity"/>
     </application>
 
 </manifest>
