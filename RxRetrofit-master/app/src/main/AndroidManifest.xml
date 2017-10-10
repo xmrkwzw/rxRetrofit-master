@@ -4,12 +4,22 @@
           package="com.xmjj.rxretrofit_master">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 
     <application
@@ -20,7 +30,10 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MdActivity" android:uiOptions="splitActionBarWhenNarrow">
+        <activity
+            android:name=".activity.MdActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -31,6 +44,39 @@
         <activity android:name="com.xmjj.jujianglibrary.zxing.CaptureActivity"/>
         <activity android:name=".activity.ZxingActivity"/>
         <activity android:name=".activity.SettingActivity"/>
+        <activity android:name=".activity.AnimationActivity"/>
+        <activity
+            android:name=".activity.FileLookActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".activity.FileDisplayActivity"/>
+        <activity
+            android:name=".activity.TbsWebViewActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+
+        <activity
+
+            android:name="com.tencent.smtt.sdk.VideoActivity"
+
+            android:configChanges="orientation|screenSize|keyboardHidden"
+
+            android:exported="false"
+
+            android:launchMode="singleTask"
+
+            android:alwaysRetainTaskState="true">
+
+            <intent-filter>
+
+                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".activity.TbsVideoViewActivity"/>
+
     </application>
 
 </manifest>

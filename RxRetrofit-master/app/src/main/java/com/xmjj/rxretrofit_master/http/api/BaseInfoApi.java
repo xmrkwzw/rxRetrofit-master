@@ -62,6 +62,7 @@ public class BaseInfoApi extends BaseApi {
 		setMethod(MSG_CODE_METHOD);
 		Observable observable = httpApiService.getMscCode(mobilePhone);
 		httpManager.initHttp(observable,BaseInfoApi.this);
+
 	}
 
 	/*嵌套接口*/

@@ -18,7 +18,7 @@ import butterknife.OnClick;
  * 2017/9/13
  */
 
-public class SkinFragment extends BaseFragment implements View.OnClickListener {
+public class SkinFragment extends BaseFragment  {
 	@BindView(R.id.ll_blue)
 	LinearLayout llBlue;
 	@BindView(R.id.ll_green)
@@ -35,9 +35,6 @@ public class SkinFragment extends BaseFragment implements View.OnClickListener {
 	@Override
 	public void initViews() {
 
-		llGreen.setOnClickListener(this);
-		llBlack.setOnClickListener(this);
-		llBlue.setOnClickListener(this);
 	}
 
 	@Override

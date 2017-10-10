@@ -17,7 +17,7 @@ import butterknife.OnClick;
  * 2017/9/11
  */
 
-public class GlideFragment extends BaseFragment implements View.OnClickListener {
+public class GlideFragment extends BaseFragment {
 	@BindView(R.id.btn_load_img)
 	Button btnLoadImg;
 	@BindView(R.id.btn_load_gif)
@@ -42,10 +42,7 @@ public class GlideFragment extends BaseFragment implements View.OnClickListener 
 
 	@Override
 	public void initData() {
-		btnLoadImg.setOnClickListener(this);
-		btnLoadGif.setOnClickListener(this);
-		btnLoadRound.setOnClickListener(this);
-		btnLoadRoundCorner.setOnClickListener(this);
+
 	}
 
 	@OnClick({R.id.btn_load_img, R.id.btn_load_gif, R.id.btn_load_round, R.id.btn_load_round_corner})

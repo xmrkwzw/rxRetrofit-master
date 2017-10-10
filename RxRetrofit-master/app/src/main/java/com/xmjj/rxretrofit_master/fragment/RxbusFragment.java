@@ -25,7 +25,7 @@ import butterknife.OnClick;
  * 2017/9/11
  */
 
-public class RxbusFragment extends BaseFragment implements View.OnClickListener {
+public class RxbusFragment extends BaseFragment {
 	@BindView(R.id.btn_rx_post)
 	Button btnPost;
 	@BindView(R.id.btn_rx_sticky_post)
@@ -55,8 +55,7 @@ public class RxbusFragment extends BaseFragment implements View.OnClickListener 
 	@Override
 	public void initData() {
 		RxBus.getDefault().register(this);
-		btnStickyPost.setOnClickListener(this);
-		btnPost.setOnClickListener(this);
+
 	}
 
 	/*post a common event by rxbus*/

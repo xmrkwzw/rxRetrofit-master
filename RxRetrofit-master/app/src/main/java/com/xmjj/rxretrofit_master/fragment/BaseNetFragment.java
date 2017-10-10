@@ -1,10 +1,17 @@
 package com.xmjj.rxretrofit_master.fragment;
 
 import android.annotation.SuppressLint;
+import android.os.Environment;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xmjj.jujianglibrary.exception.ApiException;
+import com.xmjj.jujianglibrary.http.downlaod.DownInfo;
+import com.xmjj.jujianglibrary.http.downlaod.DownState;
+import com.xmjj.jujianglibrary.http.downlaod.HttpDownManager;
+import com.xmjj.jujianglibrary.listener.HttpDownOnNextListener;
 import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
 import com.xmjj.jujianglibrary.util.ToastUtils;
 import com.xmjj.jujianglibrary.util.logger.Logger;
@@ -14,6 +21,7 @@ import com.xmjj.rxretrofit_master.entity.BrandInfoDetailBean;
 import com.xmjj.rxretrofit_master.entity.RatingBean;
 import com.xmjj.rxretrofit_master.http.api.BaseInfoApi;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,7 +39,10 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 	private static final int TYPE_OBJECT = 0;
 	private static final int TYPE_ARRAY = 1;
 	private static final int TYPE_INNER = 2;
+	private static final int TYPE_DOWNLOAD = 3;
+	private static final String DOWNLOAD_URL = "http://www.ijinbu.com/upload/brand/v1.0/banpai_V1.0.2_05-11.apk?tsecond=0.07560947055095824";
 	private int type;
+	ProgressBar progressBar;
 
 	public BaseNetFragment(int type) {
 		this.type = type;
@@ -44,6 +55,7 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 
 	@Override
 	public void initViews() {
+		progressBar = new ProgressBar(activity);
 
 	}
 
@@ -59,7 +71,9 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 			case TYPE_INNER:
 				nestedRequest();
 				break;
-
+			case TYPE_DOWNLOAD:
+				download();
+				break;
 		}
 
 
@@ -116,5 +130,64 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 		baseInfoApi = new BaseInfoApi(this, (RxAppCompatActivity) getActivity(), BrandInfoDetailBean.class);
 		baseInfoApi.doOther("d6aa48251b85b045", "嵌套接口加载......");
 	}
+
+	/**
+	 * download file
+	 */
+	public void download() {
+		DownInfo downInfo = new DownInfo(DOWNLOAD_URL);
+		File file = new File(Environment.getExternalStorageDirectory() + "/banpai/update/", "test.apk");
+
+		downInfo.setId(1);
+		downInfo.setState(DownState.START);
+		downInfo.setSavePath(file.getAbsolutePath());
+		downInfo.setListener(httpProgressOnNextListener);
+		HttpDownManager.getInstance().startDown(downInfo);
+	}
+
+	/*下载回调*/
+	HttpDownOnNextListener<DownInfo> httpProgressOnNextListener = new HttpDownOnNextListener<DownInfo>() {
+		@Override
+		public void onNext(DownInfo baseDownEntity) {
+			tvShow.setText("提示：下载完成");
+			Toast.makeText(getContext(), baseDownEntity.getSavePath(), Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onStart() {
+			tvShow.setText("提示:开始下载");
+		}
+
+		@Override
+		public void onComplete() {
+			tvShow.setText("提示：下载结束");
+		}
+
+		@Override
+		public void onError(Throwable e) {
+			super.onError(e);
+			tvShow.setText("失败:" + e.toString());
+		}
+
+
+		@Override
+		public void onPuase() {
+			super.onPuase();
+			tvShow.setText("提示:暂停");
+		}
+
+		@Override
+		public void onStop() {
+			super.onStop();
+		}
+
+		@Override
+		public void updateProgress(long readLength, long countLength) {
+			tvShow.setText("提示:下载中" + (int) countLength + "/" + (int) readLength);
+			progressBar.setMax((int) countLength);
+			progressBar.setProgress((int) readLength);
+
+		}
+	};
 
 }

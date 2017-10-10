@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * 2017/9/21
  */
 
-public class ZxingActivity extends BaseActivity implements View.OnClickListener {
+public class ZxingActivity extends BaseActivity  {
 	@BindView(R.id.iv_show)
 	ImageView ivShow;
 	@BindView(R.id.iv_scan)
@@ -49,8 +49,7 @@ public class ZxingActivity extends BaseActivity implements View.OnClickListener 
 
 	@Override
 	public void initData() {
-		ivScan.setOnClickListener(this);
-		ivShow.setOnClickListener(this);
+
 	}
 
 	@OnClick({R.id.iv_show, R.id.iv_scan})

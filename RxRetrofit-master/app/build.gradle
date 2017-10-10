@@ -13,6 +13,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //X5兼容64位手机
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
     }
     buildTypes {
         release {
@@ -27,6 +31,7 @@ android {
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
+
 }
 
 dependencies {
@@ -45,6 +50,9 @@ dependencies {
     /*butterknife*/
     compile "com.jakewharton:butterknife:${butterknife_version}"
     apt "com.jakewharton:butterknife-compiler:${butterknife_version}"
+    /*动画*/
+    compile 'com.facebook.rebound:rebound:0.3.8'
+    compile 'com.rmtheis:tess-two:6.2.0'
 
 
 }

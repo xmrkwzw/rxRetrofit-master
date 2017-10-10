@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * 2017/9/11
  */
 
-public class DbFlowFragment extends BaseFragment implements View.OnClickListener {
+public class DbFlowFragment extends BaseFragment  {
 	@BindView(R.id.btn_db_add)
 	Button btnDbAdd;
 	@BindView(R.id.btn_db_delete)
@@ -50,11 +50,7 @@ public class DbFlowFragment extends BaseFragment implements View.OnClickListener
 
 	@Override
 	public void initData() {
-		btnDbAdd.setOnClickListener(this);
-		btnDbDelete.setOnClickListener(this);
-		btnDbUpdate.setOnClickListener(this);
-		btnDbQuery.setOnClickListener(this);
-		btnDeleteTable.setOnClickListener(this);
+
 	}
 
 	/**

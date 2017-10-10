@@ -104,7 +104,7 @@ public class MdActivity extends BaseActivity {
 		otherFragment = new OtherFragment();
 		rxbusFragment = new RxbusFragment();
 		viewFragment = new ViewFragment();
-		cameraFragment = new CameraFragment();
+	//	cameraFragment = new CameraFragment();
 		skinFragment = new SkinFragment();
 		switchFragment(netFragment);
 		SKIN_DIR = FileUtils.getSkinDirPath(this);
@@ -204,7 +204,7 @@ public class MdActivity extends BaseActivity {
 								f = otherFragment;
 								break;
 							case R.id.model_camera2:
-								f = cameraFragment;
+							//	f = cameraFragment;
 								break;
 							case R.id.model_skin:
 								f = skinFragment;

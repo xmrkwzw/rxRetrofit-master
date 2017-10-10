@@ -50,6 +50,8 @@ public abstract class BaseActivity extends RxAppCompatActivity implements ISkinU
 		ButterKnife.bind(this);
 		initViews();
 		initData();
+
+
 	}
 
 
