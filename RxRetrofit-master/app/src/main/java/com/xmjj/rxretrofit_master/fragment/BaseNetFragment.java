@@ -1,7 +1,10 @@
 package com.xmjj.rxretrofit_master.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Environment;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnLongClick;
 
 /**
  * 功能描述：
@@ -77,6 +81,17 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 		}
 
 
+	}
+	@OnLongClick(R.id.tv_content)
+	public boolean onLongClick(View view){
+		switch (view.getId()){
+			case R.id.tv_content:
+
+				ClipboardManager cm =(ClipboardManager)getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+				cm.setText(tvShow.getText().toString());
+				break;
+		}
+		return false ;
 	}
 
 	@Override
@@ -149,23 +164,35 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 	HttpDownOnNextListener<DownInfo> httpProgressOnNextListener = new HttpDownOnNextListener<DownInfo>() {
 		@Override
 		public void onNext(DownInfo baseDownEntity) {
+			if(tvShow==null){
+				return;
+			}
 			tvShow.setText("提示：下载完成");
 			Toast.makeText(getContext(), baseDownEntity.getSavePath(), Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
 		public void onStart() {
+			if(tvShow==null){
+				return;
+			}
 			tvShow.setText("提示:开始下载");
 		}
 
 		@Override
 		public void onComplete() {
+			if(tvShow==null){
+				return;
+			}
 			tvShow.setText("提示：下载结束");
 		}
 
 		@Override
 		public void onError(Throwable e) {
 			super.onError(e);
+			if(tvShow==null){
+				return;
+			}
 			tvShow.setText("失败:" + e.toString());
 		}
 
@@ -173,6 +200,9 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 		@Override
 		public void onPuase() {
 			super.onPuase();
+			if(tvShow==null){
+				return;
+			}
 			tvShow.setText("提示:暂停");
 		}
 
@@ -183,6 +213,9 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 
 		@Override
 		public void updateProgress(long readLength, long countLength) {
+			if(tvShow==null){
+				return;
+			}
 			tvShow.setText("提示:下载中" + (int) countLength + "/" + (int) readLength);
 			progressBar.setMax((int) countLength);
 			progressBar.setProgress((int) readLength);

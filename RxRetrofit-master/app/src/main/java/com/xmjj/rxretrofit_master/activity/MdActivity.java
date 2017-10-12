@@ -2,6 +2,9 @@ package com.xmjj.rxretrofit_master.activity;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.umeng.social.tool.UMImageMark;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
 import com.wzgiceman.rxbuslibrary.rxbus.RxBus;
 import com.wzgiceman.rxbuslibrary.rxbus.Subscribe;
 import com.wzgiceman.rxbuslibrary.rxbus.ThreadMode;
@@ -35,10 +45,12 @@ import com.xmjj.rxretrofit_master.fragment.OtherFragment;
 import com.xmjj.rxretrofit_master.fragment.RxbusFragment;
 import com.xmjj.rxretrofit_master.fragment.SkinFragment;
 import com.xmjj.rxretrofit_master.fragment.ViewFragment;
+import com.xmjj.rxretrofit_master.util.ShareUtils;
 
 import java.io.File;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 功能描述：
@@ -53,6 +65,11 @@ public class MdActivity extends BaseActivity {
 	NavigationView navigationView;
 	@BindView(R.id.drawer_layout)
 	DrawerLayout drawerLayout;
+	@BindView(R.id.fb_share)
+	FloatingActionButton fbShare;
+	@BindView(R.id.fb_login)
+	FloatingActionButton fbLogin;
+
 	private ActionBarDrawerToggle mDrawerToggle;  //菜单开关
 	private BaseFragment f = null;
 	private NetFragment netFragment;
@@ -104,10 +121,11 @@ public class MdActivity extends BaseActivity {
 		otherFragment = new OtherFragment();
 		rxbusFragment = new RxbusFragment();
 		viewFragment = new ViewFragment();
-	//	cameraFragment = new CameraFragment();
+		//	cameraFragment = new CameraFragment();
 		skinFragment = new SkinFragment();
 		switchFragment(netFragment);
 		SKIN_DIR = FileUtils.getSkinDirPath(this);
+
 	}
 
 	@Override
@@ -164,6 +182,43 @@ public class MdActivity extends BaseActivity {
 		}
 	}
 
+	@OnClick({R.id.fb_share,R.id.fb_login})
+	public void onClick(View view) {
+		switch (view.getId()) {
+			case R.id.fb_share:
+				share();
+				break;
+
+			case R.id.fb_login:
+				startActivity(new Intent(this,AuthActivity.class));
+				break;
+		}
+	}
+
+	private void share() {
+		ShareBoardConfig config = new ShareBoardConfig();
+		config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
+		config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_ROUNDED_SQUARE);
+		UMWeb umWeb = new UMWeb("http://www.jianshu.com/p/431f12648da0");
+		/*添加图片水印*/
+		UMImageMark umImageMark = new UMImageMark();
+		umImageMark.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
+		umImageMark.setMarkBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.tuite));
+		umImageMark.setAlpha(0.2f);//设置透明度
+
+		UMImage thumb = new UMImage(this, R.drawable.sean, umImageMark);
+		umWeb.setTitle("my app");//标题
+		umWeb.setThumb(thumb);  //缩略图
+		umWeb.setDescription("rxjava+retrofit二次封装");//描述
+		new ShareAction(this)
+				.withText("my app")
+				.withMedia(umWeb)
+				.setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.ALIPAY, SHARE_MEDIA.SMS)
+				.setCallback(ShareUtils.getInstance().getListener())
+				.open(config);
+	}
+
+
 
 	public class Listener extends DialogUtils.positiveListener {
 		@Override
@@ -204,7 +259,7 @@ public class MdActivity extends BaseActivity {
 								f = otherFragment;
 								break;
 							case R.id.model_camera2:
-							//	f = cameraFragment;
+								//	f = cameraFragment;
 								break;
 							case R.id.model_skin:
 								f = skinFragment;
@@ -273,4 +328,20 @@ public class MdActivity extends BaseActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		/** attention to this below ,must add this**/
+		UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+	}
+
+	/**
+	 * 屏幕横竖屏切换时避免出现window leak的问题
+	 */
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		//shareAction.close();
+	}
 }

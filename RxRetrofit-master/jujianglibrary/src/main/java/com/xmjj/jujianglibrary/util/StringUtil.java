@@ -683,7 +683,7 @@ public final class StringUtil {
 
 	/*判断是否是域名*/
 	public static boolean isUrl(String str) {
-		String regex = "(http://|ftp://|https://|www){0,1}[^\u4e00-\u9fa5\\s]*?\\.(com|net|cn|me|tw|fr)[^\u4e00-\u9fa5\\s]*";
+		String regex = "(http://|ftp://|https://){0,1}[^\u4e00-\u9fa5\\s]*?\\.(com|net|cn|me|tw|fr)[^\u4e00-\u9fa5\\s]*";
 		// 匹配1 和匹配2均可实现Ip判断的效果
 
 		Pattern pattern = Pattern.compile(regex);

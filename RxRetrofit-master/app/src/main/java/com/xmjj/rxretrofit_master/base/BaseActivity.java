@@ -104,6 +104,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements ISkinU
 	protected void onResume() {
 		super.onResume();
 		SkinManager.getInstance().attach(this);
+
 	}
 
 	@Override

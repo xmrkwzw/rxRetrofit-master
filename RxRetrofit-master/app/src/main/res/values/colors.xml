@@ -10,4 +10,10 @@
     <color name="translucent">#66000000</color>
     <color name="light_gray">#FDFDFD</color>
     <color name="gray">#DDDDDD</color>
+    <color name="umeng_white">#ffffff</color>
+    <color name="umeng_blue">#0086DC</color>
+    <color name="umeng_black">#000000</color>
+    <color name="umeng_background">#D4E0E5</color>
+    <color name="umeng_text_color">#575A5C</color>
+    <color name="umeng_divide">#C3C6C9</color>
 </resources>

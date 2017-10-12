@@ -9,17 +9,18 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
-
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
 
     <application
@@ -31,7 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MdActivity"
+            android:name=".activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
@@ -45,38 +46,120 @@
         <activity android:name=".activity.ZxingActivity"/>
         <activity android:name=".activity.SettingActivity"/>
         <activity android:name=".activity.AnimationActivity"/>
+        <activity android:name=".activity.MdActivity"/>
         <activity
             android:name=".activity.FileLookActivity"
             android:launchMode="singleTop"/>
         <activity android:name=".activity.FileDisplayActivity"/>
         <activity
             android:name=".activity.TbsWebViewActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:configChanges="orientation|screenSize|keyboardHidden"/>
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
 
         <activity
 
             android:name="com.tencent.smtt.sdk.VideoActivity"
 
+            android:alwaysRetainTaskState="true"
+
             android:configChanges="orientation|screenSize|keyboardHidden"
 
             android:exported="false"
 
-            android:launchMode="singleTask"
-
-            android:alwaysRetainTaskState="true">
+            android:launchMode="singleTask">
 
             <intent-filter>
 
-                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
+                <action android:name="com.tencent.smtt.tbs.video.PLAY"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
             </intent-filter>
 
         </activity>
         <activity android:name=".activity.TbsVideoViewActivity"/>
+        <!--umeng share start-->
+        <!--sina-->
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
 
+        <activity
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+
+        <!-- wechat callback-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!--dingding-->
+        <activity
+            android:name=".ddshare.DDShareActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- alipay callback-->
+        <activity
+            android:name=".apshare.ShareEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!--qq simple-->
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".activity.AuthActivity"/>
+
+        <!--没安装客户端下登录-->
+        <activity
+            android:name="jp.line.android.sdk.activity.WebLoginActivity"
+            android:configChanges="keyboard|orientation"
+            android:exported="false"
+            android:screenOrientation="sensor">
+        </activity>
+
+        <!--umeng key add-->
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59dd7ddf8f4a9d3252000090" >
+        </meta-data>
+
+        <meta-data  android:value="fir.im" android:name="UMENG_CHANNEL"/>
+        <!--umeng share end-->
     </application>
 
 </manifest>
