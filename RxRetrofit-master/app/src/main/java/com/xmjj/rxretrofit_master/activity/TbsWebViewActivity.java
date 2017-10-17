@@ -1,7 +1,7 @@
 package com.xmjj.rxretrofit_master.activity;
 
-import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
+import com.xmjj.jujianglibrary.util.WebViewUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
 
@@ -17,6 +17,8 @@ public class TbsWebViewActivity extends BaseActivity {
 	@BindView(R.id.webview)
 	WebView webview;
 
+	private static final String URL = "http://192.168.1.166:63343/untitled/index.html?_ijt=90r07r8v017kde0uli65kpkn71";
+
 	@Override
 	public int getLayoutResId() {
 		return R.layout.activity_webview;
@@ -24,19 +26,7 @@ public class TbsWebViewActivity extends BaseActivity {
 
 	@Override
 	public void initViews() {
-		WebSettings webSettings = webview.getSettings();
-		webSettings.setUseWideViewPort(true);
-		webSettings.setLoadWithOverviewMode(true);
-		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-		webview.setWebViewClient(new com.tencent.smtt.sdk.WebViewClient() {
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-				webView.loadUrl(url);
-				return true;
-			}
-		});
-
-		webview.loadUrl("http://lol.qq.com/");
+		WebViewUtils.getInstance().initWebView(webview,URL);
 	}
 
 	@Override

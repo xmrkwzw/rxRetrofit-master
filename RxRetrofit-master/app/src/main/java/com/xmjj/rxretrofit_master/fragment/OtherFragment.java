@@ -1,7 +1,7 @@
 package com.xmjj.rxretrofit_master.fragment;
 
-import android.webkit.WebView;
 
+import com.tencent.smtt.sdk.WebView;
 import com.xmjj.jujianglibrary.util.WebViewUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;

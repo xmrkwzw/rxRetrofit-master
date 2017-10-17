@@ -121,7 +121,7 @@ public class MdActivity extends BaseActivity {
 		otherFragment = new OtherFragment();
 		rxbusFragment = new RxbusFragment();
 		viewFragment = new ViewFragment();
-		//	cameraFragment = new CameraFragment();
+		cameraFragment = new CameraFragment();
 		skinFragment = new SkinFragment();
 		switchFragment(netFragment);
 		SKIN_DIR = FileUtils.getSkinDirPath(this);
