@@ -5,7 +5,6 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 
 import com.xmjj.jujianglibrary.util.skinloader.load.SkinManager;
-import com.xmjj.jujianglibrary.util.skinloader.util.L;
 
 
 /**
@@ -28,12 +27,12 @@ public class BackgroundAttr extends SkinAttr {
             } else {
                 view.setBackgroundColor(color);
             }
-            L.i("applyAttr", "apply as color");
+
         } else if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)) {
             Drawable bg = SkinManager.getInstance().getDrawable(attrValueRefId);
             // view.setBackground(bg);
             view.setBackgroundDrawable(bg);
-            L.i("applyAttr", "apply as drawable");
+
         }
     }
 }

@@ -5,9 +5,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.xmjj.jujianglibrary.view.SuperFileView2
+    <com.xmjj.rxretrofit_master.widget.FileWatchView
         android:id="@+id/mSuperFileView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.xmjj.jujianglibrary.view.SuperFileView2>
+        android:layout_height="match_parent"></com.xmjj.rxretrofit_master.widget.FileWatchView>
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.xmjj.jujianglibrary.view;
+package com.xmjj.rxretrofit_master.widget;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,22 +18,22 @@ import java.io.File;
  * Created by 12457 on 2017/8/29.
  */
 
-public class SuperFileView2 extends FrameLayout implements TbsReaderView.ReaderCallback {
+public class FileWatchView extends FrameLayout implements TbsReaderView.ReaderCallback {
 
 	private static String TAG = "SuperFileView";
 	private TbsReaderView mTbsReaderView;
 	private int saveTime = -1;
 	private Context context;
 
-	public SuperFileView2(Context context) {
+	public FileWatchView(Context context) {
 		this(context, null, 0);
 	}
 
-	public SuperFileView2(Context context, AttributeSet attrs) {
+	public FileWatchView(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public SuperFileView2(Context context, AttributeSet attrs, int defStyleAttr) {
+	public FileWatchView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		mTbsReaderView = new TbsReaderView(context, this);
 		this.addView(mTbsReaderView, new LinearLayout.LayoutParams(-1, -1));
@@ -108,7 +108,7 @@ public class SuperFileView2 extends FrameLayout implements TbsReaderView.ReaderC
 	 * 将获取File路径的工作，“外包”出去
 	 */
 	public interface OnGetFilePathListener {
-		void onGetFilePath(SuperFileView2 mSuperFileView2);
+		void onGetFilePath(FileWatchView mFileWatchView);
 	}
 
 

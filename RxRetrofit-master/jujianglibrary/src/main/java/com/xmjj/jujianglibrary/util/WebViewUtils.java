@@ -1,9 +1,8 @@
 package com.xmjj.jujianglibrary.util;
 
-
-import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebView;
-import com.tencent.smtt.sdk.WebViewClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 /**
  * 功能描述：
@@ -12,31 +11,26 @@ import com.tencent.smtt.sdk.WebViewClient;
  */
 
 public class WebViewUtils {
-	public static WebViewUtils instance;
+	public static WebViewUtils instance ;
 
-	public static WebViewUtils getInstance() {
-		if (instance == null) {
+	public static WebViewUtils getInstance(){
+		if(instance==null){
 			instance = new WebViewUtils();
 		}
 		return instance;
 	}
 
-	public void initWebView(WebView webview, String url) {
-
-		WebSettings webSettings = webview.getSettings();
+	public void initWebView(WebView webView,String url){
+		WebSettings webSettings = webView.getSettings();
 		webSettings.setUseWideViewPort(true);
 		webSettings.setLoadWithOverviewMode(true);
-		webSettings.setDisplayZoomControls(true);
-		webSettings.setSupportZoom(true);
-		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-		webview.setWebViewClient(new WebViewClient() {
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-				webView.loadUrl(url);
+		webSettings.setJavaScriptEnabled(true);
+		webView.setWebViewClient(new WebViewClient() {
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				view.loadUrl(url);
 				return true;
 			}
 		});
-
-		webview.loadUrl(url);
+		webView.loadUrl(url);
 	}
 }

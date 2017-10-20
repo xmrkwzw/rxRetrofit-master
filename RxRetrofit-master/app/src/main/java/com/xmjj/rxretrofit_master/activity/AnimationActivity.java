@@ -2,14 +2,11 @@ package com.xmjj.rxretrofit_master.activity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import com.facebook.rebound.SimpleSpringListener;
@@ -33,7 +30,7 @@ import butterknife.OnClick;
  * 2017/9/22
  */
 
-public class AnimationActivity extends BaseActivity {
+public class AnimationActivity extends BaseActivity  {
 	@BindView(R.id.cv_bg)
 	ImageView cvBg;
 	@BindView(R.id.btn_interpolator)
@@ -46,8 +43,6 @@ public class AnimationActivity extends BaseActivity {
 	Button btnTwitter;
 	@BindView(R.id.sb)
 	SeekBar seekBar;
-	@BindView(R.id.ll_container)
-	LinearLayout llContainer;
 
 	private float factor;
 
@@ -64,7 +59,7 @@ public class AnimationActivity extends BaseActivity {
 			@Override
 			public void onProgressChanged(SeekBar _seekBar, int progress, boolean fromUser) {
 				DecimalFormat df = new DecimalFormat("######0.00");
-				String num = df.format((float) progress / seekBar.getMax());//返回的是String类型
+				String num = df.format((float)progress/seekBar.getMax());//返回的是String类型
 				factor = Float.parseFloat(num);
 				Logger.d("factor " + factor + "");
 			}
@@ -81,13 +76,12 @@ public class AnimationActivity extends BaseActivity {
 		});
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
 	@Override
 	public void initData() {
 
 	}
 
-	@OnClick({R.id.btn_interpolator, R.id.btn_round, R.id.btn_springAnimation, R.id.btn_twitter})
+	@OnClick({R.id.btn_interpolator, R.id.btn_round, R.id.btn_springAnimation,R.id.btn_twitter})
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.btn_interpolator:
@@ -116,11 +110,11 @@ public class AnimationActivity extends BaseActivity {
 	}
 
 	private void onTwitter() {
-		final ScaleAnimation animation2 = new ScaleAnimation(0.7f, 5f, 0.7f, 5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		final ScaleAnimation animation2 = new ScaleAnimation(0.7f, 5f, 0.7f, 5f, Animation.RELATIVE_TO_SELF,0.5f ,Animation.RELATIVE_TO_SELF,0.5f);
 		animation2.setDuration(500);
 
 
-		ScaleAnimation animation = new ScaleAnimation(1f, 0.7f, 1f, 0.7f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		ScaleAnimation animation = new ScaleAnimation(1f, 0.7f, 1f, 0.7f, Animation.RELATIVE_TO_SELF, 0.5f,Animation.RELATIVE_TO_SELF,0.5f);
 		animation.setDuration(900);
 		animation.setFillBefore(true);
 		animation.setAnimationListener(new Animation.AnimationListener() {
@@ -145,12 +139,12 @@ public class AnimationActivity extends BaseActivity {
 
 	}
 
-	private void onRound() {
-		SpringSystem springSystem = SpringSystem.create();
+	private void onRound(){
+		SpringSystem springSystem =SpringSystem.create();
 		Spring spring = springSystem.createSpring();
 		spring.setCurrentValue(0.5f);
-		spring.setSpringConfig(new SpringConfig(50, 6));
-		spring.addListener(new SimpleSpringListener() {
+		spring.setSpringConfig(new SpringConfig(50,6));
+		spring.addListener(new SimpleSpringListener(){
 			@Override
 			public void onSpringUpdate(Spring spring) {
 				super.onSpringUpdate(spring);
@@ -164,7 +158,7 @@ public class AnimationActivity extends BaseActivity {
 		spring.setEndValue(1.5f);
 	}
 
-	private void onSpringAnimation() {
+	private void onSpringAnimation(){
 
 	}
 }

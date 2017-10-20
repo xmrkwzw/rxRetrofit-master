@@ -8,9 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
-import com.xmjj.jujianglibrary.view.SuperFileView2;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.util.Md5Tool;
+import com.xmjj.rxretrofit_master.widget.FileWatchView;
 
 import java.io.File;
 
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class FileDisplayActivity extends AppCompatActivity {
 	@BindView(R.id.mSuperFileView)
-	SuperFileView2 mSuperFileView;
+	FileWatchView mSuperFileView;
 	String filePath;
 
 
@@ -34,11 +34,11 @@ public class FileDisplayActivity extends AppCompatActivity {
 
 
 	public void init() {
-		mSuperFileView = (SuperFileView2) findViewById(R.id.mSuperFileView);
-		mSuperFileView.setOnGetFilePathListener(new SuperFileView2.OnGetFilePathListener() {
+		mSuperFileView = (FileWatchView) findViewById(R.id.mSuperFileView);
+		mSuperFileView.setOnGetFilePathListener(new FileWatchView.OnGetFilePathListener() {
 			@Override
-			public void onGetFilePath(SuperFileView2 mSuperFileView2) {
-				getFilePathAndShowFile(mSuperFileView2);
+			public void onGetFilePath(FileWatchView mFileWatchView) {
+				getFilePathAndShowFile(mFileWatchView);
 			}
 		});
 
@@ -52,9 +52,9 @@ public class FileDisplayActivity extends AppCompatActivity {
 	}
 
 
-	private void getFilePathAndShowFile(SuperFileView2 mSuperFileView2) {
+	private void getFilePathAndShowFile(FileWatchView mFileWatchView) {
 
-		mSuperFileView2.displayFile(new File(getFilePath()));
+		mFileWatchView.displayFile(new File(getFilePath()));
 
 	}
 

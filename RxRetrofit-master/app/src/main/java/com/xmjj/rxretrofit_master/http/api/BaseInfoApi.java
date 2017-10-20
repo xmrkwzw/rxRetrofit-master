@@ -39,7 +39,6 @@ public class BaseInfoApi extends BaseApi {
 		this.appCompatActivity = new SoftReference(appCompatActivity);
 		httpManager = new HttpManager(onNextListener, appCompatActivity, clazz);
 		httpApiService = httpManager.getRetrofit().create(HttpApiService.class);
-		setCancel(true);
 
 	}
 

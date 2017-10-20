@@ -18,15 +18,15 @@ public class NavigationViewAttr extends SkinAttr {
     @Override
     public void apply(View view) {
         if (view instanceof NavigationView) {
-            Log.i("TabLayoutAttr", "apply");
+
             NavigationView nv = (NavigationView) view;
             if (RES_TYPE_NAME_COLOR.equals(attrValueTypeName)) {
-                Log.i("TabLayoutAttr", "apply color");
+
                 int color = SkinManager.getInstance().getColor(attrValueRefId);
                 nv.setItemTextColor(createSelector(color));
                 nv.setItemIconTintList(createSelector(color));
             } else if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)) {
-                Log.i("TabLayoutAttr", "apply drawable");
+
                 //  tv.setDivider(SkinManager.getInstance().getDrawable(attrValueRefId));
             }
         }
