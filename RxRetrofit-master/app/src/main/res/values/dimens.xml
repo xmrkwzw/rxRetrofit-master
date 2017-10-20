@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="layout_button_tb">10dp</dimen>
+    <dimen name="zhuanpan">260dp</dimen>
+    <dimen name="zhuan_left">20dp</dimen>
+    <dimen name="zhuanpan_left_size">14sp</dimen>
+    <dimen name="zhuan_sub">12sp</dimen>
+    <dimen name="margin_13">13dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+
+    <dimen name="size_20">20dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <!-- course dimen -->
+    <dimen name="course_weekdate_text">14dp</dimen>
+    <dimen name="course_lesson_text">15dp</dimen>
+    <dimen name="course_lesson_time_text">13dp</dimen>
+    <dimen name="course_subject_text">13dp</dimen>
+    <dimen name="course_teacher_text">12dp</dimen>
+
+    <!-- attendance dimen -->
+    <dimen name="attendance_jm_childsize">45dp</dimen>
+    <dimen name="attendance_jm_textsize">6dp</dimen>
+    <dimen name="attendance_piechart_height">165dp</dimen>
+    <dimen name="attendance_margin_small">12dp</dimen>
+    <dimen name="attendance_margin_mid">20dp</dimen>
+    <dimen name="attendance_class_date_height">75dp</dimen>
+    <dimen name="attendance_class_date_width">85dp</dimen>
+    <dimen name="attendance_text_mid">13dp</dimen>
+    <dimen name="attendance_margin_large">20dp</dimen>
+
+    <!-- homeperforence dimen -->
+    <dimen name="homeperforence_time_dialog_margin">5dip</dimen>
+    <dimen name="homeperforence_time_dialog_adapter_margin">6dip</dimen>
+
+    <dimen name="module_set_dp">14dp</dimen>
+    <dimen name="new_student_add_info_height">44dp</dimen>
+
+    <!--start 校外表现-->
+    <dimen name="outside_performance_title_bg_size">70dp</dimen>
+    <dimen name="outside_performance_title_text_size">60dp</dimen>
+    <dimen name="outside_performance_title_count_size">20dp</dimen>
+    <dimen name="outside_performance_list_image_size">80dp</dimen>
+    <!--字体大小-->
+    <dimen name="outside_performance_rank_title_font_size">16dp</dimen>
+    <dimen name="outside_performance_title_font_size">15dp</dimen>
+    <dimen name="outside_performance_title_count_font_size">10dp</dimen>
+    <dimen name="size_outside_performance_header">48dp</dimen>
+
+    <!--end 校外表现-->
+
+    <dimen name="height_top_bar">46dp</dimen>
+    <dimen name="padding_search_bar">5dp</dimen>
+    <dimen name="height_row_weixin">59dp</dimen>
+    <dimen name="size_avatar">48dp</dimen>
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="field_textsize">14sp</dimen>
+    <dimen name="field_margin_right">5dp</dimen>
+    <dimen name="call_button_padding_vertical">10dp</dimen>
+    <dimen name="call_button_padding_left">25dp</dimen>
+    <dimen name="call_button_padding_right">25dp</dimen>
+    <dimen name="sidebar_text_size">10dp</dimen>
+    <dimen name="image_thumbnail_size">100dp</dimen>
+    <dimen name="image_thumbnail_spacing">1dp</dimen>
+    <dimen name="chat_nick_margin_left">17dp</dimen>
+</resources>
