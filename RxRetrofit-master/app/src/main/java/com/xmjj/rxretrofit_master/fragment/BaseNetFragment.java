@@ -13,8 +13,12 @@ import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 import com.xmjj.rxretrofit_master.base.mvp.BaseView;
 import com.xmjj.rxretrofit_master.entity.BrandInfoDetailBean;
+import com.xmjj.rxretrofit_master.entity.RatingBean;
 import com.xmjj.rxretrofit_master.http.api.BaseInfoApi;
+import com.xmjj.rxretrofit_master.presenter.NestResultPresenter;
 import com.xmjj.rxretrofit_master.presenter.ObjectResultPresenter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnLongClick;
@@ -28,12 +32,10 @@ import butterknife.OnLongClick;
 public class BaseNetFragment extends BaseFragment implements BaseView {
 	@BindView(R.id.tv_content)
 	TextView tvShow;
-	private BaseInfoApi baseInfoApi;
+
 	private static final int TYPE_OBJECT = 0;
 	private static final int TYPE_ARRAY = 1;
 	private static final int TYPE_INNER = 2;
-	private static final int TYPE_DOWNLOAD = 3;
-
 	private int type;
 
 
@@ -82,7 +84,7 @@ public class BaseNetFragment extends BaseFragment implements BaseView {
 	 * the result is JsonArray such as {"result":[{"xxx"},{"xxx"}]}
 	 */
 	public void arrayResult() {
-		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "objcet数据加载");
+		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "object数据加载...");
 		objectResultPresenter.onInit();
 		objectResultPresenter.onDataCreate();
 	}
@@ -91,9 +93,9 @@ public class BaseNetFragment extends BaseFragment implements BaseView {
 	 * Nested request interface :a result doing after the other result
 	 */
 	public void nestedRequest() {
-		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "objcet数据加载");
-		objectResultPresenter.onInit();
-		objectResultPresenter.onDataCreate();
+		NestResultPresenter nestResultPresenter = new NestResultPresenter((RxAppCompatActivity) getActivity(), this, "嵌套接口数据加载...");
+		nestResultPresenter.onInit();
+		nestResultPresenter.onDataCreate();
 	}
 
 	@OnLongClick(R.id.tv_content)
@@ -116,6 +118,11 @@ public class BaseNetFragment extends BaseFragment implements BaseView {
 			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
 			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName() + "\n");
 
+		}else if (BaseInfoApi.IN.equals(method)) {
+
+			List<RatingBean> lists = (List<RatingBean>) result;
+
+			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
 		}
 	}
 

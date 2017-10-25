@@ -39,7 +39,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     testCompile 'junit:junit:4.12'
     compile project(':jujianglibrary')
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
@@ -70,5 +69,19 @@ dependencies {
     compile files('libs/SocialSDK_QQ_Simplify.jar')
     compile files('libs/umeng_shareboard_widget.jar')
     compile files('libs/umeng_social_shareboard.jar')
-
+    compile files('libs/libs/libapshare.jar')
+    compile files('libs/libs/libddshare.jar')
+    compile files('libs/libs/SocialSDK_alipay.jar')
+    compile files('libs/libs/SocialSDK_Ding.jar')
+    compile files('libs/libs/SocialSDK_QQ_Simplify.jar')
+    compile files('libs/libs/SocialSDK_Sina_Simplify.jar')
+    compile files('libs/libs/SocialSDK_sms.jar')
+    compile files('libs/libs/SocialSDK_WeChat_Simplify.jar')
+    compile files('libs/libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
+    compile files('libs/libs/umeng_shareboard_widget.jar')
+    compile files('libs/libs/umeng_social_api.jar')
+    compile files('libs/libs/umeng_social_net.jar')
+    compile files('libs/libs/umeng_social_shareboard.jar')
+    compile files('libs/libs/umeng_social_shareview.jar')
+    compile files('libs/libs/umeng_social_tool.jar')
 }
