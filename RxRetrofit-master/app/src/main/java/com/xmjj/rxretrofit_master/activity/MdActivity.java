@@ -39,6 +39,7 @@ import com.xmjj.rxretrofit_master.entity.event.SkinEvent;
 import com.xmjj.rxretrofit_master.fragment.AboutFragment;
 import com.xmjj.rxretrofit_master.fragment.CameraFragment;
 import com.xmjj.rxretrofit_master.fragment.DbFlowFragment;
+import com.xmjj.rxretrofit_master.fragment.FileDownLoadFragment;
 import com.xmjj.rxretrofit_master.fragment.GlideFragment;
 import com.xmjj.rxretrofit_master.fragment.NetFragment;
 import com.xmjj.rxretrofit_master.fragment.OtherFragment;
@@ -81,6 +82,7 @@ public class MdActivity extends BaseActivity {
 	private ViewFragment viewFragment;
 	private CameraFragment cameraFragment;
 	private SkinFragment skinFragment;
+	private FileDownLoadFragment fileDownLoadFragment;
 
 	private static String SKIN_DIR;
 	/*皮肤名*/
@@ -121,8 +123,9 @@ public class MdActivity extends BaseActivity {
 		otherFragment = new OtherFragment();
 		rxbusFragment = new RxbusFragment();
 		viewFragment = new ViewFragment();
-		//	cameraFragment = new CameraFragment();
+		cameraFragment = new CameraFragment();
 		skinFragment = new SkinFragment();
+		fileDownLoadFragment = new FileDownLoadFragment();
 		switchFragment(netFragment);
 		SKIN_DIR = FileUtils.getSkinDirPath(this);
 
@@ -182,7 +185,7 @@ public class MdActivity extends BaseActivity {
 		}
 	}
 
-	@OnClick({R.id.fb_share,R.id.fb_login})
+	@OnClick({R.id.fb_share, R.id.fb_login})
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.fb_share:
@@ -190,7 +193,7 @@ public class MdActivity extends BaseActivity {
 				break;
 
 			case R.id.fb_login:
-				startActivity(new Intent(this,AuthActivity.class));
+				startActivity(new Intent(this, AuthActivity.class));
 				break;
 		}
 	}
@@ -219,7 +222,6 @@ public class MdActivity extends BaseActivity {
 	}
 
 
-
 	public class Listener extends DialogUtils.positiveListener {
 		@Override
 		public void onClick(View v) {
@@ -240,6 +242,9 @@ public class MdActivity extends BaseActivity {
 							case R.id.model_net:
 								f = netFragment;
 								break;
+							case R.id.model_file:
+								f = fileDownLoadFragment;
+								break;
 							case R.id.model_sql:
 								f = dbFlowFragment;
 								break;
@@ -259,7 +264,7 @@ public class MdActivity extends BaseActivity {
 								f = otherFragment;
 								break;
 							case R.id.model_camera2:
-								//	f = cameraFragment;
+								f = cameraFragment;
 								break;
 							case R.id.model_skin:
 								f = skinFragment;

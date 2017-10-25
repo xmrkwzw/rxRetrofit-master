@@ -6,5 +6,6 @@ package com.xmjj.rxretrofit_master.base.mvp;
  */
 
 public interface BaseCallBack {
-    void onResult(String data);
+	void onResult(String json, Object result, String method);
+	void onError(String error,String method);
 }

@@ -6,5 +6,6 @@ package com.xmjj.rxretrofit_master.base.mvp;
  */
 
 public interface BaseView {
-    void setData(String data);
+    void setData(String json, Object result, String method);
+	void setError(String error);
 }

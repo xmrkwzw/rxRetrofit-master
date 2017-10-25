@@ -47,6 +47,7 @@ public class BaseInfoApi extends BaseApi {
 		setMethod(BASE_INFO_METHOD);
 		Observable observable = httpApiService.getBaseInfo(seqNum);
 		httpManager.setDialogMsg(dialogContent);
+		setCancel(true);
 		httpManager.initHttp(observable, BaseInfoApi.this);
 	}
 
@@ -54,6 +55,7 @@ public class BaseInfoApi extends BaseApi {
 	public void getCivilization(String classId) {
 		setMethod(CIVILIZATION_METHOD);
 		Observable observable = httpApiService.getCivilization(classId);
+		setCancel(true);
 		httpManager.initHttp(observable, BaseInfoApi.this);
 	}
 
@@ -61,6 +63,7 @@ public class BaseInfoApi extends BaseApi {
 	public void getMscCode (String mobilePhone){
 		setMethod(MSG_CODE_METHOD);
 		Observable observable = httpApiService.getMscCode(mobilePhone);
+		setCancel(true);
 		httpManager.initHttp(observable,BaseInfoApi.this);
 
 	}
@@ -79,6 +82,7 @@ public class BaseInfoApi extends BaseApi {
 			}
 		});
 		setMethod(IN);
+		setCancel(true);
 		ProgressSubscriber progressSubscriber=new ProgressSubscriber(this, onNextListener, appCompatActivity, RatingBean.class);
 		progressSubscriber.setDialogMsg(dialogContent);
 		observable

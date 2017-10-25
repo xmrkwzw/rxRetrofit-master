@@ -50,7 +50,6 @@ public class NetFragment extends BaseFragment {
 		titles.add("object结构");
 		titles.add("array结构");
 		titles.add("嵌套请求");
-		titles.add("文件下载");
 
 		for (int i = 0; i < titles.size(); i++) {
 			lists.add(new BaseNetFragment(i));
@@ -58,7 +57,7 @@ public class NetFragment extends BaseFragment {
 		adapter = new BaseViewPagerAdapter(getFragmentManager(), lists, titles);
 		viewPager.setAdapter(adapter);
 		tabLayout.setupWithViewPager(viewPager);
-		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+		//tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 		tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 	}

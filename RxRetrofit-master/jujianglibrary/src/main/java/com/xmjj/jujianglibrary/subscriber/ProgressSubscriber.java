@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.internal.$Gson$Types;
 import com.xmjj.jujianglibrary.api.BaseApi;
-import com.xmjj.jujianglibrary.exception.ApiException;
 import com.xmjj.jujianglibrary.http.entity.BaseRespond;
 import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
 import com.xmjj.jujianglibrary.util.StringUtil;
@@ -44,6 +43,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
 		this.mApi = mApi;
 		this.clazz = clazz;
 		initDialog(mApi.isCancel());
+
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
 	@Override
 	public void onError(Throwable e) {
 		if (mHttpOnNextListener.get() != null) {
-			mHttpOnNextListener.get().onError((ApiException) e, mApi.getMethod());
+			mHttpOnNextListener.get().onError( e.toString(), mApi.getMethod());
 		}
 	}
 
@@ -86,7 +86,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
 					mHttpOnNextListener.get().onNext(json,status, mApi.getMethod());
 				}
 			} else if (FAIL.equals(status)) {
-				mHttpOnNextListener.get().onNext(json,msg, mApi.getMethod());
+				mHttpOnNextListener.get().onError("操作失败" ,mApi.getMethod());
 			}
 		}
 
@@ -115,9 +115,6 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
 		if (dialog == null && context != null) {
 			dialog = new ProgressDialog(mActivity.get());
 			dialog.setCancelable(canCancel);
-			if (canCancel) {
-				onCancelProgress();
-			}
 		}
 
 	}

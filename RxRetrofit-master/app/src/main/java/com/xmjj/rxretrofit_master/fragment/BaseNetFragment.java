@@ -3,29 +3,18 @@ package com.xmjj.rxretrofit_master.fragment;
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.os.Environment;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xmjj.jujianglibrary.exception.ApiException;
-import com.xmjj.jujianglibrary.http.downlaod.DownInfo;
-import com.xmjj.jujianglibrary.http.downlaod.DownState;
-import com.xmjj.jujianglibrary.http.downlaod.HttpDownManager;
-import com.xmjj.jujianglibrary.listener.HttpDownOnNextListener;
-import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
 import com.xmjj.jujianglibrary.util.ToastUtils;
 import com.xmjj.jujianglibrary.util.logger.Logger;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
+import com.xmjj.rxretrofit_master.base.mvp.BaseView;
 import com.xmjj.rxretrofit_master.entity.BrandInfoDetailBean;
-import com.xmjj.rxretrofit_master.entity.RatingBean;
 import com.xmjj.rxretrofit_master.http.api.BaseInfoApi;
-
-import java.io.File;
-import java.util.List;
+import com.xmjj.rxretrofit_master.presenter.ObjectResultPresenter;
 
 import butterknife.BindView;
 import butterknife.OnLongClick;
@@ -36,7 +25,7 @@ import butterknife.OnLongClick;
  * 2017/9/11
  */
 @SuppressLint("ValidFragment")
-public class BaseNetFragment extends BaseFragment implements HttpOnNextListener {
+public class BaseNetFragment extends BaseFragment implements BaseView {
 	@BindView(R.id.tv_content)
 	TextView tvShow;
 	private BaseInfoApi baseInfoApi;
@@ -44,9 +33,9 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 	private static final int TYPE_ARRAY = 1;
 	private static final int TYPE_INNER = 2;
 	private static final int TYPE_DOWNLOAD = 3;
-	private static final String DOWNLOAD_URL = "http://www.ijinbu.com/upload/brand/v1.0/banpai_V1.0.2_05-11.apk?tsecond=0.07560947055095824";
+
 	private int type;
-	ProgressBar progressBar;
+
 
 	public BaseNetFragment(int type) {
 		this.type = type;
@@ -59,7 +48,6 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 
 	@Override
 	public void initViews() {
-		progressBar = new ProgressBar(activity);
 
 	}
 
@@ -75,152 +63,64 @@ public class BaseNetFragment extends BaseFragment implements HttpOnNextListener 
 			case TYPE_INNER:
 				nestedRequest();
 				break;
-			case TYPE_DOWNLOAD:
-				download();
-				break;
+
 		}
 
 
-	}
-	@OnLongClick(R.id.tv_content)
-	public boolean onLongClick(View view){
-		switch (view.getId()){
-			case R.id.tv_content:
-
-				ClipboardManager cm =(ClipboardManager)getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-				cm.setText(tvShow.getText().toString());
-				break;
-		}
-		return false ;
-	}
-
-	@Override
-	public void onNext(String json, Object result, String method) {
-		if (BaseInfoApi.BASE_INFO_METHOD.equals(method)) {
-			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
-
-
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName() + "\n");
-
-		} else if (BaseInfoApi.CIVILIZATION_METHOD.equals(method)) {
-			List<RatingBean> lists = (List<RatingBean>) result;
-
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
-		} else if (BaseInfoApi.IN.equals(method)) {
-
-			List<RatingBean> lists = (List<RatingBean>) result;
-
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
-		} else if (BaseInfoApi.MSG_CODE_METHOD.equals(method)) {
-
-			tvShow.setText((String) result);
-		}
-	}
-
-	@Override
-	public void onError(ApiException e, String method) {
-		ToastUtils.showShortMes(getActivity(), e.toString());
 	}
 
 	/**
 	 * the result is JsonObject such as {"result":{"xxx"}}
 	 */
 	public void objectResult() {
-		baseInfoApi = new BaseInfoApi(this, (RxAppCompatActivity) getActivity(), BrandInfoDetailBean.class);
-		baseInfoApi.getBaseInfo("d6aa48251b85b045", "数据加载中......");
+		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "objcet数据加载");
+		objectResultPresenter.onInit();
+		objectResultPresenter.onDataCreate();
 	}
 
 	/**
 	 * the result is JsonArray such as {"result":[{"xxx"},{"xxx"}]}
 	 */
 	public void arrayResult() {
-		baseInfoApi = new BaseInfoApi(this, (RxAppCompatActivity) getActivity(), RatingBean.class);
-		baseInfoApi.getCivilization("14871");
+		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "objcet数据加载");
+		objectResultPresenter.onInit();
+		objectResultPresenter.onDataCreate();
 	}
 
 	/**
 	 * Nested request interface :a result doing after the other result
 	 */
 	public void nestedRequest() {
-		baseInfoApi = new BaseInfoApi(this, (RxAppCompatActivity) getActivity(), BrandInfoDetailBean.class);
-		baseInfoApi.doOther("d6aa48251b85b045", "嵌套接口加载......");
+		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "objcet数据加载");
+		objectResultPresenter.onInit();
+		objectResultPresenter.onDataCreate();
 	}
 
-	/**
-	 * download file
-	 */
-	public void download() {
-		DownInfo downInfo = new DownInfo(DOWNLOAD_URL);
-		File file = new File(Environment.getExternalStorageDirectory() + "/banpai/update/", "test.apk");
+	@OnLongClick(R.id.tv_content)
+	public boolean onLongClick(View view) {
+		switch (view.getId()) {
+			case R.id.tv_content:
 
-		downInfo.setId(1);
-		downInfo.setState(DownState.START);
-		downInfo.setSavePath(file.getAbsolutePath());
-		downInfo.setListener(httpProgressOnNextListener);
-		HttpDownManager.getInstance().startDown(downInfo);
+				ClipboardManager cm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+				cm.setText(tvShow.getText().toString());
+				break;
+		}
+		return false;
 	}
 
-	/*下载回调*/
-	HttpDownOnNextListener<DownInfo> httpProgressOnNextListener = new HttpDownOnNextListener<DownInfo>() {
-		@Override
-		public void onNext(DownInfo baseDownEntity) {
-			if(tvShow==null){
-				return;
-			}
-			tvShow.setText("提示：下载完成");
-			Toast.makeText(getContext(), baseDownEntity.getSavePath(), Toast.LENGTH_SHORT).show();
-		}
 
-		@Override
-		public void onStart() {
-			if(tvShow==null){
-				return;
-			}
-			tvShow.setText("提示:开始下载");
-		}
+	@Override
+	public void setData(String json, Object result, String method) {
+		if (BaseInfoApi.BASE_INFO_METHOD.equals(method)) {
 
-		@Override
-		public void onComplete() {
-			if(tvShow==null){
-				return;
-			}
-			tvShow.setText("提示：下载结束");
-		}
-
-		@Override
-		public void onError(Throwable e) {
-			super.onError(e);
-			if(tvShow==null){
-				return;
-			}
-			tvShow.setText("失败:" + e.toString());
-		}
-
-
-		@Override
-		public void onPuase() {
-			super.onPuase();
-			if(tvShow==null){
-				return;
-			}
-			tvShow.setText("提示:暂停");
-		}
-
-		@Override
-		public void onStop() {
-			super.onStop();
-		}
-
-		@Override
-		public void updateProgress(long readLength, long countLength) {
-			if(tvShow==null){
-				return;
-			}
-			tvShow.setText("提示:下载中" + (int) countLength + "/" + (int) readLength);
-			progressBar.setMax((int) countLength);
-			progressBar.setProgress((int) readLength);
+			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
+			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName() + "\n");
 
 		}
-	};
+	}
 
+	@Override
+	public void setError(String error) {
+		ToastUtils.showShortMes(getActivity(), error);
+	}
 }

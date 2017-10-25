@@ -11,6 +11,12 @@
             android:icon="@mipmap/iconfont_blog"
             android:title="网络模块"/>
         <item
+            android:id="@+id/model_file"
+
+            android:icon="@mipmap/file"
+            android:title="文件下载"
+            />
+        <item
             android:id="@+id/model_sql"
 
             android:icon="@mipmap/iconfont_source"

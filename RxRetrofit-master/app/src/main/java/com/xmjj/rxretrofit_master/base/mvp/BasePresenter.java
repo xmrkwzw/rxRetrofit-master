@@ -6,6 +6,6 @@ package com.xmjj.rxretrofit_master.base.mvp;
  */
 
 public interface BasePresenter {
-    void onCreate();
+	void onInit();
     void onDataCreate();
 }
