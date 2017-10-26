@@ -29,7 +29,6 @@ public class BaseInfoApi extends BaseApi {
 	public static final String IN = "in";
 	private HttpApiService httpApiService;
 	private HttpManager httpManager;
-	private String dialogContent;
 	private SoftReference<HttpOnNextListener> onNextListener;
 	private SoftReference<RxAppCompatActivity> appCompatActivity;
 
@@ -52,9 +51,10 @@ public class BaseInfoApi extends BaseApi {
 	}
 
 	/*请求2*/
-	public void getCivilization(String classId) {
+	public void getCivilization(String classId,String dialogContent) {
 		setMethod(CIVILIZATION_METHOD);
 		Observable observable = httpApiService.getCivilization(classId);
+		httpManager.setDialogMsg(dialogContent);
 		setCancel(true);
 		httpManager.initHttp(observable, BaseInfoApi.this);
 	}

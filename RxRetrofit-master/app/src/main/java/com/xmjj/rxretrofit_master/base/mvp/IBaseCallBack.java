@@ -5,7 +5,7 @@ package com.xmjj.rxretrofit_master.base.mvp;
  * Description Model层通知View的回调
  */
 
-public interface BaseCallBack {
+public interface IBaseCallBack {
 	void onResult(String json, Object result, String method);
 	void onError(String error,String method);
 }

@@ -2,9 +2,10 @@ package com.xmjj.rxretrofit_master.presenter;
 
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xmjj.rxretrofit_master.base.mvp.BaseCallBack;
-import com.xmjj.rxretrofit_master.base.mvp.BasePresenter;
-import com.xmjj.rxretrofit_master.base.mvp.BaseView;
+import com.xmjj.rxretrofit_master.base.mvp.IBaseCallBack;
+import com.xmjj.rxretrofit_master.base.mvp.IBasePresenter;
+import com.xmjj.rxretrofit_master.base.mvp.IBaseView;
+import com.xmjj.rxretrofit_master.entity.params.RequestParams;
 import com.xmjj.rxretrofit_master.model.NestResultModel;
 
 import java.util.HashMap;
@@ -16,14 +17,14 @@ import java.util.Map;
  * 2017/10/25
  */
 
-public class NestResultPresenter implements BasePresenter {
+public class NestResultPresenter implements IBasePresenter {
 	private RxAppCompatActivity appCompatActivity;
 	private String dialogMsg;
 	private Map<String, Object> params;
-	private BaseView baseView;
+	private IBaseView baseView;
 	private NestResultModel model;
 
-	public NestResultPresenter(RxAppCompatActivity appCompatActivity, BaseView baseView, String dialogMsg) {
+	public NestResultPresenter(RxAppCompatActivity appCompatActivity, IBaseView baseView, String dialogMsg) {
 		this.appCompatActivity = appCompatActivity;
 		this.dialogMsg = dialogMsg;
 		this.baseView = baseView;
@@ -32,12 +33,12 @@ public class NestResultPresenter implements BasePresenter {
 	@Override
 	public void onInit() {
 		params = new HashMap<>();
-		params.put("seqNum","e24e1d7d3c0b70e0");
+		params.put(RequestParams.BaseInfo.SEQ_NUM,"e24e1d7d3c0b70e0");
 	}
 
 	@Override
 	public void onDataCreate() {
-		model = new NestResultModel(appCompatActivity, dialogMsg, new BaseCallBack() {
+		model = new NestResultModel(appCompatActivity, dialogMsg, new IBaseCallBack() {
 			@Override
 			public void onResult(String json, Object result, String method) {
 				baseView.setData(json, result, method);

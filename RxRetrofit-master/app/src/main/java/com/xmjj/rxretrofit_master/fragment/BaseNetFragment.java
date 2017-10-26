@@ -11,10 +11,11 @@ import com.xmjj.jujianglibrary.util.ToastUtils;
 import com.xmjj.jujianglibrary.util.logger.Logger;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
-import com.xmjj.rxretrofit_master.base.mvp.BaseView;
+import com.xmjj.rxretrofit_master.base.mvp.IBaseView;
 import com.xmjj.rxretrofit_master.entity.BrandInfoDetailBean;
 import com.xmjj.rxretrofit_master.entity.RatingBean;
 import com.xmjj.rxretrofit_master.http.api.BaseInfoApi;
+import com.xmjj.rxretrofit_master.presenter.ArrayResultPresenter;
 import com.xmjj.rxretrofit_master.presenter.NestResultPresenter;
 import com.xmjj.rxretrofit_master.presenter.ObjectResultPresenter;
 
@@ -28,8 +29,18 @@ import butterknife.OnLongClick;
  * Created by wzw
  * 2017/9/11
  */
+
+/**
+ * 架构思想
+ * user            view              presenter             			model
+ * |请求        	   |setData			|onDataCreate(callback)		   |getdata
+ * |-------------->|<---------------|----------------------------->|
+ *
+ * view与model并不直接交互，而是通过presenter的中间桥梁，数据请求的业务逻辑写在model层
+ * 通过callback的回调方式返回给view处理页面逻辑
+ */
 @SuppressLint("ValidFragment")
-public class BaseNetFragment extends BaseFragment implements BaseView {
+public class BaseNetFragment extends BaseFragment implements IBaseView {
 	@BindView(R.id.tv_content)
 	TextView tvShow;
 
@@ -85,9 +96,9 @@ public class BaseNetFragment extends BaseFragment implements BaseView {
 	 * the result is JsonArray such as {"result":[{"xxx"},{"xxx"}]}
 	 */
 	public void arrayResult() {
-		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "object数据加载...");
-		objectResultPresenter.onInit();
-		objectResultPresenter.onDataCreate();
+		ArrayResultPresenter arrayResultPresenter = new ArrayResultPresenter((RxAppCompatActivity) getActivity(), this, null);
+		arrayResultPresenter.onInit();
+		arrayResultPresenter.onDataCreate();
 	}
 
 	/**
@@ -119,7 +130,11 @@ public class BaseNetFragment extends BaseFragment implements BaseView {
 			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
 			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName() + "\n");
 
-		}else if (BaseInfoApi.IN.equals(method)) {
+		} else if (BaseInfoApi.CIVILIZATION_METHOD.equals(method)) {
+			List<RatingBean> lists = (List<RatingBean>) result;
+
+			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
+		} else if (BaseInfoApi.IN.equals(method)) {
 
 			List<RatingBean> lists = (List<RatingBean>) result;
 

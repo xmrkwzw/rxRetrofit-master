@@ -5,7 +5,7 @@ package com.xmjj.rxretrofit_master.base.mvp;
  * Description Presenter：是View跟Model的“中间人”，接收View的请求后，从Model获取数据交给View。
  */
 
-public interface BasePresenter {
+public interface IBasePresenter {
 	void onInit();
     void onDataCreate();
 }

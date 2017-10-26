@@ -1,12 +1,14 @@
 package com.xmjj.rxretrofit_master.presenter;
 
 
+import android.support.annotation.Nullable;
+
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xmjj.rxretrofit_master.base.mvp.IBaseCallBack;
 import com.xmjj.rxretrofit_master.base.mvp.IBasePresenter;
 import com.xmjj.rxretrofit_master.base.mvp.IBaseView;
 import com.xmjj.rxretrofit_master.entity.params.RequestParams;
-import com.xmjj.rxretrofit_master.model.ObjectResultModel;
+import com.xmjj.rxretrofit_master.model.ArrayResultModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,28 +19,30 @@ import java.util.Map;
  * 2017/10/25
  */
 
-public class ObjectResultPresenter implements IBasePresenter {
+public class ArrayResultPresenter implements IBasePresenter {
 	private RxAppCompatActivity appCompatActivity;
 	private String dialogMsg;
 	private Map<String, Object> params;
 	private IBaseView baseView;
-	private ObjectResultModel model;
+	private ArrayResultModel model;
 
-	public ObjectResultPresenter(RxAppCompatActivity appCompatActivity, IBaseView baseView, String dialogMsg) {
+	public ArrayResultPresenter(RxAppCompatActivity appCompatActivity, IBaseView baseView, @Nullable String dialogMsg) {
 		this.appCompatActivity = appCompatActivity;
 		this.dialogMsg = dialogMsg;
 		this.baseView = baseView;
 	}
 
+
+
 	@Override
 	public void onInit() {
 		params = new HashMap<>();
-		params.put(RequestParams.BaseInfo.SEQ_NUM,"e24e1d7d3c0b70e0");
+		params.put(RequestParams.Civilization.CLASS_ID,"14871");
 	}
 
 	@Override
 	public void onDataCreate() {
-		model = new ObjectResultModel(appCompatActivity, dialogMsg, new IBaseCallBack() {
+		model = new ArrayResultModel(appCompatActivity, dialogMsg, new IBaseCallBack() {
 			@Override
 			public void onResult(String json, Object result, String method) {
 				baseView.setData(json, result, method);
