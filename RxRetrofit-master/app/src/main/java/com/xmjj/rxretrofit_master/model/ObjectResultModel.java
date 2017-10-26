@@ -4,6 +4,7 @@ package com.xmjj.rxretrofit_master.model;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
 import com.xmjj.rxretrofit_master.base.mvp.BaseCallBack;
+import com.xmjj.rxretrofit_master.base.mvp.BaseModel;
 import com.xmjj.rxretrofit_master.entity.BrandInfoDetailBean;
 import com.xmjj.rxretrofit_master.http.api.BaseInfoApi;
 
@@ -15,7 +16,7 @@ import java.util.Map;
  * 2017/10/20
  */
 
-public class ObjectResultModel implements NetModel.ObjectResultModel ,HttpOnNextListener{
+public class ObjectResultModel implements BaseModel,HttpOnNextListener{
 	private RxAppCompatActivity appCompatActivity;
 	private BaseCallBack callBack;
 	private String dialogMsg ;
