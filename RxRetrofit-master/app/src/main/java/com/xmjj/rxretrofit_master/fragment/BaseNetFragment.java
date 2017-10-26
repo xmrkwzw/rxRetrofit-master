@@ -28,11 +28,10 @@ import butterknife.OnLongClick;
 public class BaseNetFragment extends BaseFragment implements BaseView {
 	@BindView(R.id.tv_content)
 	TextView tvShow;
-	private BaseInfoApi baseInfoApi;
+
 	private static final int TYPE_OBJECT = 0;
 	private static final int TYPE_ARRAY = 1;
 	private static final int TYPE_INNER = 2;
-	private static final int TYPE_DOWNLOAD = 3;
 
 	private int type;
 
