@@ -148,7 +148,7 @@ public class MdActivity extends BaseActivity {
 			OtherFragment otherFragment = (OtherFragment) mCurrentFragment;
 			if (otherFragment.canGoBack()) {
 				otherFragment.goBack();
-				return;
+
 			} else {
 				exit();
 			}

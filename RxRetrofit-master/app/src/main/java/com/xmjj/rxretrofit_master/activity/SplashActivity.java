@@ -1,15 +1,21 @@
 package com.xmjj.rxretrofit_master.activity;
 
 import android.Manifest;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
+import com.xmjj.rxretrofit_master.util.CommonUtils;
+import com.xmjj.rxretrofit_master.util.SpringScaleInterpolator;
 
 import butterknife.BindView;
 
@@ -22,6 +28,8 @@ import butterknife.BindView;
 public class SplashActivity extends BaseActivity {
 	@BindView(R.id.iv_splash)
 	ImageView ivSplash;
+	@BindView(R.id.tv_welcome)
+	TextView tvWelcome;
 
 	@Override
 	public int getLayoutResId() {
@@ -30,14 +38,15 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public void initViews() {
-		onTwitter();
+		CommonUtils.setFont(CommonUtils.getTypeface(this,"font/fonts.ttf"),tvWelcome);
+		setAnimation();
 	}
 
-	private void onTwitter() {
-		final ScaleAnimation animation2 = new ScaleAnimation(0.7f, 10f, 0.7f, 10f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-		animation2.setDuration(500);
-		animation2.setFillAfter(true);
-		animation2.setAnimationListener(new Animation.AnimationListener() {
+	private void setAnimation() {
+
+		AlphaAnimation alphaAnimation = new AlphaAnimation(0.2f, 1.0f);
+		alphaAnimation.setDuration(1500);
+		alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
 			@Override
 			public void onAnimationStart(Animation animation) {
 
@@ -45,7 +54,8 @@ public class SplashActivity extends BaseActivity {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				startActivity(new Intent(SplashActivity.this, MdActivity.class));
+				onInterpolator();
+
 			}
 
 			@Override
@@ -54,28 +64,25 @@ public class SplashActivity extends BaseActivity {
 			}
 		});
 
+		ivSplash.startAnimation(alphaAnimation);
+		tvWelcome.startAnimation(alphaAnimation);
 
-		ScaleAnimation animation = new ScaleAnimation(1f, 0.7f, 1f, 0.7f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-		animation.setDuration(900);
-		animation.setFillBefore(true);
-		animation.setAnimationListener(new Animation.AnimationListener() {
+	}
+
+	private void onInterpolator() {
+		ObjectAnimator animatorX = ObjectAnimator.ofFloat(tvWelcome, "scaleX", 1.0f, 1.5f);
+		ObjectAnimator animatorY = ObjectAnimator.ofFloat(tvWelcome, "scaleY", 1.0f, 1.5f);
+		AnimatorSet set = new AnimatorSet();
+		set.setDuration(2000);
+		set.setInterpolator(new SpringScaleInterpolator(0.2f));
+		set.playTogether(animatorX, animatorY);
+		set.start();
+		new Handler().postDelayed(new Runnable() {
 			@Override
-			public void onAnimationStart(Animation animation) {
-
+			public void run() {
+				startActivity(new Intent(SplashActivity.this,MdActivity.class));
 			}
-
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				ivSplash.startAnimation(animation2);
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-
-			}
-		});
-
-		ivSplash.startAnimation(animation);
+		},2000);
 
 
 	}

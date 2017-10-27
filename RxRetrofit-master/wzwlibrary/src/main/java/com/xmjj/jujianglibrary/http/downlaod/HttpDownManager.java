@@ -146,7 +146,7 @@ public class HttpDownManager {
     public void pause(DownInfo info) {
         if (info == null) return;
         info.setState(DownState.PAUSE);
-        info.getListener().onPuase();
+        info.getListener().onPause();
         if (subMap.containsKey(info.getUrl())) {
             ProgressDownSubscriber subscriber = subMap.get(info.getUrl());
             subscriber.unsubscribe();

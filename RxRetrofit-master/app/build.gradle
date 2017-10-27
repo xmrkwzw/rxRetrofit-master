@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 def dbflow_version = "4.0.2"
-def butterknife_version="8.4.0"
+def butterknife_version = "8.4.0"
 
 android {
     compileSdkVersion 25
@@ -39,8 +39,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     testCompile 'junit:junit:4.12'
-    compile project(':jujianglibrary')
+    compile project(':wzwlibrary')
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
@@ -51,7 +52,9 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:${butterknife_version}"
     /*动画*/
     compile 'com.facebook.rebound:rebound:0.3.8'
-    compile 'com.rmtheis:tess-two:6.2.0'
+
+    /*可手势放大旋转的view*/
+    compile 'com.github.chrisbanes:PhotoView:1.3.0'
     /*腾讯tbs*/
     compile files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
     /*友盟分享*/
@@ -71,3 +74,6 @@ dependencies {
     compile files('libs/umeng_social_shareboard.jar')
 
 }
+
+
+

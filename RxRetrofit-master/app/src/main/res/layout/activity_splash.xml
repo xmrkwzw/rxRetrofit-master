@@ -6,8 +6,19 @@
 
     <ImageView
         android:id="@+id/iv_splash"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:src="@mipmap/tuite"/>
+        android:scaleType="centerCrop"
+        android:src="@mipmap/cxc"/>
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="欢迎入坑"
+        android:textColor="@color/color_white"
+        android:textSize="60sp"
+        android:textStyle="bold"/>
 </RelativeLayout>

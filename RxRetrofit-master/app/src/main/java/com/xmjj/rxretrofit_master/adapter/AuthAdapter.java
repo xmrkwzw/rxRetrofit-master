@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Created by wangfei on 16/11/9.
+ * Created by wzw on 16/11/9.
  */
 public class AuthAdapter extends BaseAdapter {
     private ArrayList<SnsPlatform> list;

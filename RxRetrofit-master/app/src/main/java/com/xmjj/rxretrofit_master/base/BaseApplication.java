@@ -20,6 +20,7 @@ public class BaseApplication extends Application {
 		UMShareAPI.get(this);
 		Config.DEBUG = true;
 
+
 	}
 
 	@Override

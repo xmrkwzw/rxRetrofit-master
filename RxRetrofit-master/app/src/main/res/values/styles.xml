@@ -22,4 +22,10 @@
     <style name="MaterialTheme.DrawerArrowToggle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="color">#fff</item>
     </style>
+    <!--Splash启动主题-->
+    <style name="ThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

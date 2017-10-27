@@ -2,9 +2,9 @@ package com.xmjj.rxretrofit_master.fragment;
 
 import android.webkit.WebView;
 
-import com.xmjj.jujianglibrary.util.WebViewUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
+import com.xmjj.rxretrofit_master.util.WebViewUtils;
 
 import butterknife.BindView;
 
@@ -17,7 +17,7 @@ import butterknife.BindView;
 public class OtherFragment extends BaseFragment {
 	@BindView(R.id.webview)
 	WebView webView;
-	private static final String URL = "http://www.jianshu.com/p/431f12648da0";
+	private static final String URL = "http://www.jianshu.com/p/fde3eeb4e778";
 
 	@Override
 	public int getLayoutResId() {

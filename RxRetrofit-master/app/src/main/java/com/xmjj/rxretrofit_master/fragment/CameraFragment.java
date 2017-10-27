@@ -15,12 +15,10 @@ import android.hardware.camera2.CaptureRequest;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -34,17 +32,12 @@ import com.xmjj.jujianglibrary.util.ToastUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 import butterknife.BindView;
+import uk.co.senab.photoview.PhotoView;
 
-import static android.content.ContentValues.TAG;
 import static android.os.Looper.getMainLooper;
 
 /**
@@ -57,30 +50,9 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 	private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
 	/**
-	 * TessBaseAPI初始化用到的第一个参数，是个目录。
-	 */
-	private static final String DATAPATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
-	/**
-	 * 在DATAPATH中新建这个目录，TessBaseAPI初始化要求必须有这个目录。
-	 */
-	private static final String tessdata = DATAPATH + File.separator + "tessdata";
-	/**
-	 * TessBaseAPI初始化测第二个参数，就是识别库的名字不要后缀名。
-	 */
-	private static final String DEFAULT_LANGUAGE = "chi_sim";
-	/**
-	 * assets中的文件名
-	 */
-	private static final String DEFAULT_LANGUAGE_NAME = DEFAULT_LANGUAGE + ".traineddata";
-	/**
-	 * 保存到SD卡中的完整文件名
-	 */
-	private static final String LANGUAGE_PATH = tessdata + File.separator + DEFAULT_LANGUAGE_NAME;
-
-	/**
 	 * 权限请求值
 	 */
-	private static final int PERMISSION_REQUEST_CODE=0;
+	private static final int PERMISSION_REQUEST_CODE = 0;
 
 	///为了使照片竖直显示
 	static {
@@ -93,7 +65,7 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 	@BindView(R.id.surfaceview)
 	SurfaceView mSurfaceView;
 	@BindView(R.id.iv_show)
-	ImageView iv_show;
+	PhotoView iv_show;
 	@BindView(R.id.iv_take_photo)
 	ImageView ivTakePicture;
 
@@ -122,69 +94,13 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 		mSurfaceView.setOnClickListener(this);
 
 
-
 	}
 
 	@Override
 	public void initData() {
-		copyToSD(LANGUAGE_PATH, DEFAULT_LANGUAGE_NAME);
+
 
 		initSurfaceView();
-	}
-
-
-
-	/**
-	 * 将assets中的识别库复制到SD卡中
-	 * @param path  要存放在SD卡中的 完整的文件名。这里是"/storage/emulated/0//tessdata/chi_sim.traineddata"
-	 * @param name  assets中的文件名 这里是 "chi_sim.traineddata"
-	 */
-	public void copyToSD(String path, String name) {
-		Log.i(TAG, "copyToSD: "+path);
-		Log.i(TAG, "copyToSD: "+name);
-
-		//如果存在就删掉
-		File f = new File(path);
-		if (f.exists()){
-			f.delete();
-		}
-		if (!f.exists()){
-			File p = new File(f.getParent());
-			if (!p.exists()){
-				p.mkdirs();
-			}
-			try {
-				f.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		InputStream is=null;
-		OutputStream os=null;
-		try {
-			is = activity.getAssets().open(name);
-			File file = new File(path);
-			os = new FileOutputStream(file);
-			byte[] bytes = new byte[2048];
-			int len = 0;
-			while ((len = is.read(bytes)) != -1) {
-				os.write(bytes, 0, len);
-			}
-			os.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (is != null)
-					is.close();
-				if (os != null)
-					os.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 
@@ -245,11 +161,8 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 				buffer.get(bytes);//由缓冲区存入字节数组
 				final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 				if (bitmap != null) {
+
 					iv_show.setImageBitmap(bitmap);
-
-
-					//tessBaseAPI.end();
-
 				}
 			}
 		}, mainHandler);
@@ -264,6 +177,8 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 		} catch (CameraAccessException e) {
 			e.printStackTrace();
 		}
+
+
 	}
 
 
@@ -430,8 +345,6 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 		}
 
 	}
-
-
 
 
 }
