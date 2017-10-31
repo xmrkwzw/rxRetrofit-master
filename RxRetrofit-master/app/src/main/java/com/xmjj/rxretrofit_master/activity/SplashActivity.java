@@ -99,7 +99,8 @@ public class SplashActivity extends BaseActivity {
 					, Manifest.permission.SET_DEBUG_APP
 					, Manifest.permission.SYSTEM_ALERT_WINDOW
 					, Manifest.permission.GET_ACCOUNTS
-					, Manifest.permission.WRITE_APN_SETTINGS};
+					, Manifest.permission.WRITE_APN_SETTINGS
+					, Manifest.permission.RECEIVE_BOOT_COMPLETED};
 			ActivityCompat.requestPermissions(this, mPermissionList, 123);
 		}
 	}

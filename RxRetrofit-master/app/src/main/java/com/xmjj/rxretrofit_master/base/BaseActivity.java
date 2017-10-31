@@ -43,7 +43,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements ISkinU
 		mSkinInflaterFactory = new SkinInflaterFactory();
 		LayoutInflaterCompat.setFactory(getLayoutInflater(), mSkinInflaterFactory);
 		super.onCreate(savedInstanceState);
-		setContentView(getLayoutResId());
+		if(getLayoutResId()!=-1){
+
+			setContentView(getLayoutResId());
+		}
 		ActivityManagerUtils.getInstance().addActivity(this);
 		getScreenSize();
 		getActionBarHeight();

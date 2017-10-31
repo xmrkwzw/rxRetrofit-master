@@ -30,6 +30,8 @@ public class ViewFragment extends BaseFragment {
 	Button btnWebview;
 	@BindView(R.id.btn_video)
 	Button btnVideo;
+	@BindView(R.id.btn_clock)
+	Button btnClock;
 
 	private String URL = "http://baobab.wdjcdn.com/145076769089714.mp4";
 
@@ -50,7 +52,7 @@ public class ViewFragment extends BaseFragment {
 	}
 
 
-	@OnClick({R.id.btn_animation, R.id.btn_known, R.id.btn_webview,R.id.btn_video})
+	@OnClick({R.id.btn_animation, R.id.btn_known, R.id.btn_webview, R.id.btn_video, R.id.btn_clock})
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_animation:
@@ -66,11 +68,12 @@ public class ViewFragment extends BaseFragment {
 				break;
 
 			case R.id.btn_video:
-				if(TbsVideo.canUseTbsPlayer(activity)){
-					TbsVideo.openVideo(activity,URL);
+				if (TbsVideo.canUseTbsPlayer(activity)) {
+					TbsVideo.openVideo(activity, URL);
 				}
-
-
+				break;
+			case R.id.btn_clock:
+				//startActivity(new Intent(activity, ClockActivity.class));
 				break;
 		}
 

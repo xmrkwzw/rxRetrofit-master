@@ -9,6 +9,8 @@ import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.xmjj.jujianglibrary.util.skinloader.load.SkinManager;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 public class BaseApplication extends Application {
 
@@ -19,6 +21,8 @@ public class BaseApplication extends Application {
 		FlowManager.init(this);
 		UMShareAPI.get(this);
 		Config.DEBUG = true;
+		JPushInterface.setDebugMode(true);
+		JPushInterface.init(this);
 
 
 	}

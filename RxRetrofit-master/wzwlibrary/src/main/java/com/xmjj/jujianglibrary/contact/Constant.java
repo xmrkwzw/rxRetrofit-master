@@ -12,7 +12,9 @@ public class Constant {
 
 	public static final String MD5KEY = "ijinbu";
 
+	public static final boolean DEBUG = true;
 
+	public static final String PACKAGE_NAME = "com.xmjj.rxretrofit_master";
 
 
 

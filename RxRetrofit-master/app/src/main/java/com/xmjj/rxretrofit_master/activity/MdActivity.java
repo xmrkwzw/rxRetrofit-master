@@ -46,12 +46,19 @@ import com.xmjj.rxretrofit_master.fragment.OtherFragment;
 import com.xmjj.rxretrofit_master.fragment.RxbusFragment;
 import com.xmjj.rxretrofit_master.fragment.SkinFragment;
 import com.xmjj.rxretrofit_master.fragment.ViewFragment;
+import com.xmjj.rxretrofit_master.service.DaemonService;
+import com.xmjj.rxretrofit_master.service.PlayerMusicService;
+import com.xmjj.rxretrofit_master.util.JobSchedulerManager;
+import com.xmjj.rxretrofit_master.util.JpushUtil;
+import com.xmjj.rxretrofit_master.util.Md5Tool;
 import com.xmjj.rxretrofit_master.util.ShareUtils;
 
 import java.io.File;
+import java.util.HashSet;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 功能描述：
@@ -129,6 +136,31 @@ public class MdActivity extends BaseActivity {
 		switchFragment(netFragment);
 		SKIN_DIR = FileUtils.getSkinDirPath(this);
 
+		keepLive();
+		registerJpush();
+
+
+	}
+
+	/*保活服务启动*/
+	private void keepLive() {
+		JobSchedulerManager jobSchedulerManager = JobSchedulerManager.getJobSchedulerInstance(this);
+		//jobSchedulerManager.startJobScheduler();
+
+		startService(new Intent(this, PlayerMusicService.class));
+		startService(new Intent(this, DaemonService.class));
+	}
+
+	private void registerJpush() {
+		JPushInterface.resumePush(getApplicationContext());
+		String alias = JpushUtil.getAppKey(this);
+		JpushUtil.setAlias(this, Md5Tool.hashKey(alias));
+
+		java.util.Set<String> tags = new HashSet<>();
+		tags.add("tags1");
+		tags.add("tags2");
+		tags.add("tags3");
+		JpushUtil.setTags(this, tags);
 	}
 
 	@Override

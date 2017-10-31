@@ -18,6 +18,11 @@ android {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -39,7 +44,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     testCompile 'junit:junit:4.12'
     compile project(':wzwlibrary')
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
@@ -52,7 +56,6 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:${butterknife_version}"
     /*动画*/
     compile 'com.facebook.rebound:rebound:0.3.8'
-
     /*可手势放大旋转的view*/
     compile 'com.github.chrisbanes:PhotoView:1.3.0'
     /*腾讯tbs*/
@@ -72,7 +75,8 @@ dependencies {
     compile files('libs/SocialSDK_QQ_Simplify.jar')
     compile files('libs/umeng_shareboard_widget.jar')
     compile files('libs/umeng_social_shareboard.jar')
-
+    compile files('libs/jcore-android-1.1.7.jar')
+    compile files('libs/jpush-android-3.0.9.jar')
 }
 
 
