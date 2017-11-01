@@ -7,6 +7,7 @@ import android.widget.Button;
 import com.tencent.smtt.sdk.TbsVideo;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.activity.AnimationActivity;
+import com.xmjj.rxretrofit_master.activity.ClockActivity;
 import com.xmjj.rxretrofit_master.activity.FileLookActivity;
 import com.xmjj.rxretrofit_master.activity.TbsWebViewActivity;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
@@ -73,7 +74,7 @@ public class ViewFragment extends BaseFragment {
 				}
 				break;
 			case R.id.btn_clock:
-				//startActivity(new Intent(activity, ClockActivity.class));
+				startActivity(new Intent(activity, ClockActivity.class));
 				break;
 		}
 

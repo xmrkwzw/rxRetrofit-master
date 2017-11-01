@@ -80,7 +80,8 @@ public class SplashActivity extends BaseActivity {
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				startActivity(new Intent(SplashActivity.this,MdActivity.class));
+				startActivity(new Intent(SplashActivity.this,ClockActivity.class));
+				finish();
 			}
 		},2000);
 

@@ -1,10 +1,10 @@
 package com.xmjj.rxretrofit_master.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
+import com.xmjj.rxretrofit_master.widget.MyView;
+
+import butterknife.BindView;
 
 /**
  * 功能描述：
@@ -14,15 +14,16 @@ import com.xmjj.rxretrofit_master.base.BaseActivity;
 
 public class ClockActivity extends BaseActivity {
 
+	@BindView(R.id.clock)
+	MyView clock;
+
 	public int getLayoutResId() {
 		return R.layout.activity_clock;
 	}
 
 	@Override
 	public void initViews() {
-		Bitmap clockBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.clock);
-		Bitmap hourBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hour);
-		Bitmap minuteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.minute);
+		clock.init(this);
 
 
 	}
@@ -31,8 +32,6 @@ public class ClockActivity extends BaseActivity {
 	public void initData() {
 
 	}
-
-
 
 
 }

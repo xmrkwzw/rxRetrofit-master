@@ -1,11 +1,10 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 def dbflow_version = "4.0.2"
 def butterknife_version = "8.4.0"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.xmjj.rxretrofit_master"
         minSdkVersion 14
@@ -46,14 +45,14 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':wzwlibrary')
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    annotationProcessor  "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     // sql-cipher database encyrption (optional)
     compile "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:${dbflow_version}"
     /*butterknife*/
     compile "com.jakewharton:butterknife:${butterknife_version}"
-    apt "com.jakewharton:butterknife-compiler:${butterknife_version}"
+    annotationProcessor  "com.jakewharton:butterknife-compiler:${butterknife_version}"
     /*动画*/
     compile 'com.facebook.rebound:rebound:0.3.8'
     /*可手势放大旋转的view*/
@@ -78,6 +77,3 @@ dependencies {
     compile files('libs/jcore-android-1.1.7.jar')
     compile files('libs/jpush-android-3.0.9.jar')
 }
-
-
-
