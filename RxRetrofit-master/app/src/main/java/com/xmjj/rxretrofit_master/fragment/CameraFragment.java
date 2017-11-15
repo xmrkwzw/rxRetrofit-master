@@ -28,7 +28,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.xmjj.jujianglibrary.util.ToastUtils;
+import com.xmjj.rxretrofit_master.util.ToastUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 

@@ -10,8 +10,8 @@ import android.preference.SwitchPreference;
 import android.view.View;
 
 import com.wzgiceman.rxbuslibrary.rxbus.RxBus;
-import com.xmjj.jujianglibrary.util.DialogUtils;
-import com.xmjj.jujianglibrary.util.ToastUtils;
+import com.xmjj.rxretrofit_master.util.DialogUtils;
+import com.xmjj.rxretrofit_master.util.ToastUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
 import com.xmjj.rxretrofit_master.db.DBFlowModel;

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xmjj.jujianglibrary.util.ToastUtils;
+import com.xmjj.rxretrofit_master.util.ToastUtils;
 import com.xmjj.jujianglibrary.util.logger.Logger;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
@@ -51,6 +51,7 @@ public class BaseNetFragment extends BaseFragment implements IBaseView {
 	private int type;
 
 
+	public BaseNetFragment(){}
 	public BaseNetFragment(int type) {
 		this.type = type;
 	}

@@ -7,7 +7,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
-import com.xmjj.jujianglibrary.util.skinloader.load.SkinManager;
+import com.xmjj.rxretrofit_master.skinloader.load.SkinManager;
 
 import cn.jpush.android.api.JPushInterface;
 

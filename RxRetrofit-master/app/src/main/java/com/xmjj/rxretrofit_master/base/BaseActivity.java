@@ -11,15 +11,15 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.xmjj.jujianglibrary.util.ActivityManagerUtils;
 import com.xmjj.jujianglibrary.util.logger.Logger;
-import com.xmjj.jujianglibrary.util.skinloader.attr.DynamicAttr;
-import com.xmjj.jujianglibrary.util.skinloader.listener.IDynamicNewView;
-import com.xmjj.jujianglibrary.util.skinloader.listener.ISkinUpdate;
-import com.xmjj.jujianglibrary.util.skinloader.load.SkinInflaterFactory;
-import com.xmjj.jujianglibrary.util.skinloader.load.SkinManager;
-import com.xmjj.jujianglibrary.util.skinloader.statusbar.StatusBarBackground;
 import com.xmjj.rxretrofit_master.R;
+import com.xmjj.rxretrofit_master.skinloader.attr.DynamicAttr;
+import com.xmjj.rxretrofit_master.skinloader.listener.IDynamicNewView;
+import com.xmjj.rxretrofit_master.skinloader.listener.ISkinUpdate;
+import com.xmjj.rxretrofit_master.skinloader.load.SkinInflaterFactory;
+import com.xmjj.rxretrofit_master.skinloader.load.SkinManager;
+import com.xmjj.rxretrofit_master.skinloader.statusbar.StatusBarBackground;
+import com.xmjj.rxretrofit_master.util.ActivityManagerUtils;
 
 import java.util.List;
 

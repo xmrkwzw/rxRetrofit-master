@@ -4,10 +4,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
-import com.xmjj.jujianglibrary.util.skinloader.attr.AttrFactory;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 import com.xmjj.rxretrofit_master.base.BaseViewPagerAdapter;
+import com.xmjj.rxretrofit_master.skinloader.attr.AttrFactory;
 
 import java.util.ArrayList;
 import java.util.List;

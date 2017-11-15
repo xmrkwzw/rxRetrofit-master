@@ -5,7 +5,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xmjj.jujianglibrary.http.downlaod.DownInfo;
-import com.xmjj.jujianglibrary.util.ToastUtils;
+import com.xmjj.rxretrofit_master.util.ToastUtils;
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 import com.xmjj.rxretrofit_master.presenter.FileDownLoadPresenter;

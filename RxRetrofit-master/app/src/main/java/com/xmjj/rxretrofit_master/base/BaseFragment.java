@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trello.rxlifecycle.components.support.RxFragment;
-import com.xmjj.jujianglibrary.util.skinloader.attr.DynamicAttr;
-import com.xmjj.jujianglibrary.util.skinloader.listener.IDynamicNewView;
+import com.xmjj.rxretrofit_master.skinloader.attr.DynamicAttr;
+import com.xmjj.rxretrofit_master.skinloader.listener.IDynamicNewView;
 
 import java.util.ArrayList;
 import java.util.List;

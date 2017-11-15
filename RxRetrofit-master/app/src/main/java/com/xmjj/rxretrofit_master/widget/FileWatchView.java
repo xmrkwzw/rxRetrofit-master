@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.tencent.smtt.sdk.TbsReaderView;
-import com.xmjj.jujianglibrary.util.ToastUtils;
+import com.xmjj.rxretrofit_master.util.ToastUtils;
 import com.xmjj.jujianglibrary.util.logger.Logger;
 
 import java.io.File;

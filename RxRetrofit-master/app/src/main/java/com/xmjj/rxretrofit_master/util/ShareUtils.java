@@ -5,7 +5,6 @@ import android.widget.Toast;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.utils.Log;
-import com.xmjj.jujianglibrary.util.ToastUtils;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
 
 import java.lang.ref.WeakReference;

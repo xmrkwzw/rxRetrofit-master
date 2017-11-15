@@ -2,7 +2,7 @@ package com.xmjj.rxretrofit_master.activity;
 
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
-import com.xmjj.rxretrofit_master.widget.MyView;
+import com.xmjj.rxretrofit_master.widget.MyClockView;
 
 import butterknife.BindView;
 
@@ -15,7 +15,7 @@ import butterknife.BindView;
 public class ClockActivity extends BaseActivity {
 
 	@BindView(R.id.clock)
-	MyView clock;
+	MyClockView clock;
 
 	public int getLayoutResId() {
 		return R.layout.activity_clock;
