@@ -49,6 +49,6 @@ public class NestResultPresenter implements IBasePresenter {
 				baseView.setError(error);
 			}
 		});
-		model.getData(params);
+		model.doRequest(params);
 	}
 }

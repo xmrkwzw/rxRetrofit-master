@@ -9,6 +9,7 @@ import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.activity.AnimationActivity;
 import com.xmjj.rxretrofit_master.activity.ClockActivity;
 import com.xmjj.rxretrofit_master.activity.FileLookActivity;
+import com.xmjj.rxretrofit_master.activity.SpanActivity;
 import com.xmjj.rxretrofit_master.activity.TbsWebViewActivity;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 
@@ -33,6 +34,8 @@ public class ViewFragment extends BaseFragment {
 	Button btnVideo;
 	@BindView(R.id.btn_clock)
 	Button btnClock;
+	@BindView(R.id.btn_span)
+	Button btnSpan;
 
 	private String URL = "http://baobab.wdjcdn.com/145076769089714.mp4";
 
@@ -53,7 +56,7 @@ public class ViewFragment extends BaseFragment {
 	}
 
 
-	@OnClick({R.id.btn_animation, R.id.btn_known, R.id.btn_webview, R.id.btn_video, R.id.btn_clock})
+	@OnClick({R.id.btn_animation, R.id.btn_known, R.id.btn_webview, R.id.btn_video, R.id.btn_clock,R.id.btn_span})
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_animation:
@@ -75,6 +78,9 @@ public class ViewFragment extends BaseFragment {
 				break;
 			case R.id.btn_clock:
 				startActivity(new Intent(activity, ClockActivity.class));
+				break;
+			case R.id.btn_span:
+				startActivity(new Intent(activity,SpanActivity.class));
 				break;
 		}
 

@@ -53,6 +53,6 @@ public class ArrayResultPresenter implements IBasePresenter {
 				baseView.setError(error);
 			}
 		});
-		model.getData(params);
+		model.doRequest(params);
 	}
 }

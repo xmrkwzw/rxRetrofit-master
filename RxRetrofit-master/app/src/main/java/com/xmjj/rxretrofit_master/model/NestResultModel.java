@@ -25,7 +25,7 @@ public class NestResultModel extends BaseModel implements IBaseModel, HttpOnNext
 	}
 
 	@Override
-    public void getData(Map<String, Object> params) {
+    public void doRequest(Map<String, Object> params) {
         BaseInfoApi baseInfoApi = new BaseInfoApi(this, appCompatActivity, BrandInfoDetailBean.class);
         baseInfoApi.doOther((String) params.get(RequestParams.BaseInfo.SEQ_NUM), dialogMsg);
     }

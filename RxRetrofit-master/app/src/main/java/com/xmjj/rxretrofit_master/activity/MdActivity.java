@@ -248,7 +248,7 @@ public class MdActivity extends BaseActivity {
 		new ShareAction(this)
 				.withText("my app")
 				.withMedia(umWeb)
-				.setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.ALIPAY, SHARE_MEDIA.SMS)
+				.setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.ALIPAY, SHARE_MEDIA.SMS)
 				.setCallback(ShareUtils.getInstance().getListener())
 				.open(config);
 	}

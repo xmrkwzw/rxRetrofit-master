@@ -26,7 +26,7 @@ public class BaseModel implements IBaseModel,HttpOnNextListener {
 	}
 
 	@Override
-	public void getData(Map<String, Object> params) {
+	public void doRequest(Map<String, Object> params) {
 
 	}
 

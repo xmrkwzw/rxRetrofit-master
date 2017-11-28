@@ -27,7 +27,7 @@ public class ArrayResultModel extends BaseModel implements IBaseModel,HttpOnNext
 	}
 
 	@Override
-	public void getData(Map<String, Object> params) {
+	public void doRequest(Map<String, Object> params) {
 		BaseInfoApi baseInfoApi = new BaseInfoApi(this, appCompatActivity, RatingBean.class);
 		baseInfoApi.getCivilization((String) params.get(RequestParams.Civilization.CLASS_ID),dialogMsg);
 	}

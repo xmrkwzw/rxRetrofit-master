@@ -3,8 +3,10 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".MainActivity">
 
-    <group android:checkableBehavior="single">
 
+<item android:title="主要模块">
+    <menu>
+        <group android:checkableBehavior="single">
         <item
             android:id="@+id/model_net"
             android:checked="true"
@@ -26,19 +28,23 @@
             android:id="@+id/model_rxbus"
             android:icon="@mipmap/event"
             android:title="rxbus模块"/>
-        <item
-            android:id="@+id/model_view"
-            android:icon="@mipmap/view"
-            android:title="自定义View"/>
+
         <item
             android:id="@+id/model_glide"
             android:icon="@mipmap/iconfont_custom_view"
-            android:title="glide"/>
+            android:title="glide模块"/>
         <item
             android:id="@+id/model_camera2"
             android:icon="@mipmap/camera_icon"
-            android:title="camera2"/>
+            android:title="camera2模块"/>
+        <item
+            android:id="@+id/model_view"
+            android:icon="@mipmap/view"
+            android:title="其他第三方工具"/>
+        </group>
+    </menu>
 
+</item>
         <item android:title="其他">
             <menu>
                 <item
@@ -60,6 +66,6 @@
 
             </menu>
         </item>
-    </group>
+
 
 </menu>

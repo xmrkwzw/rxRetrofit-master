@@ -21,13 +21,17 @@ public class WebViewUtils {
 		return instance;
 	}
 
-	public void initWebView(WebView webview, String url) {
+	public void initWebView(WebView webview, String url, boolean isHtml) {
 
 		WebSettings webSettings = webview.getSettings();
-		webSettings.setUseWideViewPort(true);
+
 		webSettings.setLoadWithOverviewMode(true);
 		webSettings.setDisplayZoomControls(true);
 		webSettings.setSupportZoom(true);
+		webSettings.setDomStorageEnabled(true);
+		webSettings.setJavaScriptEnabled(true);
+		webSettings.setUseWideViewPort(true);
+		webSettings.setLoadWithOverviewMode(true);
 		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 		webview.setWebViewClient(new WebViewClient() {
 			@Override
@@ -37,6 +41,11 @@ public class WebViewUtils {
 			}
 		});
 
-		webview.loadUrl(url);
+		if (isHtml) {
+			webview.loadDataWithBaseURL(null, url, "text/html", "utf-8", null);
+		} else {
+
+			webview.loadUrl(url);
+		}
 	}
 }

@@ -30,7 +30,7 @@ public class ObjectResultModel extends BaseModel implements IBaseModel, HttpOnNe
 	 * the result is JsonObject such as {"result":{"xxx"}}
 	 */
 	@Override
-	public void getData(Map<String, Object> params) {
+	public void doRequest(Map<String, Object> params) {
 		BaseInfoApi baseInfoApi = new BaseInfoApi(this, appCompatActivity, BrandInfoDetailBean.class);
 		baseInfoApi.getBaseInfo((String) params.get(RequestParams.BaseInfo.SEQ_NUM), dialogMsg);
 

@@ -71,3 +71,6 @@ RxRetrofit-master/app/src/main/gen/com/xmjj/rxretrofit_master/R.java
 RxRetrofit-master/jujianglibrary/src/main/gen/com/xmjj/jujianglibrary/Manifest.java
 RxRetrofit-master/jujianglibrary/src/main/gen/com/xmjj/jujianglibrary/R.java
 RxRetrofit-master/.idea/vcs.xml
+*.xml
+*.xml
+RxRetrofit-master/.idea/misc.xml

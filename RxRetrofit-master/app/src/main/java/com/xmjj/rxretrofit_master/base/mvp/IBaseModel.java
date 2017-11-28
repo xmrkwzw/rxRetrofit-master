@@ -8,6 +8,6 @@ import java.util.Map;
  */
 
 public interface IBaseModel {
-    //将请求参数通过map集合上传
-    void getData(Map<String, Object> params);
+    //将请求参数通过map集合上传 然后请求数据
+    void doRequest(Map<String, Object> params);
 }

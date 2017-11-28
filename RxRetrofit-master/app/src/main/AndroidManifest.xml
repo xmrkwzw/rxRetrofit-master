@@ -250,6 +250,7 @@
                 <category android:name="com.xmjj.rxretrofit_master" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SpanActivity"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

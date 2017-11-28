@@ -44,6 +44,23 @@
             android:background="@color/transparent"
             android:text="时钟"/>
     </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@color/windowBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        >
+
+        <Button
+            android:id="@+id/btn_span"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="精通Span 轻松玩转各种文本特效"/>
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
