@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.squareup.leakcanary.LeakCanary;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -23,7 +24,7 @@ public class BaseApplication extends Application {
 		Config.DEBUG = true;
 		JPushInterface.setDebugMode(true);
 		JPushInterface.init(this);
-
+		LeakCanary.install(this);
 
 	}
 

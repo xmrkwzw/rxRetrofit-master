@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.xmjj.jujianglibrary.R;
+import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.zxing.camera.CameraManager;
 import com.xmjj.rxretrofit_master.zxing.decoding.CaptureActivityHandler;
 import com.xmjj.rxretrofit_master.zxing.view.ViewfinderView;
@@ -57,10 +57,8 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
 		setContentView(R.layout.activity_zxing);
 		surfaceView = (SurfaceView) findViewById(R.id.surfaceview);
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinderview);
-
 		Window window = getWindow();
 		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
 		hasSurface = false;
 
 	}
@@ -71,7 +69,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
 		if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
-		// CameraManager.init(getApplication());
+
 		cameraManager = new CameraManager(getApplication());
 
 		viewfinderView.setCameraManager(cameraManager);

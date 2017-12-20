@@ -1,4 +1,4 @@
-package com.xmjj.jujianglibrary.contact;
+package com.xmjj.rxretrofit_master.contact;
 
 import java.io.File;
 
@@ -16,6 +16,21 @@ public class Constant {
 
 	public static final String PACKAGE_NAME = "com.xmjj.rxretrofit_master";
 
+
+	public static final class MainPage {
+		public static final int NET_INDEX = 0;
+		public static final int FILE_INDEX = 1;
+		public static final int DBFLOW_INDEX = 2;
+		public static final int RXBUS_INDEX = 3;
+		public static final int GLIDE_INDEX = 4;
+		public static final int CAMERA2_INDEX = 5;
+		public static final int OTHER_INDEX = 6;
+		public static final int SKIN_INDEX = 7;
+		public static final int ABOUT_INDEX = 8;
+		public static final int BLOG_INDEX = 8;
+
+
+	}
 
 
 	// 文件信息
@@ -54,14 +69,11 @@ public class Constant {
 	}
 
 	public static final class SharePerferencedKey {
-		public static final String token="token";//保存登陆获取的token信息
+		public static final String token = "token";//保存登陆获取的token信息
 		public static final String LOCATION = "location";
 		public static final String CARD_ID = "cardId";
 		public static final String FIRST_INSTALL = "first_install";//判断是否第一次安装
 	}
-
-
-
 
 
 }

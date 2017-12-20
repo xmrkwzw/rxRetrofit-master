@@ -135,8 +135,6 @@ public class CameraFragment extends BaseFragment implements View.OnClickListener
 			}
 		});
 	}
-
-
 	/**
 	 * 初始化Camera2
 	 */

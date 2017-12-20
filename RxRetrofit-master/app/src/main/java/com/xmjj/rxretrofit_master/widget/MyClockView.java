@@ -28,6 +28,7 @@ public class MyClockView extends View implements View.OnTouchListener {
 	private float mAngel = 0; //分针旋转的角度
 	private float hAngel = 0;//时针旋转的角度
 	private Context context;
+	private static final float START_ANGEL = 30;//开始的位置
 
 	public MyClockView(Context context) {
 		super(context);
@@ -63,7 +64,7 @@ public class MyClockView extends View implements View.OnTouchListener {
 		super.onDraw(canvas);
 		drawCircle(canvas);
 		drawLines(canvas);
-		drawHours(canvas);
+		//drawHours(canvas);
 		drawMinute(canvas);
 		drawCenter(canvas);
 		//drawXY(canvas);
@@ -144,7 +145,7 @@ public class MyClockView extends View implements View.OnTouchListener {
 
 	/*画分针*/
 	public void drawMinute(Canvas canvas) {
-		canvas.rotate(mAngel - hAngel, centerX, centerY);
+		canvas.rotate(mAngel - START_ANGEL, centerX, centerY);
 		Paint paint = new Paint();
 		paint.setAntiAlias(true);
 		paint.setColor(Color.RED);
@@ -177,6 +178,7 @@ public class MyClockView extends View implements View.OnTouchListener {
 
 		canvas.drawLine(canvas.getWidth() / 2, 0, canvas.getWidth() / 2, canvas.getHeight(), paint);
 	}
+
 	/**
 	 * @param x
 	 * @param y
@@ -186,10 +188,17 @@ public class MyClockView extends View implements View.OnTouchListener {
 		int ry = (int) -(y - centerY);
 
 		Point point = new Point(rx, ry);
-		mAngel = MyDegreeAdapter.getAngle(point);
-		//还需要处理bug,只是做个简单的设置。
-		hAngel = mAngel/12;
-		Logger.d("degree = after" + mAngel+"-----"+hAngel);
+		Logger.d("rx ="+rx+"---ry ="+ry);
+		mAngel = MyDegreeAdapter.getAngle(point) + START_ANGEL;
+
+		postInvalidate();
+//		if (mAngel >= -120 && mAngel <= 0) {
+//
+//			//还需要处理bug,只是做个简单的设置。
+//			hAngel = mAngel / 12;
+//			Logger.d("degree = after" + mAngel + "-----" + hAngel);
+//
+//		}
 	}
 
 
@@ -201,19 +210,19 @@ public class MyClockView extends View implements View.OnTouchListener {
 			case MotionEvent.ACTION_DOWN:
 
 				calcDegree((int) event.getX(), (int) event.getY());
-				postInvalidate();
+				//	postInvalidate();
 
 				break;
 			case MotionEvent.ACTION_MOVE:
 
 				calcDegree((int) event.getX(), (int) event.getY());
-				postInvalidate();
+				//postInvalidate();
 
 				break;
 			case MotionEvent.ACTION_UP:
 
 				calcDegree((int) event.getX(), (int) event.getY());
-				postInvalidate();
+				//postInvalidate();
 
 				break;
 		}

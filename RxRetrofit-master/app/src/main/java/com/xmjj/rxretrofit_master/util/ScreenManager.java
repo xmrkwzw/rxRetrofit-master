@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.xmjj.jujianglibrary.contact.Constant;
+import com.xmjj.rxretrofit_master.contact.Constant;
 import com.xmjj.rxretrofit_master.activity.SinglePixelActivity;
 
 import java.lang.ref.WeakReference;

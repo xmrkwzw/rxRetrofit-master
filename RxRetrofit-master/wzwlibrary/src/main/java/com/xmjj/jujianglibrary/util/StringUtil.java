@@ -689,7 +689,33 @@ public final class StringUtil {
 		Pattern pattern = Pattern.compile(regex);
 		return pattern.matcher(str).matches();
 	}
+	/**
+	 * URL转换为链接
+	 *
+	 * @param urlText
+	 * @return String
+	 * @author 顾冬冬
+	 */
+	public static String urlToLink(String urlText) {
+		// url的正则表达式
+		String regexp = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)";                                     // 结束条件
+		Pattern pattern = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(urlText);
 
+		String resultText = "";// （临时变量，保存转换后的文本）
+		int lastEnd = 0;// 保存每个链接最后一会的下标
+
+		while (matcher.find()) {
+			resultText += urlText.substring(lastEnd, matcher.start() - 1);
+			resultText += "<a href=\"" + matcher.group() + "\">" + matcher.group() + "</a>";
+			// 提取url
+			// System.out.println(matcher.group());
+			lastEnd = matcher.end();
+		}
+		resultText += urlText.substring(lastEnd);
+
+		return resultText;
+	}
 	/**
 	 * 读取baseurl
 	 *

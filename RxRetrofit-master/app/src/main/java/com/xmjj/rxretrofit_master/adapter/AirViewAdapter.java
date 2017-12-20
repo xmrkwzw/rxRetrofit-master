@@ -7,7 +7,7 @@ import android.graphics.Point;
  * @author genius
  *         这里的坐标系是X轴向右，Y轴向上的坐标系
  */
-public class MyDegreeAdapter {
+public class AirViewAdapter {
 
 	private static final int ANGLE_0 = 0;
 	private static final int ANGLE_90 = 90;
@@ -58,28 +58,7 @@ public class MyDegreeAdapter {
 		int degree = (int) Math.toDegrees(dAngle);
 
 		switch (GetQuadrant(point)) {
-			case QUADRANT_NONE:
-				if (point.x == 0 && point.y == 0) {
-					degree = 0;
-				}
 
-				if (point.x == 0) {
-					if (point.y > 0) {
-						degree = -ANGLE_90;
-					} else {
-						degree = ANGLE_90;
-					}
-				}
-
-				if (point.y == 0) {
-					if (point.x > 0) {
-						degree = ANGLE_0;
-					} else {
-						degree = ANGLE_180;
-					}
-				}
-
-				break;
 			case QUADRANT_ONE:
 				degree = -degree;
 				break;
@@ -88,14 +67,7 @@ public class MyDegreeAdapter {
 				degree = -(ANGLE_180 - degree);
 
 				break;
-			case QUADRANT_THREE:
-				degree = -(degree + ANGLE_180);
 
-				break;
-			case QUADRANT_FOUR:
-				degree = -(ANGLE_360-degree);
-
-				break;
 		}
 
 		return degree;

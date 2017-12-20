@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
-import com.xmjj.rxretrofit_master.view.span.FrameSpan;
-import com.xmjj.rxretrofit_master.view.span.MutableForegroundColorSpan;
-import com.xmjj.rxretrofit_master.view.span.RainbowSpan;
-import com.xmjj.rxretrofit_master.view.span.TypeWriterSpanGroup;
-import com.xmjj.rxretrofit_master.view.span.VerticalImageSpan;
+import com.xmjj.rxretrofit_master.widget.span.FrameSpan;
+import com.xmjj.rxretrofit_master.widget.span.MutableForegroundColorSpan;
+import com.xmjj.rxretrofit_master.widget.span.RainbowSpan;
+import com.xmjj.rxretrofit_master.widget.span.TypeWriterSpanGroup;
+import com.xmjj.rxretrofit_master.widget.span.VerticalImageSpan;
 
 import butterknife.BindView;
 

@@ -1,4 +1,4 @@
-package com.xmjj.rxretrofit_master.view.span;
+package com.xmjj.rxretrofit_master.widget.span;
 
 import java.util.ArrayList;
 

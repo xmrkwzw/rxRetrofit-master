@@ -9,7 +9,7 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.xmjj.jujianglibrary.contact.Constant;
+import com.xmjj.rxretrofit_master.contact.Constant;
 import com.xmjj.rxretrofit_master.util.ScreenManager;
 import com.xmjj.rxretrofit_master.util.SystemUtils;
 

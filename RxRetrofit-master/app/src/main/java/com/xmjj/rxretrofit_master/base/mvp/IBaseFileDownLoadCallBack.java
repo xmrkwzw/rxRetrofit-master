@@ -12,12 +12,12 @@ public interface IBaseFileDownLoadCallBack<T> {
 	 *
 	 * @param t
 	 */
-	public void onNext(T t);
+	 void onNext(T t);
 
 	/**
 	 * 下载提示信息
 	 */
-	public  void onMsg(String msg);
+	  void onMsg(String msg);
 
 
 	/**
@@ -26,7 +26,7 @@ public interface IBaseFileDownLoadCallBack<T> {
 	 * @param readLength
 	 * @param countLength
 	 */
-	public void updateProgress(long readLength, long countLength);
+	 void updateProgress(long readLength, long countLength);
 
 	/**
 	 * 失败或者错误方法
@@ -34,7 +34,12 @@ public interface IBaseFileDownLoadCallBack<T> {
 	 *
 	 * @param e
 	 */
-	public void onError(Throwable e);
+	 void onError(Throwable e);
+
+
+	 /*下载完成*/
+	 void onComplete();
+
 
 
 }

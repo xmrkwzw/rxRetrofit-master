@@ -9,7 +9,7 @@
         <group android:checkableBehavior="single">
         <item
             android:id="@+id/model_net"
-            android:checked="true"
+
             android:icon="@mipmap/iconfont_blog"
             android:title="网络模块"/>
         <item
@@ -19,7 +19,7 @@
             android:title="文件下载"
             />
         <item
-            android:id="@+id/model_sql"
+            android:id="@+id/model_db"
 
             android:icon="@mipmap/iconfont_source"
             android:title="数据库模块"
@@ -38,7 +38,7 @@
             android:icon="@mipmap/camera_icon"
             android:title="camera2模块"/>
         <item
-            android:id="@+id/model_view"
+            android:id="@+id/model_other"
             android:icon="@mipmap/view"
             android:title="其他第三方工具"/>
         </group>
@@ -58,7 +58,7 @@
                     android:icon="@mipmap/iconfont_about"
                     android:title="关于"/>
                 <item
-                    android:id="@+id/model_other"
+                    android:id="@+id/model_blog"
                     android:checkable="true"
                     android:icon="@mipmap/blog"
                     android:title="我的博客"/>

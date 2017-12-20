@@ -20,6 +20,7 @@ import butterknife.BindView;
  * 2017/9/11
  */
 
+
 public class NetFragment extends BaseFragment {
 	@BindView(R.id.tablayout_net)
 	TabLayout tabLayout;
@@ -61,5 +62,6 @@ public class NetFragment extends BaseFragment {
 		tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 	}
+
 
 }

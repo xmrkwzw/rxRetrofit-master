@@ -10,7 +10,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.xmjj.jujianglibrary.contact.Constant;
+import com.xmjj.rxretrofit_master.contact.Constant;
 import com.xmjj.rxretrofit_master.activity.MdActivity;
 import com.xmjj.rxretrofit_master.util.SystemUtils;
 

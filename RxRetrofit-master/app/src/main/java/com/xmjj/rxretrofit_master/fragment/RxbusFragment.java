@@ -54,6 +54,7 @@ public class RxbusFragment extends BaseFragment {
 
 	@Override
 	public void initData() {
+
 		RxBus.getDefault().register(this);
 
 	}

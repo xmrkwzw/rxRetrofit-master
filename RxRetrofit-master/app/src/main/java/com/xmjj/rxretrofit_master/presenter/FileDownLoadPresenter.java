@@ -18,6 +18,7 @@ public class FileDownLoadPresenter {
 
 	public FileDownLoadPresenter(IFileDownLoadView<DownInfo> downLoadView) {
 		this.downLoadView = downLoadView;
+		init();
 	}
 
 	public void init() {
@@ -41,9 +42,26 @@ public class FileDownLoadPresenter {
 			public void onError(Throwable e) {
 				downLoadView.onError(e);
 			}
+
+			@Override
+			public void onComplete() {
+				downLoadView.onComplete();
+			}
 		});
+
+	}
+
+	public void downLoadFile(){
 		model.download();
 	}
 
 
+	public void pauseLoadFile(){
+		model.pauseLoad();
+	}
+
+
+	public void reLoadFile(){
+		model.reLoad();
+	}
 }

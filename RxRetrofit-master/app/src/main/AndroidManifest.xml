@@ -58,7 +58,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.RcvActivity"/>
-        <activity android:name="com.xmjj.jujianglibrary.zxing.CaptureActivity"/>
+        <activity android:name=".zxing.CaptureActivity"/>
         <activity android:name=".activity.ZxingActivity"/>
         <activity android:name=".activity.SettingActivity"/>
         <activity android:name=".activity.AnimationActivity"/>
@@ -251,6 +251,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SpanActivity"/>
+        <activity android:name=".activity.AirActivity"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

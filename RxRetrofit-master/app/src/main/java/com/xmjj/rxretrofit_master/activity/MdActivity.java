@@ -25,36 +25,32 @@ import com.umeng.socialize.shareboard.ShareBoardConfig;
 import com.wzgiceman.rxbuslibrary.rxbus.RxBus;
 import com.wzgiceman.rxbuslibrary.rxbus.Subscribe;
 import com.wzgiceman.rxbuslibrary.rxbus.ThreadMode;
-import com.xmjj.rxretrofit_master.util.DialogUtils;
-import com.xmjj.rxretrofit_master.util.FileUtils;
-import com.xmjj.rxretrofit_master.util.ToastUtils;
 import com.xmjj.jujianglibrary.util.logger.Logger;
 import com.xmjj.rxretrofit_master.R;
+import com.xmjj.rxretrofit_master.adapter.CustomViewpagerAdapter;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
-import com.xmjj.rxretrofit_master.base.BaseFragment;
+import com.xmjj.rxretrofit_master.contact.Constant;
 import com.xmjj.rxretrofit_master.entity.event.SkinEvent;
-import com.xmjj.rxretrofit_master.fragment.AboutFragment;
-import com.xmjj.rxretrofit_master.fragment.CameraFragment;
-import com.xmjj.rxretrofit_master.fragment.DbFlowFragment;
-import com.xmjj.rxretrofit_master.fragment.FileDownLoadFragment;
-import com.xmjj.rxretrofit_master.fragment.GlideFragment;
-import com.xmjj.rxretrofit_master.fragment.NetFragment;
+import com.xmjj.rxretrofit_master.fragment.BlogFragment;
 import com.xmjj.rxretrofit_master.fragment.OtherFragment;
-import com.xmjj.rxretrofit_master.fragment.RxbusFragment;
-import com.xmjj.rxretrofit_master.fragment.SkinFragment;
-import com.xmjj.rxretrofit_master.fragment.ViewFragment;
+import com.xmjj.rxretrofit_master.presenter.MainPagePresenter;
 import com.xmjj.rxretrofit_master.service.DaemonService;
 import com.xmjj.rxretrofit_master.service.PlayerMusicService;
 import com.xmjj.rxretrofit_master.skinloader.listener.ILoaderListener;
 import com.xmjj.rxretrofit_master.skinloader.load.SkinManager;
 import com.xmjj.rxretrofit_master.util.ActivityManagerUtils;
-import com.xmjj.rxretrofit_master.util.JobSchedulerManager;
+import com.xmjj.rxretrofit_master.util.DialogUtils;
+import com.xmjj.rxretrofit_master.util.FileUtils;
 import com.xmjj.rxretrofit_master.util.JpushUtil;
 import com.xmjj.rxretrofit_master.util.Md5Tool;
 import com.xmjj.rxretrofit_master.util.ShareUtils;
+import com.xmjj.rxretrofit_master.util.ToastUtils;
+import com.xmjj.rxretrofit_master.view.IMainPageView;
+import com.xmjj.rxretrofit_master.widget.CustomViewPager;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -66,7 +62,7 @@ import cn.jpush.android.api.JPushInterface;
  * 2017/9/11
  */
 
-public class MdActivity extends BaseActivity {
+public class MdActivity extends BaseActivity implements IMainPageView {
 	@BindView(R.id.toolbar)
 	Toolbar toolbar;
 	@BindView(R.id.navigation_view)
@@ -77,19 +73,10 @@ public class MdActivity extends BaseActivity {
 	FloatingActionButton fbShare;
 	@BindView(R.id.fb_login)
 	FloatingActionButton fbLogin;
+	@BindView(R.id.viewpager)
+	CustomViewPager viewPager;
 
 	private ActionBarDrawerToggle mDrawerToggle;  //菜单开关
-	private BaseFragment f = null;
-	private NetFragment netFragment;
-	private DbFlowFragment dbFlowFragment;
-	private GlideFragment glideFragment;
-	private RxbusFragment rxbusFragment;
-	private OtherFragment otherFragment;
-	private AboutFragment aboutFragment;
-	private ViewFragment viewFragment;
-	private CameraFragment cameraFragment;
-	private SkinFragment skinFragment;
-	private FileDownLoadFragment fileDownLoadFragment;
 
 	private static String SKIN_DIR;
 	/*皮肤名*/
@@ -98,6 +85,7 @@ public class MdActivity extends BaseActivity {
 	public static final int GREEN = 0;
 	public static final int BLUE = 1;
 	public static final int BLACK = 2;
+	private int index;
 
 
 	@Override
@@ -108,6 +96,7 @@ public class MdActivity extends BaseActivity {
 	@Override
 	public void initViews() {
 		RxBus.getDefault().register(this);
+		viewPager.setSlipping(false);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		setupDrawerContent(navigationView);
@@ -122,20 +111,17 @@ public class MdActivity extends BaseActivity {
 	}
 
 	@Override
-	public void initData() {
-		netFragment = new NetFragment();
-		glideFragment = new GlideFragment();
-		dbFlowFragment = new DbFlowFragment();
-		aboutFragment = new AboutFragment();
-		otherFragment = new OtherFragment();
-		rxbusFragment = new RxbusFragment();
-		viewFragment = new ViewFragment();
-		cameraFragment = new CameraFragment();
-		skinFragment = new SkinFragment();
-		fileDownLoadFragment = new FileDownLoadFragment();
-		switchFragment(netFragment);
-		SKIN_DIR = FileUtils.getSkinDirPath(this);
+	public void setData(List<Fragment> lists) {
+		viewPager.setAdapter(new CustomViewpagerAdapter(getSupportFragmentManager(), lists));
+		viewPager.setCurrentItem(0);
+	}
 
+
+	@Override
+	public void initData() {
+		MainPagePresenter presenter = new MainPagePresenter(this);
+		presenter.createData();
+		SKIN_DIR = FileUtils.getSkinDirPath(this);
 		keepLive();
 		registerJpush();
 
@@ -144,9 +130,6 @@ public class MdActivity extends BaseActivity {
 
 	/*保活服务启动*/
 	private void keepLive() {
-		JobSchedulerManager jobSchedulerManager = JobSchedulerManager.getJobSchedulerInstance(this);
-		//jobSchedulerManager.startJobScheduler();
-
 		startService(new Intent(this, PlayerMusicService.class));
 		startService(new Intent(this, DaemonService.class));
 	}
@@ -177,9 +160,9 @@ public class MdActivity extends BaseActivity {
 		}
 		Fragment mCurrentFragment = getCurrentFragment();
 		if (mCurrentFragment instanceof OtherFragment) {//如果当前的Fragment是WebViewFragment 则监听返回事件
-			OtherFragment otherFragment = (OtherFragment) mCurrentFragment;
-			if (otherFragment.canGoBack()) {
-				otherFragment.goBack();
+			BlogFragment blogFragment = (BlogFragment) mCurrentFragment;
+			if (blogFragment.canGoBack()) {
+				blogFragment.goBack();
 
 			} else {
 				exit();
@@ -248,7 +231,7 @@ public class MdActivity extends BaseActivity {
 		new ShareAction(this)
 				.withText("my app")
 				.withMedia(umWeb)
-				.setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.ALIPAY, SHARE_MEDIA.SMS)
+				.setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.ALIPAY, SHARE_MEDIA.SMS)
 				.setCallback(ShareUtils.getInstance().getListener())
 				.open(config);
 	}
@@ -272,40 +255,41 @@ public class MdActivity extends BaseActivity {
 						switch (menuItem.getItemId()) {
 
 							case R.id.model_net:
-								f = netFragment;
+								index = Constant.MainPage.NET_INDEX;
 								break;
 							case R.id.model_file:
-								f = fileDownLoadFragment;
+								index = Constant.MainPage.FILE_INDEX;
 								break;
-							case R.id.model_sql:
-								f = dbFlowFragment;
+							case R.id.model_db:
+								index = Constant.MainPage.DBFLOW_INDEX;
 								break;
 							case R.id.model_rxbus:
-								f = rxbusFragment;
-								break;
-							case R.id.model_view:
-								f = viewFragment;
-								break;
-							case R.id.model_glide:
-								f = glideFragment;
-								break;
-							case R.id.model_about:
-								f = aboutFragment;
+								index = Constant.MainPage.RXBUS_INDEX;
 								break;
 							case R.id.model_other:
-								f = otherFragment;
+								index = Constant.MainPage.OTHER_INDEX;
+								break;
+							case R.id.model_glide:
+								index = Constant.MainPage.GLIDE_INDEX;
+								break;
+							case R.id.model_about:
+								index = Constant.MainPage.ABOUT_INDEX;
+								break;
+							case R.id.model_blog:
+								index = Constant.MainPage.BLOG_INDEX;
 								break;
 							case R.id.model_camera2:
-								f = cameraFragment;
+								index = Constant.MainPage.CAMERA2_INDEX;
 								break;
 							case R.id.model_skin:
-								f = skinFragment;
+								index = Constant.MainPage.SKIN_INDEX;
 								break;
 
 						}
-						switchFragment(f);
+						viewPager.setCurrentItem(index);
 						menuItem.setChecked(true);
 						drawerLayout.closeDrawers();
+
 						return true;
 					}
 				});
@@ -355,7 +339,7 @@ public class MdActivity extends BaseActivity {
 		if (id == R.id.action_settings) {
 			startActivity(new Intent(this, SettingActivity.class));
 		} else if (id == R.id.action_about) {
-			switchFragment(aboutFragment);
+			viewPager.setCurrentItem(Constant.MainPage.ABOUT_INDEX);
 			drawerLayout.closeDrawers();
 		} else if (id == R.id.action_scan) {
 			startActivity(new Intent(this, ZxingActivity.class));

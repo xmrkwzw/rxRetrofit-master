@@ -29,6 +29,7 @@ public abstract class BaseFragment extends RxFragment implements IDynamicNewView
 	public BaseActivity activity;
 	private Unbinder unbinder;
 	private IDynamicNewView mIDynamicNewView;
+	private int index ;
 
 	@Nullable
 	@Override
@@ -88,6 +89,14 @@ public abstract class BaseFragment extends RxFragment implements IDynamicNewView
 	public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
 		LayoutInflater result = getActivity().getLayoutInflater();
 		return result;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public abstract int getLayoutResId();

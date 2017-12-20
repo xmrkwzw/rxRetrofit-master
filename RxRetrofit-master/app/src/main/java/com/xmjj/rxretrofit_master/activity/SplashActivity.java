@@ -38,7 +38,7 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public void initViews() {
-		CommonUtils.setFont(CommonUtils.getTypeface(this,"font/fonts.ttf"),tvWelcome);
+		CommonUtils.setFont(CommonUtils.getTypeface(this, "font/fonts.ttf"), tvWelcome);
 		setAnimation();
 	}
 
@@ -80,10 +80,10 @@ public class SplashActivity extends BaseActivity {
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				startActivity(new Intent(SplashActivity.this,MdActivity.class));
+				startActivity(new Intent(SplashActivity.this, MdActivity.class));
 				finish();
 			}
-		},2000);
+		}, 2000);
 
 
 	}
@@ -101,9 +101,12 @@ public class SplashActivity extends BaseActivity {
 					, Manifest.permission.SYSTEM_ALERT_WINDOW
 					, Manifest.permission.GET_ACCOUNTS
 					, Manifest.permission.WRITE_APN_SETTINGS
+					, Manifest.permission.CAMERA
 					, Manifest.permission.RECEIVE_BOOT_COMPLETED};
 			ActivityCompat.requestPermissions(this, mPermissionList, 123);
+
 		}
+
 	}
 
 	@Override
@@ -112,4 +115,6 @@ public class SplashActivity extends BaseActivity {
 
 
 	}
+
+	
 }

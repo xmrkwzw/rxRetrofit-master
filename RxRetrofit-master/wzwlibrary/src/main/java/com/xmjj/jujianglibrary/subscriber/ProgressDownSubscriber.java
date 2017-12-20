@@ -22,7 +22,7 @@ import rx.functions.Action1;
  */
 public class ProgressDownSubscriber<T> extends Subscriber<T> implements DownloadProgressListener {
     //弱引用结果回调
-    private SoftReference<HttpDownOnNextListener> mSubscriberOnNextListener;
+    private SoftReference< HttpDownOnNextListener> mSubscriberOnNextListener;
     /*下载数据*/
     private DownInfo downInfo;
 

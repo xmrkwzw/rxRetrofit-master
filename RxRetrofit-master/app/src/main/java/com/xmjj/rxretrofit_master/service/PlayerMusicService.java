@@ -7,7 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.xmjj.jujianglibrary.contact.Constant;
+import com.xmjj.rxretrofit_master.contact.Constant;
 import com.xmjj.rxretrofit_master.R;
 
 
