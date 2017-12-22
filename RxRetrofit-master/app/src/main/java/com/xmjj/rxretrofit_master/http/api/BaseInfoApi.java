@@ -26,6 +26,7 @@ public class BaseInfoApi extends BaseApi {
 	public static final String BASE_INFO_METHOD = "brand/brandBaseInfo";
 	public static final String CIVILIZATION_METHOD = "brand/getMoralRateData";
 	public static final String MSG_CODE_METHOD="getVerifyCode";
+	public static final String GET_WEAHTER ="brand/getWeather";
 	public static final String IN = "in";
 	private HttpApiService httpApiService;
 	private HttpManager httpManager;
@@ -66,6 +67,13 @@ public class BaseInfoApi extends BaseApi {
 		setCancel(true);
 		httpManager.initHttp(observable,BaseInfoApi.this);
 
+	}
+	/*请求4*/
+	public void getWeather(String city){
+		setMethod(GET_WEAHTER);
+		Observable observable = httpApiService.getWeather(city);
+		setCancel(true);
+		httpManager.initHttp(observable,this);
 	}
 
 	/*嵌套接口*/

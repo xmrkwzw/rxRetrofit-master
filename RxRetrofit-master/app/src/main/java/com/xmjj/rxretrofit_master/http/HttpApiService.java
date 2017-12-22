@@ -23,4 +23,7 @@ public interface HttpApiService {
 	@FormUrlEncoded
 	@POST("app/commonService/getVerifyCode")
 	Observable<String> getMscCode(@Field("mobile") String mobile);
+
+	@GET("brand/getWeather")
+	Observable<String> getWeather(@Query("city") String city);
 }

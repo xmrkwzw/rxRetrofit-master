@@ -34,10 +34,6 @@
             android:icon="@mipmap/iconfont_custom_view"
             android:title="glide模块"/>
         <item
-            android:id="@+id/model_camera2"
-            android:icon="@mipmap/camera_icon"
-            android:title="camera2模块"/>
-        <item
             android:id="@+id/model_other"
             android:icon="@mipmap/view"
             android:title="其他第三方工具"/>

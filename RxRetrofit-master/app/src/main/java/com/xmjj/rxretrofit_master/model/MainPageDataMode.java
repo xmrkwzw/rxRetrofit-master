@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 
 import com.xmjj.rxretrofit_master.fragment.AboutFragment;
 import com.xmjj.rxretrofit_master.fragment.BlogFragment;
-import com.xmjj.rxretrofit_master.fragment.CameraFragment;
 import com.xmjj.rxretrofit_master.fragment.DbFlowFragment;
 import com.xmjj.rxretrofit_master.fragment.FileDownLoadFragment;
 import com.xmjj.rxretrofit_master.fragment.GlideFragment;
@@ -29,7 +28,6 @@ public class MainPageDataMode {
 	private DbFlowFragment dbFlowFragment;
 	private RxbusFragment rxbusFragment;
 	private GlideFragment glideFragment;
-	private CameraFragment cameraFragment;
 	private OtherFragment otherFragment;
 	private SkinFragment skinFragment;
 	private AboutFragment aboutFragment;
@@ -43,7 +41,6 @@ public class MainPageDataMode {
 		dbFlowFragment = new DbFlowFragment();
 		rxbusFragment = new RxbusFragment();
 		glideFragment = new GlideFragment();
-		cameraFragment = new CameraFragment();
 		otherFragment = new OtherFragment();
 		skinFragment = new SkinFragment();
 		aboutFragment = new AboutFragment();
@@ -55,7 +52,6 @@ public class MainPageDataMode {
 		fragmentList.add(dbFlowFragment);
 		fragmentList.add(rxbusFragment);
 		fragmentList.add(glideFragment);
-		fragmentList.add(cameraFragment);
 		fragmentList.add(otherFragment);
 		fragmentList.add(skinFragment);
 		fragmentList.add(aboutFragment);

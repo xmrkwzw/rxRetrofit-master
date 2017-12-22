@@ -17,4 +17,8 @@ public class RequestParams {
 	public static class Civilization{
 		public static final String CLASS_ID ="classId";
 	}
+
+	public static class GetWeather{
+		public static final String CIYT ="city";
+	}
 }

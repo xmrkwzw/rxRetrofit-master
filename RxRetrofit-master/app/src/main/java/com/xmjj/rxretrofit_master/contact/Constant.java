@@ -23,13 +23,19 @@ public class Constant {
 		public static final int DBFLOW_INDEX = 2;
 		public static final int RXBUS_INDEX = 3;
 		public static final int GLIDE_INDEX = 4;
-		public static final int CAMERA2_INDEX = 5;
-		public static final int OTHER_INDEX = 6;
-		public static final int SKIN_INDEX = 7;
-		public static final int ABOUT_INDEX = 8;
+		public static final int OTHER_INDEX = 5;
+		public static final int SKIN_INDEX = 6;
+		public static final int ABOUT_INDEX = 7;
 		public static final int BLOG_INDEX = 8;
 
 
+	}
+
+	public static final class CODE {
+
+		public static final int CODE_GALLERY_REQUEST = 0xa0;
+
+		public static final int CODE_CAMERA_REQUEST = 0Xa1;
 	}
 
 
@@ -69,10 +75,16 @@ public class Constant {
 	}
 
 	public static final class SharePerferencedKey {
-		public static final String token = "token";//保存登陆获取的token信息
+		public static final String TOKEN = "token";//保存登陆获取的token信息
 		public static final String LOCATION = "location";
 		public static final String CARD_ID = "cardId";
 		public static final String FIRST_INSTALL = "first_install";//判断是否第一次安装
+		public static final String URL = "save_url";
+	}
+
+
+	public static final class Intent_key {
+		public static final String URI = "URI";
 	}
 
 

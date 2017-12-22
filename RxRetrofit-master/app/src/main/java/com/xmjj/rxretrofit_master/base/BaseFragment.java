@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trello.rxlifecycle.components.support.RxFragment;
+import com.xmjj.jujianglibrary.util.logger.Logger;
 import com.xmjj.rxretrofit_master.skinloader.attr.DynamicAttr;
 import com.xmjj.rxretrofit_master.skinloader.listener.IDynamicNewView;
 
@@ -24,16 +25,18 @@ import butterknife.Unbinder;
  * 2017/8/24
  */
 
-public abstract class BaseFragment extends RxFragment implements IDynamicNewView {
+public abstract class   BaseFragment extends RxFragment implements IDynamicNewView {
+	public String TAG ;
 	public View containerView;
 	public BaseActivity activity;
 	private Unbinder unbinder;
 	private IDynamicNewView mIDynamicNewView;
-	private int index ;
+
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		TAG = getClass().getSimpleName();
 		if (containerView == null) {
 			containerView = inflater.inflate(getLayoutResId(), null);
 			unbinder = ButterKnife.bind(this, containerView);
@@ -54,11 +57,12 @@ public abstract class BaseFragment extends RxFragment implements IDynamicNewView
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (unbinder != null) {
-
-			unbinder.unbind();
-			unbinder = null;
-		}
+		Logger.d("fragment onDestroy");
+//		if (unbinder != null) {
+//
+//			unbinder.unbind();
+//			unbinder = null;
+//		}
 	}
 
 	@Override
@@ -91,20 +95,11 @@ public abstract class BaseFragment extends RxFragment implements IDynamicNewView
 		return result;
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
 	public abstract int getLayoutResId();
 
 	public abstract void initViews();
 
 	public abstract void initData();
-
 
 	protected <T extends View> T findView(int id) {
 		return (T) containerView.findViewById(id);

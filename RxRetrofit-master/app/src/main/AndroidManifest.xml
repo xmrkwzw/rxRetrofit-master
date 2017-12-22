@@ -63,6 +63,7 @@
         <activity android:name=".activity.SettingActivity"/>
         <activity android:name=".activity.AnimationActivity"/>
         <activity android:name=".activity.MdActivity"/>
+        <activity android:name=".activity.Camera2Activity"/>
         <activity
             android:name=".activity.FileLookActivity"
             android:launchMode="singleTop"/>
@@ -94,6 +95,7 @@
 
         </activity>
         <activity android:name=".activity.TbsVideoViewActivity"/>
+        <activity android:name=".activity.TestActivity" android:screenOrientation="landscape"/>
         <!--umeng share start-->
         <!--sina-->
         <activity
@@ -252,6 +254,7 @@
         </activity>
         <activity android:name=".activity.SpanActivity"/>
         <activity android:name=".activity.AirActivity"/>
+
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

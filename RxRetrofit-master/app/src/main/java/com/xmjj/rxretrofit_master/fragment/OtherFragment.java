@@ -12,10 +12,12 @@ import com.xmjj.rxretrofit_master.activity.ClockActivity;
 import com.xmjj.rxretrofit_master.activity.FileLookActivity;
 import com.xmjj.rxretrofit_master.activity.SpanActivity;
 import com.xmjj.rxretrofit_master.activity.TbsWebViewActivity;
+import com.xmjj.rxretrofit_master.activity.TestActivity;
 import com.xmjj.rxretrofit_master.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * 功能描述：
@@ -39,6 +41,9 @@ public class OtherFragment extends BaseFragment {
 	Button btnSpan;
 	@BindView(R.id.btn_air)
 	Button btnAir;
+	@BindView(R.id.btn_tool)
+	Button btnTool;
+	Unbinder unbinder;
 
 	private String URL = "http://baobab.wdjcdn.com/145076769089714.mp4";
 
@@ -59,7 +64,7 @@ public class OtherFragment extends BaseFragment {
 	}
 
 
-	@OnClick({R.id.btn_animation, R.id.btn_known, R.id.btn_webview, R.id.btn_video, R.id.btn_clock, R.id.btn_span,R.id.btn_air})
+	@OnClick({R.id.btn_tool,R.id.btn_animation, R.id.btn_known, R.id.btn_webview, R.id.btn_video, R.id.btn_clock, R.id.btn_span, R.id.btn_air})
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_animation:
@@ -87,6 +92,10 @@ public class OtherFragment extends BaseFragment {
 				break;
 			case R.id.btn_air:
 				startActivity(new Intent(activity, AirActivity.class));
+				break;
+
+			case R.id.btn_tool:
+				startActivity(new Intent(activity, TestActivity.class));
 				break;
 		}
 

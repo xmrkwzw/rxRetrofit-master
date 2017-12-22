@@ -14,10 +14,17 @@ import android.widget.TextView;
 
 import com.xmjj.rxretrofit_master.R;
 import com.xmjj.rxretrofit_master.base.BaseActivity;
+import com.xmjj.rxretrofit_master.service.DaemonService;
+import com.xmjj.rxretrofit_master.service.PlayerMusicService;
 import com.xmjj.rxretrofit_master.util.CommonUtils;
+import com.xmjj.rxretrofit_master.util.JpushUtil;
+import com.xmjj.rxretrofit_master.util.Md5Tool;
 import com.xmjj.rxretrofit_master.util.SpringScaleInterpolator;
 
+import java.util.HashSet;
+
 import butterknife.BindView;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 功能描述：
@@ -40,6 +47,23 @@ public class SplashActivity extends BaseActivity {
 	public void initViews() {
 		CommonUtils.setFont(CommonUtils.getTypeface(this, "font/fonts.ttf"), tvWelcome);
 		setAnimation();
+	}
+	/*注册极光推送的别名*/
+	private void registerJPush() {
+		JPushInterface.resumePush(getApplicationContext());
+		String alias = JpushUtil.getAppKey(this);
+		JpushUtil.setAlias(this, Md5Tool.hashKey(alias));
+
+		java.util.Set<String> tags = new HashSet<>();
+		tags.add("tags1");
+		tags.add("tags2");
+		tags.add("tags3");
+		JpushUtil.setTags(this, tags);
+	}
+	/*保活服务启动*/
+	private void keepLive() {
+		startService(new Intent(this, PlayerMusicService.class));
+		startService(new Intent(this, DaemonService.class));
 	}
 
 	private void setAnimation() {
@@ -90,6 +114,8 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	public void initData() {
+		registerJPush();
+		keepLive();
 		if (Build.VERSION.SDK_INT >= 23) {
 			String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
 					, Manifest.permission.ACCESS_FINE_LOCATION

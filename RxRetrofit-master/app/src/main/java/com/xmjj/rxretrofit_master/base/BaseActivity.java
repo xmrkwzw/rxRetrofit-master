@@ -32,6 +32,7 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends RxAppCompatActivity implements ISkinUpdate, IDynamicNewView {
+	public  String TAG ;
 	public int screenWidth, screenHeight;
 	public int actionBarHeight;
 	// 当前Activity是否需要响应皮肤更改需求
@@ -40,6 +41,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements ISkinU
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		TAG= getClass().getSimpleName();
 		mSkinInflaterFactory = new SkinInflaterFactory();
 		LayoutInflaterCompat.setFactory(getLayoutInflater(), mSkinInflaterFactory);
 		super.onCreate(savedInstanceState);
