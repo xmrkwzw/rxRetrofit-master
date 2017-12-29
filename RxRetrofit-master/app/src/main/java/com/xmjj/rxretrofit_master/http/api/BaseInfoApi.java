@@ -7,7 +7,7 @@ import com.xmjj.jujianglibrary.listener.HttpOnNextListener;
 import com.xmjj.jujianglibrary.subscriber.ProgressSubscriber;
 import com.xmjj.jujianglibrary.util.GsonUtils;
 import com.xmjj.rxretrofit_master.entity.BrandInfoDetailBean;
-import com.xmjj.rxretrofit_master.entity.RatingBean;
+import com.xmjj.rxretrofit_master.entity.WeatherBean;
 import com.xmjj.rxretrofit_master.http.HttpApiService;
 
 import java.lang.ref.SoftReference;
@@ -84,14 +84,14 @@ public class BaseInfoApi extends BaseApi {
 			public Observable<String> call(String respond) {
 
 				BrandInfoDetailBean bean = (BrandInfoDetailBean) GsonUtils.getInstance().format(respond, BrandInfoDetailBean.class);
-				bean.setTime("14871");
+				bean.setTime("厦门市");//只是为了模拟下个请求天气的接口而已
 				//.......do something by others method like "callback"
-				return httpApiService.getCivilization(bean.getTime());
+				return httpApiService.getWeather(bean.getTime());
 			}
 		});
 		setMethod(IN);
 		setCancel(true);
-		ProgressSubscriber progressSubscriber=new ProgressSubscriber(this, onNextListener, appCompatActivity, RatingBean.class);
+		ProgressSubscriber progressSubscriber=new ProgressSubscriber(this, onNextListener, appCompatActivity, WeatherBean.class);
 		progressSubscriber.setDialogMsg(dialogContent);
 		observable
 				.subscribeOn(Schedulers.io())

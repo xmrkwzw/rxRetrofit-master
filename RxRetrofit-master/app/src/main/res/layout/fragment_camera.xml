@@ -18,7 +18,7 @@
         android:layout_gravity="center"/>
     <ImageView
         android:layout_width="50dp"
-        android:src="@mipmap/camera"
+        android:src="@drawable/camera"
         android:id="@+id/iv_take_photo"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="20dp"

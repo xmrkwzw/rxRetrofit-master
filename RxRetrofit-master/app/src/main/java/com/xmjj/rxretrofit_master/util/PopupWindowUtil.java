@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
-import com.xmjj.rxretrofit_master.R;
-
 
 /**
  * @author wangZhiWei
@@ -52,7 +50,7 @@ public abstract class PopupWindowUtil {
 
 		}
 		if (outSideTouchable) {
-			popupWindow.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.transparent));
+			//popupWindow.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.transparent));
 			popupWindow.setFocusable(true);
 			popupWindow.setOutsideTouchable(true);
 		}

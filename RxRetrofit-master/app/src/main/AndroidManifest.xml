@@ -95,7 +95,7 @@
 
         </activity>
         <activity android:name=".activity.TbsVideoViewActivity"/>
-        <activity android:name=".activity.TestActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".activity.ComparedActivity" android:screenOrientation="landscape"/>
         <!--umeng share start-->
         <!--sina-->
         <activity
@@ -253,7 +253,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SpanActivity"/>
-        <activity android:name=".activity.AirActivity"/>
 
 
         <!-- Required SDK 核心功能-->

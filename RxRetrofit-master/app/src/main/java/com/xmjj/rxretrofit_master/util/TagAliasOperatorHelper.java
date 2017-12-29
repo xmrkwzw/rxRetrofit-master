@@ -199,7 +199,7 @@ public class TagAliasOperatorHelper {
             tagAliasActionCache.remove(sequence);
             String logs = getActionStr(tagAliasBean.action)+" tags success";
             Logger.i(TAG,logs);
-            JpushUtil.showToast(logs, context);
+            //JpushUtil.showToast(logs, context);
         }else{
             String logs = "Failed to " + getActionStr(tagAliasBean.action)+" tags";
             if(jPushMessage.getErrorCode() == 6018){
@@ -252,7 +252,7 @@ public class TagAliasOperatorHelper {
             tagAliasActionCache.remove(sequence);
             String logs = getActionStr(tagAliasBean.action)+" alias success";
             Logger.i(TAG,logs);
-            JpushUtil.showToast(logs, context);
+            //JpushUtil.showToast(logs, context);
         }else{
             String logs = "Failed to " + getActionStr(tagAliasBean.action)+" alias, errorCode:" + jPushMessage.getErrorCode();
             Logger.e(TAG, logs);

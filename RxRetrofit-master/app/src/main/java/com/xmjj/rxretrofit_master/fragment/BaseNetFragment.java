@@ -46,149 +46,144 @@ import butterknife.OnLongClick;
 @SuppressLint("ValidFragment")
 public class BaseNetFragment extends BaseFragment implements IBaseView, SwipeRefreshLayout.OnRefreshListener {
 
-	@BindView(R.id.tv_content)
-	TextView tvShow;
-	@BindView(R.id.swiperefresh)
-	SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.tv_content)
+    TextView tvShow;
+    @BindView(R.id.swiperefresh)
+    SwipeRefreshLayout refreshLayout;
 
-	private static final int TYPE_OBJECT = 0;
-	private static final int TYPE_ARRAY = 1;
-	private static final int TYPE_INNER = 2;
+    private static final int TYPE_OBJECT = 0;
+    private static final int TYPE_ARRAY = 1;
+    private static final int TYPE_INNER = 2;
 
-	private int type;
-
-
-	public BaseNetFragment() {
-
-	}
-
-	public BaseNetFragment(int type) {
-		this.type = type;
-	}
-
-	@Override
-	public int getLayoutResId() {
-		return R.layout.fragment_object;
-	}
-
-	@Override
-	public void initViews() {
-		//refreshLayout.setOnRefreshListener(this);
-	}
-
-	@Override
-	public void initData() {
-		switch (type) {
-			case TYPE_OBJECT:
-				getWeatherRequest();
-				break;
-			case TYPE_ARRAY:
-				arrayResult();
-				break;
-			case TYPE_INNER:
-				nestedRequest();
-				break;
-
-		}
+    private int type;
 
 
-	}
+    public BaseNetFragment() {
 
-	/**
-	 * the result is JsonObject such as {"result":{"xxx"}}
-	 */
-	public void objectResult() {
-		ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "objcet数据加载");
-		objectResultPresenter.onInit();
-		objectResultPresenter.onDataCreate();
-	}
+    }
 
-	/*get weather result */
-	public void getWeatherRequest(){
-		GetWeatherResultPresenter weatherResultPresenter = new GetWeatherResultPresenter((RxAppCompatActivity) getActivity(),this,null);
-		weatherResultPresenter.onInit();
-		weatherResultPresenter.onDataCreate();
+    public BaseNetFragment(int type) {
+        this.type = type;
+    }
 
-	}
+    @Override
+    public int getLayoutResId() {
+        return R.layout.fragment_object;
+    }
 
-	/**
-	 * the result is JsonArray such as {"result":[{"xxx"},{"xxx"}]}
-	 */
-	public void arrayResult() {
-		ArrayResultPresenter arrayResultPresenter = new ArrayResultPresenter((RxAppCompatActivity) getActivity(), this, null);
-		arrayResultPresenter.onInit();
-		arrayResultPresenter.onDataCreate();
-	}
+    @Override
+    public void initViews() {
+        //refreshLayout.setOnRefreshListener(this);
+    }
 
-	/**
-	 * Nested request interface :a result doing after the other result
-	 */
-	public void nestedRequest() {
-		NestResultPresenter nestResultPresenter = new NestResultPresenter((RxAppCompatActivity) getActivity(), this, "嵌套接口数据加载...");
-		nestResultPresenter.onInit();
-		nestResultPresenter.onDataCreate();
-	}
+    @Override
+    public void initData() {
+        switch (type) {
+            case TYPE_OBJECT:
+                objectResult();
+                break;
+            case TYPE_ARRAY:
+                arrayResult();
+                break;
+            case TYPE_INNER:
+                nestedRequest();
+                break;
 
-	@OnLongClick(R.id.tv_content)
-	public boolean onLongClick(View view) {
-		switch (view.getId()) {
-			case R.id.tv_content:
-
-				ClipboardManager cm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-				cm.setText(tvShow.getText().toString());
-				break;
-		}
-		return false;
-	}
+        }
 
 
-	@Override
-	public void setData(String json, Object result, String method) {
-		if (BaseInfoApi.BASE_INFO_METHOD.equals(method)) {
-			Logger.d("setData"+BaseInfoApi.BASE_INFO_METHOD);
-			BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
+    }
 
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName() + "\n");
+    /**
+     * the result is JsonObject such as {"result":{"xxx"}}
+     */
+    public void objectResult() {
+        ObjectResultPresenter objectResultPresenter = new ObjectResultPresenter((RxAppCompatActivity) getActivity(), this, "objcet数据加载");
+        objectResultPresenter.onInit();
+        objectResultPresenter.onDataCreate();
+    }
 
-		} else if (BaseInfoApi.CIVILIZATION_METHOD.equals(method)) {
-			Log.d(TAG,BaseInfoApi.CIVILIZATION_METHOD);
-			List<RatingBean> lists = (List<RatingBean>) result;
+    /*get weather result */
+    public void getWeatherRequest() {
+        GetWeatherResultPresenter weatherResultPresenter = new GetWeatherResultPresenter((RxAppCompatActivity) getActivity(), this, null);
+        weatherResultPresenter.onInit();
+        weatherResultPresenter.onDataCreate();
 
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
-		} else if (BaseInfoApi.IN.equals(method)) {
-			Log.d(TAG,BaseInfoApi.IN);
-			List<RatingBean> lists = (List<RatingBean>) result;
+    }
 
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
-		}else if(BaseInfoApi.GET_WEAHTER.equals(method)){
-			Log.d(TAG,BaseInfoApi.IN);
-			WeatherBean bean = (WeatherBean) result;
-			tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getCity() + "\n");
+    /**
+     * the result is JsonArray such as {"result":[{"xxx"},{"xxx"}]}
+     */
+    public void arrayResult() {
+        ArrayResultPresenter arrayResultPresenter = new ArrayResultPresenter((RxAppCompatActivity) getActivity(), this, null);
+        arrayResultPresenter.onInit();
+        arrayResultPresenter.onDataCreate();
+    }
 
-		}else{
-			tvShow.setText("暂无数据");
-		}
-		refreshLayout.setRefreshing(false);
-	}
+    /**
+     * Nested request interface :a result doing after the other result
+     */
+    public void nestedRequest() {
+        NestResultPresenter nestResultPresenter = new NestResultPresenter((RxAppCompatActivity) getActivity(), this, "嵌套接口数据加载...");
+        nestResultPresenter.onInit();
+        nestResultPresenter.onDataCreate();
+    }
 
-	@Override
-	public void setError(String error) {
-		ToastUtils.showShortMes(getActivity(), error);
-	}
+    @OnLongClick(R.id.tv_content)
+    public boolean onLongClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_content:
 
-	@Override
-	public void onRefresh() {
-		switch (type) {
-			case TYPE_OBJECT:
-				getWeatherRequest();
-				break;
-			case TYPE_ARRAY:
-				arrayResult();
-				break;
-			case TYPE_INNER:
-				nestedRequest();
-				break;
+                ClipboardManager cm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText(tvShow.getText().toString());
+                break;
+        }
+        return false;
+    }
 
-		}
-	}
+
+    @Override
+    public void setData(String json, Object result, String method) {
+        if (BaseInfoApi.BASE_INFO_METHOD.equals(method)) {
+            Logger.d("setData" + BaseInfoApi.BASE_INFO_METHOD);
+            BrandInfoDetailBean bean = (BrandInfoDetailBean) result;
+
+            tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getBrand().getSchoolName() + "\n");
+
+        } else if (BaseInfoApi.CIVILIZATION_METHOD.equals(method)) {
+            Log.d(TAG, BaseInfoApi.CIVILIZATION_METHOD);
+            List<RatingBean> lists = (List<RatingBean>) result;
+
+            tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + lists.get(0).getWeek() + "\n");
+        } else if (BaseInfoApi.IN.equals(method)) {
+            Log.d(TAG, BaseInfoApi.IN);
+            WeatherBean bean = (WeatherBean) result;
+
+            tvShow.setText("原数据 \n" + Logger.formatJson(json) + "\n" + bean.getCity() + "\n");
+        } else {
+            tvShow.setText("暂无数据");
+        }
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void setError(String error) {
+        ToastUtils.showShortMes(getActivity(), error);
+    }
+
+    @Override
+    public void onRefresh() {
+        switch (type) {
+            case TYPE_OBJECT:
+                objectResult();
+                break;
+            case TYPE_ARRAY:
+                arrayResult();
+                break;
+            case TYPE_INNER:
+                nestedRequest();
+                break;
+
+        }
+    }
 }
