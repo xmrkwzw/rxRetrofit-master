@@ -253,6 +253,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SpanActivity"/>
+        <activity android:name=".activity.LayImActivity" />
 
 
         <!-- Required SDK 核心功能-->

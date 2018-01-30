@@ -18,7 +18,7 @@ import butterknife.BindView;
 public class TbsWebViewActivity extends BaseActivity {
 	@BindView(R.id.webview)
 	WebView webview;
-	private static final String URL = "http://mp.weixin.qq.com/s?__biz=MzU4MDI3NDg5MQ==&mid=2247483924&idx=1&sn=f7a659b0a91bd829f53b1270689e72b4&chksm=fd581db0ca2f94a673cf315d334f84e5a991e3228f3aa829785c6a800bdc982f39d09252bbe9&mpshare=1&scene=23&srcid=1121LgxJQACNpqPhZa0b2c3G#rd";
+	private static final String URL = "file:///android_asset/mobile.html";
 
 
 	@Override
@@ -46,8 +46,12 @@ public class TbsWebViewActivity extends BaseActivity {
 				return true;
 			}
 		});
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			webview.evaluateJavascript(URL, null);
+		} else {
+			webview.loadUrl(URL);
+		}
 
-		webview.loadUrl(URL);
 	}
 
 	@Override

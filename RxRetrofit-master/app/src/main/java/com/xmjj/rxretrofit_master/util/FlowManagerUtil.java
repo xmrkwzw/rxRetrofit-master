@@ -1,10 +1,16 @@
 package com.xmjj.rxretrofit_master.util;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.CursorResult;
 import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.Model;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
+import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 import com.xmjj.rxretrofit_master.db.AppDataBase;
 
@@ -49,6 +55,7 @@ public class FlowManagerUtil {
 					}
 				}).build().execute();
 	}
+
 
 	public void deleteTable(Class table) {
 		Delete.table(table);

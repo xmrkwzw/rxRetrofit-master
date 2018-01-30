@@ -24,12 +24,23 @@ public class WebViewUtils {
 	public void initWebView(WebView webview, String url, boolean isHtml) {
 
 		WebSettings webSettings = webview.getSettings();
-
+		webSettings.setBuiltInZoomControls(true);
+		webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+		webSettings.setUseWideViewPort(true);
+		webSettings.setSavePassword(true);
+		webSettings.setSaveFormData(true);
+		webSettings.setJavaScriptEnabled(true);     // enable navigator.geolocation
+		webSettings.setGeolocationEnabled(true);
+		webSettings.setGeolocationDatabasePath("/data/data/org.itri.html5webview/databases/");     // enable Web Storage: localStorage, sessionStorage
+		// 设置与Js交互的权限
+		webSettings.setJavaScriptEnabled(true);
+		// 设置允许JS弹窗
+		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 		webSettings.setLoadWithOverviewMode(true);
 		webSettings.setDisplayZoomControls(true);
 		webSettings.setSupportZoom(true);
 		webSettings.setDomStorageEnabled(true);
-		webSettings.setJavaScriptEnabled(true);
+
 		webSettings.setUseWideViewPort(true);
 		webSettings.setLoadWithOverviewMode(true);
 		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);

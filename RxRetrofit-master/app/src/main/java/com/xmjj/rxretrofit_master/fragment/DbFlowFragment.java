@@ -58,7 +58,7 @@ public class DbFlowFragment extends BaseFragment  {
 	 */
 	public void insert() {
 		ArrayList<DBFlowModel> array = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1000; i++) {
 			DBFlowModel dbFlowModel = new DBFlowModel();
 			dbFlowModel.setName("name:" + i);
 			dbFlowModel.setAge((i));

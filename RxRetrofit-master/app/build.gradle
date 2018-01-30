@@ -7,7 +7,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.xmjj.rxretrofit_master"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -45,14 +45,14 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':wzwlibrary')
-    annotationProcessor  "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     // sql-cipher database encyrption (optional)
     compile "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:${dbflow_version}"
     /*butterknife*/
     compile "com.jakewharton:butterknife:${butterknife_version}"
-    annotationProcessor  "com.jakewharton:butterknife-compiler:${butterknife_version}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknife_version}"
     /*动画*/
     compile 'com.facebook.rebound:rebound:0.3.8'
     /*可手势放大旋转的view*/
@@ -90,4 +90,5 @@ dependencies {
     compile files('libs/umeng_social_shareboard.jar')
     compile files('libs/jcore-android-1.1.7.jar')
     compile files('libs/jpush-android-3.0.9.jar')
+
 }
